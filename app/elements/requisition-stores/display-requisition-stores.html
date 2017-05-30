@@ -203,9 +203,9 @@
           <paper-input label="Item Type" value="{{itemtype}}" readonly></paper-input>
           <paper-input label="Item Required" value="{{iquantity}} {{unitofmeasures}}" readonly></paper-input>
           <paper-input label="Item Required Date" value="{{itemreqdate}}" readonly></paper-input>
-          <paper-input label="Number of {{itemcontainer}}(s)" value="{{cquantity}}"></paper-input>
           <input disabled type="range" min="{{min}}" max="{{availablequantity}}" value="{{supplyquantity}}"></input>{{availablequantity}}
-          <paper-input label="Enter the Amount of Item to Supply" value={{supplyquantity}} on-value-changed="test"><span class="fa fa-share"></span></paper-input>
+          <paper-input label="Number of {{itemcontainer}}(s)" value="{{cquantity}}" disabled="{{inputvar}}"></paper-input>
+          <paper-input label="Enter the Amount of Item to Supply" value={{supplyquantity}} on-value-changed="test" disabled="{{inputvar}}"><span class="fa fa-share"></span></paper-input>
           <datetime-picker date-string="{{min}}" time-string={{timevar}} disabled min-date="[[max]]" use-not-native hidden></datetime-picker>
           <center>
             <paper-button class="btn btn-app" id="supplybutton" raised on-click="supply" disabled="{{buttonvar}}"><span class="fa fa-share"></span>Supply</paper-button>
@@ -230,6 +230,7 @@
 var supplyStatus;
 var autoid;
 var availablequantity1;
+var supplybuttonFlag;
   Polymer({
     is: "display-requisition-stores",
     requisitionbind:function(reqnumber,reqdate,itemquantity,itemname,itemspecification1,itemtype,warehousename,itemreqdate,itemcontainer,itemavailablequantity,unitofmeasurename){
@@ -245,9 +246,10 @@ var availablequantity1;
       this.itemreqdate=itemreqdate;
       this.availablequantity=itemavailablequantity;
       availablequantity1=itemavailablequantity;
-      if(availablequantity1<itemquantity){
+      if(Number(availablequantity1)<Number(itemquantity)){
         this.buttonvar=true;
-        alert("Stores has not enough quantity for "+itemname+"!");
+        this.inputvar=true;
+        alert("Stores has not enough quantity for this requisition!");
       }
     },
     supply:function(){
@@ -278,13 +280,13 @@ var availablequantity1;
       this.buttonvar=false;
     },
     test:function(){
-      if (Number(this.supplyquantity)>Number(this.iquantity)) {
-        this.buttonvar=true;
-        alert("Exceeding the Required Amount");
-      }
-      else {
-        this.buttonvar=false;
-      }
+        if (Number(this.supplyquantity)>Number(this.iquantity)) {
+          this.buttonvar=true;
+          alert("Exceeding the Required Amount");
+        }
+        else {
+          this.buttonvar=false;
+        }
     }
   });
 </script>
