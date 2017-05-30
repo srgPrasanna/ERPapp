@@ -1,0 +1,69 @@
+<dom-module id="insert-update">
+  <template>
+    <div hidden>
+      {{insert}}
+      {{update}}
+      {{where}}
+      {{table}}
+      {{field}}
+      {{data}}
+      {{wheredata}}
+      {{newdata}}
+      {{receiveon}}
+      {{respondto}}
+    </div>
+    <iron-ajax
+      id="insertAjax"
+      method="post"
+      params="{{query}}"
+      url="http://localhost:4000/testinsert"
+      handle-as="json"
+      on-response="serverResponse">
+    </iron-ajax>
+  </template>
+</dom-module>
+<script type="text/javascript">
+var mySQLQuery;
+  Polymer({
+    is: "insert-update",
+    ready: function() {
+      if (this.update&&this.insert==1) {
+        alert("Can't perform insert and update at same time!");
+      }
+      else if(this.insert==1){
+        mySQLQuery="INSERT into "+this.table+" ("+this.field+") VALUES ('"+this.data+"');"
+        var object={mySQLQuery};
+        this.query=object;
+        this.$.insertAjax.generateRequest();
+      }
+      else if (this.update==1) {
+        mySQLQuery="UPDATE "+this.table+" SET "+this.field+"='"+this.newdata+"'WHERE "+this.where+"='"+this.wheredata+"';"
+        var object={mySQLQuery};
+        this.query=object;
+        this.$.insertAjax.generateRequest();
+      }
+      else {
+        alert("insert or update value must be 1");
+      }
+    },
+    serverResponse:function(x){
+      document.querySelector(this.receiveon)[this.respondto](x.detail.response.status);
+    }
+  });
+</script>
+<!-- <insert-update  insert="1"
+                table="emp_login1"
+                field="password"
+                data="Data"
+                receiveon="item-details"
+                respondto="check1">
+</insert-update>
+<insert-update  update="1"
+                table="emp_login1"
+                field="password"
+                where="password"
+                wheredata="Check Data"
+                newdata="password"
+                receiveon="item-details"
+                respondto="check1">
+</insert-update> -->

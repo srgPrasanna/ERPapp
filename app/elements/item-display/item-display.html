@@ -1,0 +1,29 @@
+<link rel="import" href="../custom-papercard/custom-papercard.html">
+<dom-module id="item-display">
+  <template>
+    <style>
+      hr{
+        width: 70%;
+      }
+  </style>
+    <template is="dom-repeat" items={{getdata}}>
+      <custom-papercard
+                      title="item"
+                      specification1="{{item.itemname}}"
+                      specification2="{{item.itemspecification1}}"
+                      specification3="{{item.itemspecification2}}"
+                      imageurl="../../images/items.jpg"></custom-papercard>
+      <hr>
+    </template>
+  </template>
+  <script>
+  Polymer({
+    is:"item-display",
+    ready:function(){
+    },
+    getdataFn(data){
+      this.getdata=data;
+    }
+  });
+  </script>
+</dom-module>

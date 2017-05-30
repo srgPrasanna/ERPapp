@@ -1,0 +1,42 @@
+<link rel="import" href="call-security-card-ironajax.html">
+<dom-module id="call-security-card">
+  <template>
+      <p hidden>{{domdata}}</p>
+    <div class="container-fluid">
+    <div class="row">
+    <div class="col-sm-4">
+    <div>
+      <paper-dropdown-menu label="goodsvehiclenumber">
+        <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{selection}}" on-click="vehNumSearchFn">
+          <template is="dom-repeat" items="{{vehicleNumdata}}">
+            <paper-item value="{{item.goodsvehiclenumber}}">{{item.goodsvehiclenumber}}</paper-item>
+          </template>
+        </paper-menu>
+      </paper-dropdown-menu>
+        <paper-button raised on-click="testFn">search<iron-icon  icon="search" suffix></iron-icon></paper-button>
+    </div>
+    </div>
+    <div class="col-sm-8">
+      <template is="dom-repeat" items="{{salesorderdata}}">
+        <paper-card image="../../images/salesimage.jpg">
+    <div class="card-content">SALE ORDER DATA
+        <div>{{item.salesorderid}}</div>
+        <div>{{item.salesorderdate}}</div>
+        <div>{{item.customerid}}</div>
+        <div>{{item.customerlocation}}</div>
+        <div>{{item.itemid}}</div>
+        <div>{{item.containerquantity}}</div>
+        <div>{{item.availablequantity}}</div>
+        <div>{{item.deliveredquantity}}</div>
+        <div>{{item.requireddeliverydate}}</div>
+        <div>{{item.status}}</div>
+    </div>
+   </paper-card>
+  </template>
+   </div>
+   </div>
+   </div>
+    <call-security-card-ironajax></call-security-card-ironajax>
+</template>
+  <script src="call-security-card.js"></script>
+</dom-module>

@@ -1,0 +1,28 @@
+<link rel="import" href="salesorder-summary-logistics.html">
+<dom-module id="salesorderlog-summaryajax">
+<template>
+    <iron-ajax
+          auto
+          method="post"
+          id="readajax"
+          url="http://localhost:4000/fetch"
+          handle-as="json"
+          content-type="application/json"
+          on-response="searchitemdetails"
+          debounce-duration="300">
+    </iron-ajax>
+</template>
+  <script>
+  (function() {
+    'use strict';
+     Polymer({
+      is: 'salesorderlog-summaryajax',
+        searchitemdetails:function(e)
+     			 {
+            var array1=e.detail.response.returnval;
+            document.querySelector("salesorder-summary-logistics").fetchfunction(array1);
+    			 }
+     });
+ })();
+  </script>
+</dom-module>

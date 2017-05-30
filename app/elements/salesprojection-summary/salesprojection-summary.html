@@ -1,0 +1,37 @@
+<link rel="import" href="salesprojection-summaryajax.html">
+<link rel="import" href="sliderorder-papercard.html">
+<dom-module id="salesprojection-summary">
+<template>
+<style>
+hr {
+    display: block;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: 100px;
+    margin-right: 200px;
+    border-style: inset;
+    border-width: 0px;
+  }
+</style>
+    <salesprojection-summaryajax></salesprojection-summaryajax>
+  <template id="templateUsers"  is="dom-repeat" items={{jsondata}} as="item">
+     <div class="col-sm-4">
+       <sliderorder-papercard
+        itemid="{{item.itemid}}"
+        salesorderid="{{item.salesorderid}}"
+        customername="{{item.customername}}"
+        itemspecification="{{item.itemspecification}}"
+        containerquantity="{{item.containerquantity}}"
+        deliveredquantity="{{item.deliveredquantity}}"
+        requireddeliverydate="{{item.requireddeliverydate}}"
+        itemname="{{item.itemname}}"
+        customerlocation="{{item.city}}"
+        status="{{item.status}}">
+      </sliderorder-papercard>
+      <hr>
+    </div>
+</template>
+</template>
+  <script src="salesprojection-summary.js">
+  </script>
+</dom-module>

@@ -1,0 +1,139 @@
+<link rel="import" href="GRNcard-container-domrepeat.html">
+<dom-module id="GRNcard-click-function">
+  <template>
+    <!-- <p hidden>{{containerid}}</p>
+    <p hidden>{{grnnumber}}</p> -->
+  <style is="custom-style">
+      paper-card{
+        width: 70%;
+        height: 60%
+      }
+      paper-card.rate {
+         @apply(--layout-horizontal);
+         background-color: #F5F5F5;
+       }
+      .rate-image {
+       width: 200px;
+       height: 200px;
+       background-size: cover;
+      }
+      .rate-content {
+       @apply(--layout-flex);
+       float: left;
+      }
+      .rate-header { @apply(--paper-font-headline);}
+      .rate-name { color: var(--paper-grey-600); margin: 10px 0; }
+      paper-icon-button.rate-icon {
+       --iron-icon-fill-color: white;
+       --iron-icon-stroke-color: var(--paper-grey-600);
+      }
+      hr {
+    display: block;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+    margin-left: auto;
+    margin-right: auto;
+    border-style: inset;
+    border-width: 0px;
+} 
+  </style>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <template is="dom-repeat" items="{{displaycontent}}">
+        <center><div class="rate-header">{{item.inward_register_number}}</div></center>
+        <center><paper-card class="rate" style="margin-top:6px;margin-left:15px;" on-click="cardgetFn">
+          <div class="rate-content">
+          <div class="card-content">
+            <div class="rate-name">
+              <table>
+                <div hidden>{{item.po_number}}</div>
+                <div hidden>{{item.po_date}}</div>
+                <div class="rate-header">{{item.Itemname}}</div>
+                <div>{{item.itemname}}</div>
+                <div>{{item.itemspecification}}</div>
+                <div class="rate-header">{{item.Containername}}</div>
+                <div>{{item.item_quantity}}{{item.unit_of_measure_id}}</div>
+                <div>{{item.container_quantity}}{{item.container_id}}</div>
+                <div class="rate-header">{{item.Suppliername}}</div>
+                <div>{{item.suppliername}}</div>
+                <div class="rate-header">{{item.Invoice}}</div>
+                <div>{{item.invoice_no}}  {{item.invoice_date}}</div>
+              </table>
+            </div>
+          </div>
+        </div>
+        <div class="rate-image" style="background-image: url({{item.images}})"></div>
+      </paper-card>
+    </center>
+      </template>
+      <hr>
+    </div>
+    <div class="col-sm-6">
+      <paper-button raised on-click="saveconFn">save</paper-button>
+      <template is="dom-repeat-n" count="[[countvalue]]">
+            <GRNcard-container-domrepeat
+                                        containerid="{{containerid}}"
+                                        grnnumber="{{grnnumber}}"
+                                        idval="{{idval}}"
+                                        indexval="{{index}}"
+                                        btno="{{btno}}"
+                                        htno="{{htno}}"></GRNcard-container-domrepeat>
+        <div></div>
+        <hr>
+        <div></div>
+      </template>
+    </div>
+  </div>
+</div>
+<iron-ajax
+        method="post"
+        id="savecontaineridAjax"
+        url="http://localhost:4000/savecontaineridinfo"
+        params="{{containeridparams}}"
+        handle-as="json"
+        on-response="savecontainerResponse"></iron-ajax>
+</template>
+<script>
+  Polymer({
+    is:"GRNcard-click-function",
+    ready:function(){
+    },
+    saveconFn:function(){
+      document.querySelector("GRNcard-container-domrepeat").savecontaineridFn();
+    },
+    getfunc:function(data){
+      this.displaycontent=data;
+      this.grnnumber=data[0].inward_register_number;
+      for(var i=0;i<data.length;i++){
+      if(data[i].container_quantity!=""){
+        if(data[i].container_id=="coil"){
+          this.countvalue=data[i].container_quantity;
+          this.idval=data[i].container_id;
+          this.containerid=data[i].container_id;
+          this.btno=0;
+          this.htno=0;
+        }
+        if(data[i].container_id=="bag"){
+          this.countvalue=data[i].container_quantity;
+          this.idval=data[i].container_id;
+          this.containerid=data[i].container_id;
+          this.btno=1;
+          this.htno=1;
+        }
+        }
+      }
+    },
+    savecontaineridFn:function(data){
+      for(var i=0;i<data.length;i++){
+        this.containeridparams=data[i];
+        this.$.savecontaineridAjax.generateRequest();
+        alert(JSON.stringify(this.containeridparams));
+      }
+  },
+  savecontainerResponse:function(e){
+    alert(e.detail.response.returnval);
+  }
+  });
+</script>
+</dom-module>

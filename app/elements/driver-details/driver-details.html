@@ -1,0 +1,87 @@
+<link rel="import" href="driver-ajax.html" />
+<dom-module id="driver-details">
+<style>
+  hr {
+    display: block;
+    border-style: inset;
+    border-width: 0px;
+    }
+  table.size{
+    font-size: 20px;
+    }
+  paper-card.rate { @apply(--layout-horizontal); }
+   .rate-image {
+     width: 100px;
+     height: 100px;
+     background: url('"../../images/user2-160x160.jpg"');
+     background-size: cover;
+     margin-left: 20px;
+     margin-top: 20px;
+   }
+ .rate-image1 {
+    width: 100px;
+    height: 100px;
+    background: url('"../../images/user8-128x128.jpg"');
+    background-size: cover;
+    margin-left: 20px;
+    margin-top: 20px;
+  }
+ .rate-content {
+     @apply(--layout-flex);
+     margin-right: 300px;
+     float: right;
+  }
+ .rate-header { @apply(--paper-font-headline); font-size: 20px;
+  }
+ .rate-name { color: var(--paper-grey-600); margin: 10px 0; }
+  paper-icon-button.rate-icon {
+   --iron-icon-fill-color: white;
+   --iron-icon-stroke-color: var(--paper-grey-600);
+ }
+ div.row{
+   width:100%;
+ }
+ div.card-content{
+   margin-left: 100px;
+ }
+</style>
+  <template>
+    <div class="row">
+      <paper-card class="rate" elevation="0">
+      <div class="">
+        <div class="rate-image1"></div>
+    </div>
+      <div class="">
+    <div class="rate-content">
+      <div class="card-content">
+        <div class="rate-header">Driver</div>
+        <div class="rate-name">{{vehicledrivername}}</div>
+        <div class="rate-name">{{vehicledriverphonenumber1}}</div>
+        <div class="rate-name">{{vehicledriverphonenumber2}}</div>
+      </div>
+    </div>
+    </div>
+      </paper-card>
+    </div><br>
+    <div class="row">
+      <paper-card class="rate" elevation="0">
+      <div class="">
+        <div class="rate-image"></div>
+    </div>
+    <div class="">
+    <div class="rate-content">
+    <div class="card-content">
+      <div class="rate-header">Owner</div>
+      <div class="rate-name">{{vehicleownername}}</div>
+      <div class="rate-name">{{vehicleownerphonenumber}}</div>
+    </div>
+    </div>
+    </div>
+    </paper-card>
+    </div>
+
+      <driver-ajax></driver-ajax>
+
+</template>
+  <script src="driver-details.js"></script>
+</dom-module>

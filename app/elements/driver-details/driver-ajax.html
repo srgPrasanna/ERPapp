@@ -1,0 +1,34 @@
+
+<link rel="import" href="driver-details.html" />
+<dom-module id="driver-ajax">
+  <template>
+    <iron-ajax
+      auto
+      method="get"
+      id="jsoninfoid"
+      url="../timeline-chart/timelinedesign.json"
+      handle-as="json"
+      content-type="application/json"
+      on-response="jsoninfoResponse"
+      last-response="{{jsondata}}"
+      debounce-duration="300">
+    </iron-ajax>
+</template>
+<script>
+  (function() {
+    'use strict';
+
+    Polymer({
+      is: 'driver-ajax',
+	      ready:function(){
+
+		       },
+
+	      jsoninfoResponse:function(){
+          var labeljsondata=this.jsondata;
+          document.querySelector("driver-details").getJsondata(labeljsondata[0].goodsvehicledrivername,labeljsondata[0].goodsvehicledriverphonenumber1,labeljsondata[0].goodsvehicledriverphonenumber2,labeljsondata[0].goodsvehicleownername,labeljsondata[0].goodsvehicleownerphonenumber);
+          }
+    });
+})();
+</script>
+</dom-module>

@@ -1,0 +1,52 @@
+<link rel="import" href="requisition-process-ironajax.html">
+<dom-module id="requisition-process">
+  <style>
+  paper-dropdown-menu {
+      --paper-dropdown-menu: {
+        width: 100%;
+      }
+    }
+  </style>
+  <template>
+    <div hidden>
+      {{tempitemname1}}
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <img src="../../elements/requisition-process/images/no_image.jpg" width="60%" height="60%" style="margin-left:110px;margin-top:160px;"/>
+      </div>
+      <div class="col-sm-6">
+        <paper-card style="width:100%;" elevation="0">
+          <div class="card-content">
+            <b>Requisition Creation</b>
+            <paper-input  label="{{namelabel}}" is="" value="{{value1}}" on-keydown="FnSearchEnquiry1"></paper-input>
+             <paper-listbox class="dropdown-content" id="transportinput3" on-click="searchitem" on-iron-select="FnSelectEnquiry2" selected="{{selectedname}}">
+               <template is="dom-repeat" items="{{itemArray1}}" as="item1">
+                 <paper-item value="{{item1.itemdes1}}">{{item1.itemdes1}}</paper-item>
+               </template>
+             </paper-listbox>
+            <paper-input label="{{typelabel}}" value="{{selectedtype}}" readonly></paper-input>
+            <paper-input label="{{spec1label}}" value="{{itemspec1}}" readonly></paper-input>
+            <paper-input label="{{whloclabel}}" value={{whlocation}} readonly></paper-input>
+            <paper-input label="{{containerlabel}}" value={{selectedcontainer}} readonly></paper-input>
+            <paper-input label="{{itemquantitylabel}} in {{unitofmeasure}}" value="{{itemquantity}}"></paper-input>
+            <datetime-picker date-string="{{requisitiondate}}"  disabled min-date="[[max]]" use-not-native hidden></datetime-picker>
+            <datetime-picker date-string="{{min}}"  disabled min-date="[[max]]" use-not-native></datetime-picker>
+            <div>
+              <center>
+                <a class="btn btn-app" on-click="saverequisition" style="margin-top:10px;">
+                  <i class="fa fa-save"></i>Create requisition
+                </a>
+              </center>
+            </div>
+          </div>
+        </paper-card>
+      </div>
+    </div>
+    <requisition-process-ironajax></requisition-process-ironajax>
+    <check-autogenid stringname="req"
+                     elementname="requisition-process">
+    </check-autogenid>
+  </template>
+</dom-module>
+<script src="requisition-process.js"></script>

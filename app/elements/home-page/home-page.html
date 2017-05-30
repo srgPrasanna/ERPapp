@@ -1,0 +1,80 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../header-head/header-head.html">
+<link rel="import" href="../header-left/header-left.html">
+<link rel="import" href="../footer-page/footer-page.html">
+<link rel="import" href="../../bower_components/paper-header-panel/paper-header-panel.html">
+<link rel="import" href="../../bower_components/paper-toolbar/paper-toolbar.html">
+<link rel="import" href="../../bower_components/paper-drawer-panel/paper-drawer-panel.html">
+<link rel="import" href="../../bower_components/iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../../bower_components/app-layout/app-layout.html">
+<script src="bower_components/webcomponentsjs/webcomponents-lite.min.js"></script>
+<dom-module id="home-page">
+  <style>
+      #container {
+    	background-color: white;
+      }
+  </style>
+  <template>
+    <div class="hold-transition skin-blue sidebar-mini" style="">
+      <div class="wrapper">
+        <header-head></header-head>
+        <header-left></header-left>
+          <div class="content-wrapper" id="container">
+            <section class="content-header">
+              <h1>Dashboard<small>Control panel</small></h1>
+              <ol class="breadcrumb">
+                <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+                <li class="active">Dashboard</li>
+              </ol>
+            </section>
+            <iron-pages attr-for-selected="data-category">
+              <section data-category="paper-date">
+                <div id="toggledate">
+                  <paper-date-picker></paper-date-picker>
+                </div>
+              </section>
+            </iron-pages>
+            <section class="content">
+              <iron-pages selected>
+                <div id="showpage"></div>
+              </iron-pages>
+            </section>
+          </div>
+          <footer-page></footer-page>
+      </div>
+    </div>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'home-page',
+      properties: {
+        foo: {
+          type: String,
+          value: 'home-page',
+          notify: true
+        }
+      },
+      FnSetPage:function(uicomponent){
+        var element = this.$.showpage.querySelector("*");
+        if (element) {
+          element.parentNode.removeChild(element);
+        }
+        var newelement=document.createElement(uicomponent);
+        var ironpage=document.querySelector("#showpage");
+        Polymer.dom(ironpage).appendChild(newelement);
+      },
+      tabfun:function(){
+        this.page="tabcontent";
+      },
+      open:function(){
+        this.$.togglediv.toggle();
+      },
+      open1:function(){
+        this.$.togglediv1.toggle();
+      }
+    });
+  })();
+  </script>
+</dom-module>

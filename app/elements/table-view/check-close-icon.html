@@ -1,0 +1,61 @@
+<dom-module id="check-close-icon">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+    <div hidden>
+      {{itemid}}
+      {{itemname}}
+      {{containerid}}
+      {{unitofmeasureid}}
+      {{itemgroup}}
+      {{itemtypeid}}
+      {{itempurchasetype}}
+    </div>
+    <span id="check" on-click="check" style="color:{{checkcolor}};font-size:23px;cursor:pointer;" class="fa fa-check"></span>&#8195
+    <span id="close" on-click="close" style="color:{{closecolor}};font-size:23px;cursor:pointer;" class="fa fa-close"></span>
+    <iron-ajax
+      id="ceorespond"
+      method="post"
+      params="{{responseparam}}"
+      url="http://localhost:4000/ceoresponse"
+      handle-as="json"
+      on-response="handleResponse">
+    </iron-ajax>
+  </template>
+</dom-module>
+<script type="text/javascript">
+  var approve;
+  var reject;
+  var response={};
+  var responsevalue=[];
+  var responsearray=[];
+    Polymer({
+      is: "check-close-icon",
+      ready: function() {
+        this.closecolor="grey";
+        this.checkcolor="grey";
+      },
+      check:function(){
+        response={"itemid":this.itemid,"itemtype":this.itemtypeid,"respond":"active"};
+        responsevalue.push(response);
+        this.closecolor="grey";
+        this.checkcolor="#A2CD6F";
+      },
+      close:function(){
+        response={"itemid":this.itemid,"itemtype":this.itemtypeid,"respond":"inactive"};
+        responsevalue.push(response);
+        this.checkcolor="grey";
+        this.closecolor="red";
+      },
+      respond:function(){
+        for(i=0;i<responsevalue.length;i++){
+          this.responseparam=responsevalue[i];
+          this.$.ceorespond.generateRequest();
+        }
+        document.querySelector("home-page").FnSetPage("table-view");
+      }
+    });
+</script>

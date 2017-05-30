@@ -1,0 +1,81 @@
+
+<dom-module id="demo-filecharts">
+  <style>
+      div.slidersize{
+        width: 100%;
+
+      }
+      paper-card.linesize{
+        height: auto;
+        width: 100%;
+      }
+      paper-card.driver{
+        height: auto;
+        width: 100%;
+      }
+      hr{
+        border-width: 0px;
+      }
+      .rate-header { @apply(--paper-font-headline);
+        font-size: 20px;
+       }
+
+  </style>
+<template>
+  <div class="row">
+  <br>
+  <div class="col-sm-6">
+    <paper-card  elevation="0" style="width:100%;">
+    <div style="margin-left:100px; margin-top:25px;">
+        <item-customerdetail></item-customerdetail>
+    </div>
+  </div>
+  <div class="col-sm-6">
+  <paper-card  elevation="0" style="width:100%;">
+  <!-- <div id="vehicle" class="rate-header">Vehicle Status Tracking</div> -->
+  <div>
+    <timeline-chart></timeline-chart>
+  </div>
+  </paper-card>
+  <div style="margin-top:0px;">
+  <paper-card  elevation="0"  style="width:100%;">
+  <div >
+      <slider-barnew></slider-barnew>
+  </div>
+  </paper-card>
+</div>
+</div>
+</div>
+
+  <div class="row">
+  <div class="col-sm-6">
+    <paper-card  elevation="0"  style="width:100%;">
+    <div class="rate-header" style="margin-left:100px; margin-top:50px;">Item Stock Details</div>
+    <!-- <div class="card-content" style="margin-top:12px;"> -->
+      <barchart-card></barchart-card>
+    </div>
+    </paper-card>
+
+
+  <div class="col-sm-6">
+  <paper-card  elevation="0"  style="width:100%;">
+    <div style="margin-left:70px; margin-top:40px;">
+    <driver-details></driver-details>
+  </div>
+  </paper-card>
+  </div>
+  </div>
+
+</template>
+<script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'demo-filecharts',
+        ready:function(){
+
+        }
+    });
+  })();
+</script>
+</dom-module>

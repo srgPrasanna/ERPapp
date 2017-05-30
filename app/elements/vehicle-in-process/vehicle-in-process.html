@@ -1,0 +1,79 @@
+<script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<dom-module id="vehicle-in-process">
+<template>
+  <div class="container">
+  <div class="row">
+  <div  class="col-sm-6" >
+    <img src="../../images/vehicle.png"width="60%" height="60%" style="margin-left:110px;margin-top:160px;"/>
+  </div>
+  <div class="col-sm-6">
+  <div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+  <div class="panel-heading">
+  <h4 class="panel-title">
+      <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">Invoice Details</a>
+  </h4>
+  </div>
+  <div id="collapse1" class="panel-collapse collapse in">
+  <!-- <paper-card elevation="0"> -->
+  <vehicle-in-process-invoiceno></vehicle-in-process-invoiceno>
+  <!-- </paper-card> -->
+  </div>
+  </div>
+  <div class="panel panel-default">
+  <div class="panel-heading">
+  <h4 class="panel-title">
+    <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">Vehicle Entry</a>
+  </h4>
+  </div>
+  <div id="collapse2" class="panel-collapse collapse">
+  <!-- <div class="panel-body"> -->
+    <!-- <paper-card elevation="0"> -->
+      <vehicle-in-process-driverdetails></vehicle-in-process-driverdetails>
+    <!-- </paper-card> -->
+  <!-- </div> -->
+  </div>
+  </div>
+  <div class="panel panel-default">
+  <div class="panel-heading">
+      <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">Supplier Entry</a>
+      </h4>
+  </div>
+  <div id="collapse3" class="panel-collapse collapse">
+  <!-- <div class="panel-body"> -->
+  <!-- <paper-card elevation="0"> -->
+     <vehicle-in-process-suppliername></vehicle-in-process-suppliername>
+  <!-- </paper-card> -->
+  <!-- </div> -->
+  </div>
+  </div>
+  <div class="panel panel-default">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+          <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">Item Entry</a>
+    </h4>
+    </div>
+    <div id="collapse4" class="panel-collapse collapse">
+    <!-- <div class="panel-body"> -->
+    <!-- <paper-card elevation="0"> -->
+        <vehicle-in-process-itemdetails></vehicle-in-process-itemdetails>
+    <!-- </paper-card> -->
+    <!-- </div> -->
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+</template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'vehicle-in-process',
+
+            });
+  })();
+  </script>
+</dom-module>

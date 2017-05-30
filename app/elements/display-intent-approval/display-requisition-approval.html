@@ -1,0 +1,106 @@
+<dom-module id="display-requisition-approval">
+  <style>
+  paper-dropdown-menu {
+      --paper-dropdown-menu: {
+        width: 100%;
+      }
+    }
+  </style>
+  <template>
+    <div class="col-sm-6">
+      <img src="../../dist/img/no_image.jpg" width="60%" height="60%" style="margin-left:110px;margin-top:160px;"/>
+    </div>
+    <div class="col-sm-6">
+      <paper-card style="width:100%;" elevation="0">
+        <div class="card-content">
+          <paper-input label="Item Name" value="{{itemname}}" readonly></paper-input>
+          <paper-dropdown-menu label="Item Type" value="{{itype}}" noink>
+            <paper-listbox hidden class="dropdown-content" attr-for-selected="tvalue" selected="{{selectedtype}}">
+              <paper-item tvalue="CON">Consumable Items</paper-item>
+              <paper-item tvalue="FG">Finished Goods</paper-item>
+              <paper-item tvalue="MP">Machine Parts</paper-item>
+              <paper-item tvalue="OS">Office Supply</paper-item>
+              <paper-item tvalue="PM">Packing Material</paper-item>
+              <paper-item tvalue="RM">Raw Material</paper-item>
+              <paper-item tvalue="RMFL">Raw Material Flux</paper-item>
+              <paper-item tvalue="TP">Tool Part</paper-item>
+            </paper-listbox>
+          </paper-dropdown-menu>
+          <div>
+            <paper-input label="Item Specification1" value="{{itemspecification1}}" readonly></paper-input>
+          </div>
+          <paper-dropdown-menu label="Warehouselocation" value="{{itype}}" noink>
+            <paper-listbox hidden class="dropdown-content" attr-for-selected="wvalue" selected="{{selectedwh}}">
+              <paper-item wvalue="stores1">Stores1</paper-item>
+              <paper-item wvalue="stores2">Stores2</paper-item>
+              <paper-item wvalue="stores3">Stores3</paper-item>
+              <paper-item wvalue="stores4">Stores4</paper-item>
+              <paper-item wvalue="stores5">Stores5</paper-item>
+            </paper-listbox>
+          </paper-dropdown-menu>
+          <div>
+            <paper-dropdown-menu label="Item Container" value="{{icontainer}}" noink>
+              <paper-listbox hidden class="dropdown-content" attr-for-selected="cvalue" selected="{{selectedcontainer}}">
+                <paper-item cvalue="box">BOX</paper-item>
+                <paper-item cvalue="coils">COILS</paper-item>
+                <paper-item cvalue="drum">DRUM</paper-item>
+                <paper-item cvalue="bag">BAG</paper-item>
+              </paper-listbox>
+            </paper-dropdown-menu>
+          </div>
+          <paper-input label="Container Quantity" value="{{cquantity}}" readonly></paper-input>
+          <paper-input label="Item Quantity" value="{{iquantity}}" readonly></paper-input>
+          <paper-input label="Required Date" value={{reqdate}} readonly></paper-input>
+        </div>
+        <div class="card-actions">
+          <paper-radio-group attr-for-selected="value" selected="{{responsevalue}}" on-iron-select="respond">
+            <paper-radio-button value="active">Approve</paper-radio-button>
+            <paper-radio-button value="inactive">Reject</paper-radio-button>
+          </paper-radio-group>
+        </div>
+      </paper-card>
+    </div>
+    <iron-ajax
+      id="requisitionrespond"
+      method="post"
+      params="{{responseparam}}"
+      url="http://localhost:4000/requisitionresponse"
+      handle-as="json"
+      on-response="handleResponse">
+    </iron-ajax>
+  </template>
+</dom-module>
+<script type="text/javascript">
+var itemid1;
+  Polymer({
+    is: "display-requisition-approval",
+
+    requisitions:function(intnumber,intdate,requisitiontype,itemid,iquantity,cquantity,whstoresid,
+                     status,ireqdate,itemid,itemname,itemdescription,itemspecification1,
+                     itemspecification2,containerid,unitofmeasures,itemgroup,itemtypeid,
+                     itemstatus,itempurchasetype,warehouselocation,deptname){
+          this.itemname=itemname;
+          this.selectedtype=itemtypeid;
+          this.itemspecification1=itemspecification1;
+          this.selectedwh=warehouselocation;
+          this.selectedcontainer=containerid;
+          this.cquantity=cquantity;
+          this.iquantity=iquantity;
+          this.reqdate=intdate;
+          itemid1=itemid;
+        },
+
+      respond:function(){
+        var jobj={};
+        jobj.respond=this.responsevalue;
+        jobj.itemid=itemid1;
+        this.responseparam=jobj;
+        this.$.requisitionrespond.generateRequest();
+        document.querySelector('home-page').FnSetPage("call-requisition-approval");
+      },
+
+      handleResponse:function(e){
+        alert(e.detail.response.returnval);
+      }
+  });
+</script>

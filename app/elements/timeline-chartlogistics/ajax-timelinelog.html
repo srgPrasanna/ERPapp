@@ -1,0 +1,71 @@
+<link rel="import" href="timeline-chartlogistics.html" />
+<dom-module id="ajax-timelinelog">
+<template>
+    <iron-ajax
+      auto
+      method="get"
+      id="jsoninfoid"
+      url="timelinedesignlog.json"
+      handle-as="json"
+      content-type="application/json"
+      on-response="jsoninfoResponse"
+      last-response="{{jsondata}}"
+      debounce-duration="300">
+    </iron-ajax>
+    <iron-ajax
+      auto
+      method="post"
+      id="timelineajax"
+      url="{{timelinerequesturl}}"
+      handle-as="json"
+      params="{{timelineparameters}}"
+      content-type="application/json"
+      on-response="timelinedetails"
+      debounce-duration="300">
+    </iron-ajax>
+    <iron-ajax
+      auto
+      method="{{jsonmethod}}"
+      id="timelinelabelAjax"
+      url="timelinejsonlog.json"
+      handle-as="json"
+      content-type="application/json"
+      on-response="jsonresponse"
+      last-response="{{responsejson}}">
+    </iron-ajax>
+    <iron-ajax id="updateajax"
+               method="post"
+               url="http://localhost:4000/vehicleupdate"
+               params="{{updateparam}}"
+               handle-as="json"
+               content-type="application/json"
+               on-response="salesResponse1"></iron-ajax>
+</template>
+<script>
+  (function() {
+    'use strict';
+  Polymer({
+    is: 'ajax-timelinelog',
+    	  ready:function(){
+          var salesorderid = sessionStorage.getItem('salesorderid');
+          var itemid = sessionStorage.getItem('itemid');
+    		    this.timelinerequesturl="http://localhost:4000"+"/timelinefetch";
+          var obj={};
+            obj.salesid=salesorderid;
+            obj.itemssid=itemid;
+            this.timelineparameters=obj;
+            alert(JSON.stringify(this.timelineparameters));
+            this.$.timelineajax.generateRequest();
+    	  },
+    	  jsoninfoResponse:function(){
+          var labeljsondata=this.jsondata;
+          document.querySelector("timeline-chartlogistics").getJsondata(labeljsondata[0].goodsvehiclenumber,labeljsondata[0].goodsvehicleintime,labeljsondata[0].loadstart,labeljsondata[0].loadend,labeljsondata[0].goodsvehicleouttime,labeljsondata[0].delivered);
+        },
+        jsonresponse:function(){
+          var arr=this.responsejson;
+          document.querySelector("timeline-chartlogistics").Jsondata(arr[0].vehicleintime,arr[0].vehicleloadstartdatetime,arr[0].vehicleloadenddatetime,arr[0].vehicleouttime,arr[0].vehicledelivered);
+        }
+    });
+  })();
+  </script>
+</dom-module>

@@ -1,0 +1,62 @@
+<dom-module id="vehicleorder-summaryajax">
+  <p hidden>{{getdata}}</p>
+  <p hidden>{{getsaleiddata}}</p>
+<template>
+  <iron-ajax
+         auto
+         method="get"
+         id="jsoninfoid"
+         url="vehicle.json"
+         handle-as="json"
+         content-type="application/json"
+         on-response="jsoninfoResponse"
+         last-response="{{jsondata}}"
+         debounce-duration="300">
+  </iron-ajax>
+  <iron-ajax
+        auto
+        method="post"
+        id="readajax"
+        url="{{requesturl}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="searchitemdetails"
+        debounce-duration="300">
+  </iron-ajax>
+  <iron-ajax
+        method="post"
+        id="getsalesorderajax_id"
+        url="http://localhost:4000/searchsalesorder"
+        handle-as="json"
+        content-type="application/json"
+        on-response="searchsalesorderresponse"
+        debounce-duration="300">
+  </iron-ajax>
+</template>
+  <script>
+    Polymer({
+      is: 'vehicleorder-summaryajax',
+          ready:function(){
+            this.requesturl="http://localhost:4000"+"/vehiclefetch";
+            this.$.readajax.generateRequest();
+
+          },
+          searchitemdetails:function(e){
+            alert(e.detail.response.returnval);
+          },
+          jsoninfoResponse:function(){
+            var jsonsummary=this.jsondata;
+            document.querySelector('vehicleorder-summary').getfunction(jsonsummary);
+          },
+          searchsalesorderFn:function(){
+            this.$.getsalesorderajax_id.generateRequest();
+          },
+          searchsalesorderresponse:function(e){
+            var salesdata=e.detail.response.returnval;
+            var uiname="salesorder-mapping";
+            document.querySelector("home-page").FnSetPage(uiname);
+            document.querySelector("salesorder-mapping").getsalesorderFn(salesdata,this.getdata,this.getsaleiddata);
+          }
+      });
+  </script>
+</dom-module>

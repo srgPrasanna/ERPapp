@@ -1,0 +1,290 @@
+<dom-module id="display-requisition-stores">
+  <style is="custom-style">
+    input[type=range] {
+      -webkit-appearance: none;
+      margin: 10px 0;
+      width: 100%;
+    }
+    input[type=range]:focus {
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 10px;
+      cursor: pointer;
+      animate: 0.2s;
+      background: #C6C4C4;
+      border-radius: 5px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      box-shadow: 1px 1px 1px #000000;
+      border: 1px solid #000000;
+      height: 20px;
+      width: 10px;
+      border-radius: 5px;
+      background: #FFFFFF;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -6px;
+    }
+    input[type=range]:focus::-webkit-slider-runnable-track {
+      background: #C6C4C4;
+    }
+    input[type=range]::-moz-range-track {
+      width: 100%;
+      height: 10px;
+      cursor: pointer;
+      animate: 0.2s;
+      box-shadow: 1px 1px 1px #000000;
+      background: #3071A9;
+      border-radius: 5px;
+      border: 1px solid #000000;
+    }
+    input[type=range]::-moz-range-thumb {
+      box-shadow: 1px 1px 1px #000000;
+      border: 1px solid #000000;
+      height: 30px;
+      width: 15px;
+      border-radius: 5px;
+      background: #FFFFFF;
+      cursor: pointer;
+    }
+    input[type=range]::-ms-track {
+      width: 100%;
+      height: 10px;
+      cursor: pointer;
+      animate: 0.2s;
+      background: transparent;
+      border-color: transparent;
+      color: transparent;
+    }
+    input[type=range]::-ms-fill-lower {
+      background: #3071A9;
+      border: 1px solid #000000;
+      border-radius: 10px;
+      box-shadow: 1px 1px 1px #000000;
+    }
+    input[type=range]::-ms-fill-upper {
+      background: #3071A9;
+      border: 1px solid #000000;
+      border-radius: 10px;
+      box-shadow: 1px 1px 1px #000000;
+    }
+    input[type=range]::-ms-thumb {
+      box-shadow: 1px 1px 1px #000000;
+      border: 1px solid #000000;
+      height: 30px;
+      width: 15px;
+      border-radius: 5px;
+      background: #FFFFFF;
+      cursor: pointer;
+    }
+    input[type=range]:focus::-ms-fill-lower {
+      background: #3071A9;
+    }
+    input[type=range]:focus::-ms-fill-upper {
+      background: #3071A9;
+    }
+    .range.range-primary output {
+        background-color: rgb(66, 139, 202);
+        margin-left: 155px;
+        margin-left: 500px;
+        margin-top: 10px;
+    }
+    .range output {
+        display: table;
+        padding: 3px 5px 2px;
+        min-width: 40px;
+        color: rgb(255, 255, 255);
+        background-color: rgb(153, 153, 153);
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        width:50px ;
+        white-space: nowrap;
+        vertical-align: middle;
+        margin-left: 500px;
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: -moz-none;
+        -o-user-select: none;
+        user-select: none;
+      }
+      .maximumordered {
+          display: table;
+          padding: 3px 5px 2px;
+          min-width: 40px;
+          color: rgb(255, 255, 255);
+          background-color: rgb(153, 153, 153);
+          text-align: center;
+
+          text-decoration: none;
+          border-radius: 4px;
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
+          width:50px ;
+          white-space: nowrap;
+          vertical-align: middle;
+          margin-left: 500px;
+          -webkit-transition: all 0.5s ease;
+          -moz-transition: all 0.5s ease;
+          -o-transition: all 0.5s ease;
+          -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: -moz-none;
+          -o-user-select: none;
+          user-select: none;
+        }
+     .maximumordered{
+         margin-left: 358px;
+         background-color: rgb(66, 139, 202);
+        margin-top: 20px;
+      }
+     .rate-header { @apply(--paper-font-headline);
+           font-size: 20px;
+       }
+     .totaldesign
+     {
+         margin-left: 65px;
+
+     }
+    paper-card.rate { @apply(--layout-horizontal); }
+    .rate-image {
+      width: 45%;
+      height: 120px;
+      background: url('../../elements/requisition-process/images/no_image.jpg');
+      background-size: cover;
+    }
+    .rate-content {
+      @apply(--layout-flex);
+      float: left;
+    }
+    .rate-header { @apply(--paper-font-headline); }
+    .rate-name { color: var(--paper-grey-600); margin: 10px 0; }
+    paper-icon-button.rate-icon {
+      --iron-icon-fill-color: white;
+      --iron-icon-stroke-color: var(--paper-grey-600);
+    }
+  </style>
+  <template>
+    <div class="col-sm-6" style="margin-top:15%;">
+      <div style="margin-left:15%;"class="rate-header">{{itemname}}</div>
+      <paper-card class="rate" elevation="0">
+        <div class="rate-image"></div>
+        <div class="rate-content">
+          <div class="card-content">
+            <div class="rate-name">
+              <table>
+                <tr><td>{{whname}}</td></tr>
+                <tr><td>{{reqno}}</td></tr>
+                <tr><td>{{reqdate}}</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </paper-card>
+    </div>
+    <div class="col-md-6">
+      <paper-card style="width:100%;" elevation="0">
+        <div class="card-content">
+          <b>Requisition</b>
+          <paper-input label="Item Specification1" value="{{itemspecification1}}" readonly></paper-input>
+          <paper-input label="Item Type" value="{{itemtype}}" readonly></paper-input>
+          <paper-input label="Item Required" value="{{iquantity}} {{unitofmeasures}}" readonly></paper-input>
+          <paper-input label="Item Required Date" value="{{itemreqdate}}" readonly></paper-input>
+          <paper-input label="Number of {{itemcontainer}}(s)" value="{{cquantity}}"></paper-input>
+          <input disabled type="range" min="{{min}}" max="{{availablequantity}}" value="{{supplyquantity}}"></input>{{availablequantity}}
+          <paper-input label="Enter the Amount of Item to Supply" value={{supplyquantity}} on-value-changed="test"><span class="fa fa-share"></span></paper-input>
+          <datetime-picker date-string="{{min}}" time-string={{timevar}} disabled min-date="[[max]]" use-not-native hidden></datetime-picker>
+          <center>
+            <paper-button class="btn btn-app" id="supplybutton" raised on-click="supply" disabled="{{buttonvar}}"><span class="fa fa-share"></span>Supply</paper-button>
+          </center>
+        </div>
+      </paper-card>
+    </div>
+    <iron-ajax
+      id="requisitionstores"
+      method="post"
+      params="{{moveparam}}"
+      url="http://localhost:4000/requisitionitemsupply"
+      handle-as="json"
+      on-response="handleSupplyResponse">
+    </iron-ajax>
+    <check-autogenid stringname="itemmove"
+                     elementname="display-requisition-stores">
+    </check-autogenid>
+  </template>
+</dom-module>
+<script type="text/javascript">
+var supplyStatus;
+var autoid;
+var availablequantity1;
+  Polymer({
+    is: "display-requisition-stores",
+    requisitionbind:function(reqnumber,reqdate,itemquantity,itemname,itemspecification1,itemtype,warehousename,itemreqdate,itemcontainer,itemavailablequantity,unitofmeasurename){
+      this.reqno=reqnumber;
+      this.itemname=itemname;
+      this.itemspecification1=itemspecification1;
+      this.itemcontainer=itemcontainer;
+      this.unitofmeasures=unitofmeasurename;
+      this.reqdate=reqdate;
+      this.itemtype=itemtype;
+      this.iquantity=itemquantity;
+      this.whname=warehousename;
+      this.itemreqdate=itemreqdate;
+      this.availablequantity=itemavailablequantity;
+      availablequantity1=itemavailablequantity;
+      if(availablequantity1<itemquantity){
+        this.buttonvar=true;
+        alert("Stores has not enough quantity for "+itemname+"!");
+      }
+    },
+    supply:function(){
+      if(Number(this.supplyquantity)<Number(this.iquantity)){
+        supplyStatus="Partially Fulfilled";
+      }
+      else {
+        supplyStatus="Fulfilled";
+      }
+      var jsonobject={};
+      jsonobject.autoid=autoid;
+      jsonobject.reqno=this.reqno;
+      jsonobject.supplyquantity=this.supplyquantity;
+      jsonobject.containerquantity=this.cquantity;
+      jsonobject.datetime=this.min+" "+this.timevar;
+      jsonobject.status=supplyStatus;
+      this.moveparam=jsonobject;
+      this.$.requisitionstores.generateRequest();
+    },
+    checkid:function(x){
+      autoid=x;
+    },
+    handleSupplyResponse:function(y){
+      alert(y.detail.response.processstatus);
+      document.querySelector('home-page').FnSetPage("requisition-stores");
+    },
+    ready: function() {
+      this.buttonvar=false;
+    },
+    test:function(){
+      if (Number(this.supplyquantity)>Number(this.iquantity)) {
+        this.buttonvar=true;
+        alert("Exceeding the Required Amount");
+      }
+      else {
+        this.buttonvar=false;
+      }
+    }
+  });
+</script>

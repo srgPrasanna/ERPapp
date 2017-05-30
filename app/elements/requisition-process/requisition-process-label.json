@@ -1,0 +1,8 @@
+[{"itemtype":"Item Type",
+  "itemname":"Item Name",
+  "itemspecification1":"Item specification1",
+  "warehouselocation":"Warehouse Location",
+  "itemcontainer":"Item Container",
+  "itemcontainerquantity":"Container Quantity",
+  "itemquantity":"Item Quantity"
+  }]

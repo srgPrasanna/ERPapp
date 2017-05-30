@@ -1,0 +1,30 @@
+<dom-module id="vehicle-in-process-driverdetails">
+<template>
+<style>
+.card-content{
+  width:100%;
+}
+</style>
+  <paper-card  elevation="0" style="width:100%;" >
+  <div class="card-content">
+  <paper-input  label="{{Vehiclename}}" value="{{vehiclenamevalue}}" ></paper-input>
+  <paper-input  label="{{Vehicleno}}" value="{{vehiclenovalue}}" ></paper-input>
+  <paper-input  label="{{Drivername}}" value="{{drivernamevalue}}"></paper-input>
+  <paper-input  label="{{Driverno}}" value="{{drivernovalue}}"></paper-input>
+  </div>
+ </paper-card>
+ <iron-ajax
+    auto
+    method="get"
+    url="vehiclelabel.json"
+    handle-as="json"
+    content-type="application/json"
+    on-response="vehiclelabelinfo"
+    last-response="{{jsondata}}"
+    debounce-duration="300">
+ </iron-ajax>
+</template>
+  <script src="vehicle-in-process-driverdetails.js">
+
+  </script>
+</dom-module>

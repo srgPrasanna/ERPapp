@@ -1,0 +1,85 @@
+<dom-module id="display-requisition-approval">
+  <style>
+  paper-dropdown-menu {
+      --paper-dropdown-menu: {
+        width: 100%;
+      }
+    }
+  </style>
+  <template>
+    <div class="col-sm-6">
+      <img src="../../dist/img/no_image.jpg" width="60%" height="60%" style="margin-left:110px;margin-top:160px;"/>
+    </div>
+    <div class="col-sm-6">
+      <paper-card style="width:100%;" elevation="0">
+        <div class="card-content">
+          <paper-input label="Item Name" value="{{itemname}}" readonly></paper-input>
+          <paper-input label="Item Type" value="{{selectedtype}}" readonly></paper-input>
+          <div>
+            <paper-input label="Item Specification1" value="{{itemspecification1}}" readonly></paper-input>
+          </div>
+          <paper-input label="Warehouselocation" value="{{selectedwh}}" readonly></paper-input>
+          <div>
+            <paper-input label="Item Container" value="{{selectedcontainer}}" readonly></paper-input>
+          </div>
+          <paper-input label="Item Quantity" value="{{iquantity}}" readonly></paper-input>
+          <paper-input label="Required Date" value={{reqdate}} readonly></paper-input>
+        </div>
+        <div class="card-actions">
+          <paper-radio-group attr-for-selected="value" selected="{{responsevalue}}" on-iron-select="respond">
+            <paper-radio-button value="active">Approve</paper-radio-button>
+            <paper-radio-button value="inactive">Reject</paper-radio-button>
+          </paper-radio-group>
+        </div>
+      </paper-card>
+    </div>
+    <iron-ajax
+      id="requisitionrespond"
+      method="post"
+      params="{{responseparam}}"
+      url="http://localhost:4000/requisitionresponse"
+      handle-as="json"
+      on-response="handleResponse">
+    </iron-ajax>
+  </template>
+</dom-module>
+<script type="text/javascript">
+var itemid1;
+var requisition;
+var role;
+  Polymer({
+    is: "display-requisition-approval",
+    requisitions:function(requisitionno,intdate,requisitiontype,itemid,iquantity,cquantity,whstoresid,
+                     status,ireqdate,itemid,itemname,itemdescription,itemspecification1,
+                     itemspecification2,containername,unitofmeasures,itemgroup,itemtypename,
+                     itemstatus,itempurchasetype,warehousename,deptname){
+          this.itemname=itemname;
+          this.selectedtype=itemtypename;
+          this.itemspecification1=itemspecification1;
+          this.selectedwh=warehousename;
+          this.selectedcontainer=containername;
+          this.cquantity=cquantity;
+          this.iquantity=iquantity;
+          this.reqdate=intdate;
+          itemid1=itemid;
+          requisition=requisitionno;
+        },
+      respond:function(){
+        var jobj={};
+        jobj.respond=this.responsevalue;
+        jobj.itemid=itemid1;
+        jobj.requisitionno=requisition;
+        this.responseparam=jobj;
+        this.$.requisitionrespond.generateRequest();
+        var jsonobj={role};
+        document.querySelector('home-page').FnSetPage("call-requisition-approval");
+        document.querySelector('call-requisition-approval').loggedrole=jsonobj;
+      },
+      handleResponse:function(e){
+        alert(e.detail.response.returnval);
+      },
+      ready: function() {
+        role=sessionStorage.getItem("logrole");
+      }
+  });
+</script>

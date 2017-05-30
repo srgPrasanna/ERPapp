@@ -1,0 +1,42 @@
+<dom-module id="vehiclecard-ironajax">
+  <template>
+    <iron-ajax
+      auto
+      method="{{jsonmethod}}"
+      id="vehiclelabelAjax"
+      url="vehiclelabel.json"
+      handle-as="json"
+      content-type="application/json"
+      on-response="jsoninforesponse"
+      last-response="{{responsejson}}">
+    </iron-ajax>
+    <iron-ajax
+      method="post"
+      id="dbpostAjax"
+      url="http://localhost:4000/vehiclesavedata"
+      params="{{dbpostparams}}"
+      handle-as="json"
+      content-type="application/json"
+      on-response="dbinforesponse">
+    </iron-ajax>
+  </template>
+<script>
+  Polymer({
+    is:"vehiclecard-ironajax",
+      jsoninforesponse:function(){
+        var arr=this.responsejson;
+          document.querySelector("vehicle-card").getJsondata(arr[0].vno,arr[0].vname,arr[0].dname,arr[0].dno1,
+          arr[0].dno2,arr[0].ownname,arr[0].ownno,arr[0].vintime,arr[0].vindate,arr[0].typelab,arr[0].sin,arr[0].sout);
+          },
+
+      dbinforesponse:function(e){
+        alert(e.detail.response.datavalue);
+      },
+
+      to_ironajax:function(postvalue){
+        this.dbpostparams=postvalue;
+        this.$.dbpostAjax.generateRequest();
+      }
+});
+</script>
+</dom-module>

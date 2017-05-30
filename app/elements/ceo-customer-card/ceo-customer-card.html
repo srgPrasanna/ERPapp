@@ -1,0 +1,19 @@
+<link rel="import" href="ceo-customer-card-ironajax.html">
+<link rel="import" href="ceo-customer-papercard.html">
+<dom-module id="ceo-customer-card">
+  <template>
+    <p hidden>{{getcuid}}</p>
+      <template is="dom-repeat" items="{{getdata}}" as="e">
+        <ceo-customer-papercard customerid="{{e.customerid}}"
+                                customername="{{e.customername}}"
+                                customerlocation="{{e.customerlocation}}"
+                                address1="{{e.address1}}"
+                                country="{{e.country}}"
+                                state="{{e.state}}"
+                                email="{{e.email}}">
+        </ceo-customer-papercard>
+      </template>
+        <ceo-customer-card-ironajax></ceo-customer-card-ironajax>
+  </template>
+    <script src="ceo-customer-card.js"></script>
+</dom-module>

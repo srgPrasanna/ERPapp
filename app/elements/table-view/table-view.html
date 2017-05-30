@@ -1,0 +1,141 @@
+<dom-module id="table-view">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+      <table class="table">
+        <b>{{tableheading1}}</b>
+        <tr>
+          <th>Item Name</th>
+          <th>Container</th>
+          <th>Unit of Measure</th>
+          <th>Group</th>
+          <th>Type</th>
+          <th>Purchase Type</th>
+          <th></th>
+        </tr>
+        <template is="dom-repeat" items="{{pggoods}}">
+          <tr>
+            <td>
+              <table-view-data itemname={{item.item_name}}></table-view-data>
+            </td>
+            <td>
+              <table-view-data containerid={{item.container_id}}></table-view-data>
+            </td>
+            <td>
+              <table-view-data unitofmeasureid={{item.unit_of_measure_id}}></table-view-data>
+            </td>
+            <td>
+              <table-view-data itemgroup={{item.item_group}}></table-view-data>
+            </td>
+            <td>
+              <table-view-data itemtypeid={{item.item_type_id}}></table-view-data>
+            </td>
+            <td>
+              <table-view-data itempurchasetype={{item.item_purchase_type}}></table-view-data>
+            </td>
+            <td>
+              <check-close-icon itemid={{item.item_id}}
+                                itemname={{item.item_name}}
+                                itemdescription={{item.item_description}}
+                                itemspecification1={{item.item_specification1}}
+                                itemspecification2={{item.item_specification2}}
+                                containerid={{item.container_id}}
+                                unitofmeasureid={{item.unit_of_measure_id}}
+                                itemgroup={{item.item_group}}
+                                itemtypeid={{item.item_type_id}}
+                                itempurchasetype={{item.item_purchase_type}}>
+              </check-close-icon>
+            </td>
+          </tr>
+        </template>
+      </table>
+      <center>
+        <a class="btn btn-app" on-click="respond" style="cursor:pointer;">
+          <i class="fa fa-save"></i>Submit
+        </a>
+      </center>
+      <!--Finished Goods-->
+      <div style="margin-top:10px;">
+      <table class="table">
+        <b>{{tableheading2}}</b>
+        <tr>
+          <th>Item Name</th>
+          <th>Container</th>
+          <th>Unit of Measure</th>
+          <th>Group</th>
+          <th>Type</th>
+          <th>Purchase Type</th>
+          <th></th>
+        </tr>
+        <template is="dom-repeat" items="{{fggoods}}">
+          <tr>
+            <td>
+              <table-view-data itemname={{item.item_name}}></table-view-data>
+            </td>
+            <td>
+              <table-view-data containerid={{item.container_id}}></table-view-data>
+            </td>
+            <td>
+              <table-view-data unitofmeasureid={{item.unit_of_measure_id}}></table-view-data>
+            </td>
+            <td>
+              <table-view-data itemgroup={{item.item_group}}></table-view-data>
+            </td>
+            <td>
+              <table-view-data itemtypeid={{item.item_type_id}}></table-view-data>
+            </td>
+            <td>
+              <table-view-data itempurchasetype={{item.item_purchase_type}}></table-view-data>
+            </td>
+            <td>
+              <check-close-icon itemid={{item.item_id}}
+                                itemname={{item.item_name}}
+                                itemdescription={{item.item_description}}
+                                itemspecification1={{item.item_specification1}}
+                                itemspecification2={{item.item_specification2}}
+                                containerid={{item.container_id}}
+                                unitofmeasureid={{item.unit_of_measure_id}}
+                                itemgroup={{item.item_group}}
+                                itemtypeid={{item.item_type_id}}
+                                itempurchasetype={{item.item_purchase_type}}>
+              </check-close-icon>
+            </td>
+          </tr>
+        </template>
+      </table>
+      <center>
+        <a class="btn btn-app" on-click="respond" style="cursor:pointer;">
+          <i class="fa fa-save"></i>Submit
+        </a>
+      </center>
+    </div>
+      <iron-ajax
+        auto
+        method="post"
+        url="http://localhost:4000/ceoitemsearch"
+        handle-as="json"
+        on-response="handleResponse">
+      </iron-ajax>
+  </template>
+</dom-module>
+<script type="text/javascript">
+var tableviewdata;
+var tableviewdatafg;
+  Polymer({
+    is: "table-view",
+    respond:function(){
+      document.querySelector("check-close-icon").respond();
+    },
+    handleResponse:function(e){
+      tableviewdata=e.detail.response.returnval;
+      tableviewdatafg=e.detail.response.returnfg;
+      document.querySelector("table-view").pggoods=tableviewdata;
+      document.querySelector("table-view").tableheading="Purchased Goods";
+      document.querySelector("table-view").fggoods=tableviewdatafg;
+      document.querySelector("table-view").tableheading2="Finished Goods";
+    }
+  });
+</script>

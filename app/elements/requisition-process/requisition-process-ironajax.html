@@ -1,0 +1,39 @@
+<dom-module id="requisition-process-ironajax">
+  <template>
+    <div hidden>{{loggedrole}}</div>
+    <iron-ajax
+      auto
+      method="post"
+      url="http://localhost:4000/searchitemnames"
+      params="{{loggedrole}}"
+      handle-as="json"
+      on-response="handlerequisitionitems">
+    </iron-ajax>
+    <iron-ajax
+      id="requisitionia"
+      method="post"
+      url="http://localhost:4000/requisitionsave"
+      params="{{requisitionparam}}"
+      handle-as="json"
+      on-response="handlerequisitionsave">
+    </iron-ajax>
+    <iron-ajax
+      auto
+      method="get"
+      url="requisition-process-label.json"
+      handle-as="json"
+      on-request="request"
+      on-response="handlerequisitionlabel"
+      last-response="{{requisitionlabel}}">
+    </iron-ajax>
+    <iron-ajax
+      id="searchitem"
+      method="post"
+      url="http://localhost:4000/searchrequisitionitem"
+      params="{{searchitemparam}}"
+      handle-as="json"
+      on-response="handleItems">
+    </iron-ajax>
+  </template>
+  <script src="requisition-process-ironajax.js"></script>
+</dom-module>

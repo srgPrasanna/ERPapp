@@ -1,0 +1,147 @@
+<dom-module id="item-quality-testing">
+  <style>
+  #insertionPoint{
+    cursor: pointer;
+  }
+  </style>
+  <template>
+    <section class="content">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="box">
+            <div class="box-header with-border">
+              <h3 class="box-title">Testing</h3>
+            </div>
+            <div class="box-body">
+              <table class="table"> <!--  <table class="table"> for no border -->
+                <tr>
+                  <th>&#8195&#8195&#8195&#8195&#8195&#8195&#8195&#8195
+                    &#8195&#8195&#8195&#8195&#8195&#8195&#8195&#8195&#8195&#8195
+                    &#8195Actuals</th>
+                  <!-- <th class="text-center">Actuals</th> -->
+                </tr>
+                <slider-paper-input check="1" close="1" hidden></slider-paper-input>
+                <td style="width:100%">
+                <template is="dom-repeat" items="{{response}}">
+                  <slider-paper-input parametername="{{item.quality_parameter_name}}"
+                                      minimumvalue="{{item.minimum_value}}"
+                                      maximumvalue="{{item.maximum_value}}"
+                                      min="{{item.minimum_value}}"
+                                      max="{{item.maximum_value}}"
+                                      check="1"
+                                      close="1">
+                  </slider-paper-input>
+                  <!-- uid="10" -->
+                  <!-- uid="{{_doneId(item.minimum_value)}}" -->
+                </template>
+              </td>
+              </table>
+            </div>
+            <div class"box-footer clearfix">
+              <div>&#8195&#8195&#8195&#8195&#8195&#8195
+                <a on-click="pass" id="insertionPoint">
+                  <span id="up" class="glyphicon glyphicon-thumbs-up" style="font-size: 30px;color:grey"></span>
+                </a>
+                &#8195&#8195
+                <a on-click="fail" id="insertionPoint">
+                  <span id="down" class="glyphicon glyphicon-thumbs-down" style="font-size: 30px;color:grey;"></span>
+                </a>
+              </div>
+              <div>
+                <center>
+                  <a class="btn btn-app" on-click="SaveActuals" style="">
+                    <i class="fa fa-save"></i>Save
+                  </a>
+                </center>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <iron-ajax
+      id="SaveActualsIA"
+      method="post"
+      url="http://localhost:4000/saveactual"
+      params="{{actualparam}}"
+      handle-as="json"
+      on-response="HandleSaveActualsIA">
+    </iron-ajax>
+    <check-autogenid stringname="qtest"
+                     elementname="item-quality-testing">
+    </check-autogenid>
+  </template>
+</dom-module>
+<script type="text/javascript">
+  var actualsValue;
+  var qid;
+  var PorF;
+  var y=[];
+  var l=[];
+  Polymer({
+    is: "item-quality-testing",
+    HandleSaveActualsIA:function(e){
+      alert(e.detail.response.serverres);
+    },
+
+    SaveActuals:function(){
+      for(i=0;i<actualsValue.length;i++){
+        var k={"id":actualsValue[0].id,"actualvalue":actualsValue[i].actualvalue,"status":PorF};
+          l.push(k);
+      }
+      for(i=0;i<actualsValue.length;i++){
+        this.actualparam=l[i];
+        this.$.SaveActualsIA.generateRequest();
+      }
+      // alert("l"+JSON.stringify(l));
+
+      // alert(qid);
+      // alert(JSON.stringify(this.actualparam));
+      // alert(JSON.stringify(actualsValue));
+      // alert(JSON.stringify(j));
+      // var j={};
+      // var x=[];
+      // for(i=0;i<actualsValue.length;i++){
+      //   // alert(actualsValue[0]);
+      //   j=actualsValue[i];
+      //   x.push(j);
+      //   alert("x"+x);
+      // }
+      // var x=[];
+      // for(i=0;i<=actualsValue.length;i++){
+      // j=actualsValue[i];
+      // x.push(j);
+      // alert(JSON.stringify(j));
+      // }
+      // var json={};
+      // json.actualsValue=actualsValue;
+      // alert(JSON.stringify(json));
+      // alert(this.PorF);
+    },
+    pass: function() {
+      PorF="pass";
+      document.getElementById("down").style.color = "grey";
+      document.getElementById("up").style.color = "#A2CD6F";
+    },
+    fail: function() {
+      PorF="fail";
+      document.getElementById("up").style.color = "grey";
+      document.getElementById("down").style.color = "red";
+    },
+    dbResponse:function(a){
+      this.response=a;
+      // alert(JSON.stringify(a));
+    },
+    inputvalues:function(x){
+      var z={"id":qid,"actualvalue":x};
+      y.push(z);
+      actualsValue=y;
+    },
+    checkid:function(id){
+      qid=id;
+    }
+    // _doneId:function(index){
+    //   alert("_doneId" + index);
+    // }
+  });
+</script>

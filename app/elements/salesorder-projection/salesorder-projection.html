@@ -1,0 +1,162 @@
+<link rel="import" href="salesorder-projection-ironajax.html">
+<link rel="import" href="../autogen-id/autogen-id.html">
+
+<dom-module id="salesorder-projection">
+<style is="custom-style">
+     paper-card.size{
+       width: 100%;
+     }
+     paper-card.reqsize{
+       width: 100%;
+     }
+     paper-card.imgsize{
+       height: 300px;
+       width: 300px;
+      margin-left: 150px;
+      margin-top: 150px;
+     }
+     paper-listbox.dropdown-content{
+       width:100%;
+     }
+     paper-card.btnsize{
+       margin-top:2000px;
+     }
+     paper-dropdown-menu {
+         --paper-dropdown-menu: {
+           width: 100%;
+         }
+       }
+       :host([hidden]), .paper-item[hidden] {
+          display: none !important;
+        }
+        #date{
+          width:100%;
+        }
+        /*paper-listbox.dropdown-content{
+          width: 100%;
+          height: 200px;
+          overflow: scroll;
+        }*/
+</style>
+  <template>
+    <div class="row">
+       <div class="col-sm-6">
+         <paper-card elevation="0" heading="Customer Image" image="../../images/user2-160x160.jpg" class="imgsize"></paper-card>
+       </div>
+       <div class="col-sm-6">
+       <paper-card elevation="0" heading="Sales Order" style="width:100%;">
+       <div class="card-content"> <!--card-content-->
+         <paper-input hidden label="{{salesorderid}}" value="{{salesid}}"></paper-input>
+         <paper-input readonly label="Customer Name" is="" value="{{value}}"  on-keydown="FnSearchEnquiry"></paper-input>
+         <paper-listbox class="dropdown-content" id="transportinput2" on-click="functionitem" on-iron-select="FnSelectEnquiry1">
+           <template is="dom-repeat" items="{{itemArray}}" as="item">
+             <paper-item value="{{item.customerid}}">{{item.itemdes}}</paper-item>
+           </template>
+         </paper-listbox>
+         <!-- Itemname -->
+         <paper-input readonly label="Item Name" is="" value="{{value1}}"   on-keydown="FnSearchEnquiry1"></paper-input>
+         <paper-listbox class="dropdown-content" id="transportinput3" on-click="functionlocation" on-iron-select="FnSelectEnquiry2">
+           <template is="dom-repeat" items="{{itemArray1}}" as="item1">
+             <paper-item value="{{item1.itemid}}">{{item1.itemdes1}}</paper-item>
+           </template>
+         </paper-listbox>
+         <!-- location -->
+         <paper-input readonly label="Customer Location" is="" value="{{value5}}" on-keydown="locationkey"></paper-input>
+         <paper-listbox class="dropdown-content" id="locationid" on-iron-select="locationlistbox">
+         <template is="dom-repeat" items="{{itemArray5}}" as="item5">
+         <paper-item value="{{item5.city}}">{{item5.itemdes5}}</paper-item>
+        </template>
+         </paper-listbox>
+         <paper-input readonly label="Item Quantity" value="{{rtons}}"></paper-input>
+         <paper-input readonly label="Container Quantity" value="{{rcoils}}"></paper-input>
+         <!-- collapse -->
+         <!-- <iron-collapse id="collapse" opened="{{colvar}}"> -->
+         <paper-input label="Item Specification" value="{{ispecification}}"></paper-input>
+         <salesorder-projection-ironajax></salesorder-projection-ironajax>
+          <autogen-id></autogen-id>
+          <div class="row">
+            <div class="col-sm-6" style="margin-top:10px;">
+              <vaadin-date-picker id="date" label="Required Delivered Date" value="{{min1}}"></vaadin-date-picker>
+            </div>
+            <div class="col-sm-6">
+              <div style="margin-top:10px;">
+            <datetime-picker hidden date-string="{{min}}"  disabled min-date="[[max]]" use-not-native></datetime-picker>
+          </div>
+        </div>
+      </div>
+        <br><br>
+<check-autogenid stringname="sal" elementname="salesorder-projection"></check-autogenid>
+ <!-- save details -->
+    <div class="card-actions" style="margin-top=10px;">
+      <center>
+        <!-- <paper-button id="anchorID1" hidden="{{qwerty1}}" class="btn btn-app" on-click="saveitemsfn2">
+          <i class="fa fa-save"></i>Confirm Order
+        </paper-button> -->
+        <paper-button hidden="{{qwerty2}}" class="btn btn-app" on-click="confirm">
+          <i class="fa fa-save"></i>Confirm Order
+        </paper-button>
+    </center>
+      </div> <!--div 3-->
+      </paper-card>
+        </div>
+      </div>
+
+  </div>
+
+    <iron-ajax id="insertajax"
+               method="post"
+               url="http://localhost:4000/salesinsert"
+               params="{{writeparam}}"
+               handle-as="json"
+               content-type="application/json"
+               on-response="salesResponse"></iron-ajax>
+     <iron-ajax id="updateajax"
+                method="post"
+                url="http://localhost:4000/salesupdate"
+                params="{{updateparam}}"
+                handle-as="json"
+                content-type="application/json"
+                on-response="salesResponse1"></iron-ajax>
+
+    <iron-ajax
+            auto
+            method="post"
+            url="http://localhost:4000/autocomplete"
+            handle-as="json"
+            on-response="autocompletearr">
+    </iron-ajax>
+    <iron-ajax
+            method="post"
+            id="writeajax"
+            params="{{writeparam}}"
+            url="{{urlname}}"
+            handle-as="json"
+            on-response="autocompletearr1">
+    </iron-ajax>
+    <iron-ajax
+            method="post"
+            id="locationajax"
+            params="{{locationparam}}"
+            url="{{urlname1}}"
+            handle-as="json"
+            on-response="autocompletearr5">
+    </iron-ajax>
+
+    <iron-ajax
+            auto
+            method="get"
+            id="jsoninfoid"
+            url="salesprojection-label.json"
+            handle-as="json"
+            content-type="application/json"
+            on-response="jsoninfoResponse"
+            last-response="{{jsondata}}"
+            debounce-duration="300">
+    </iron-ajax>
+  </template>
+    <script src="salesorder-projection.js">
+
+  </script>
+
+
+</dom-module>

@@ -1,0 +1,74 @@
+<dom-module id="GRN-card">
+  <template>
+  <style is="custom-style">
+    .cafe-header { @apply(--paper-font-headline); }
+    .cafe-light { color: var(--paper-black-600); }
+    .cafe-location {
+      float: right;
+      font-size: 15px;
+      vertical-align: middle;
+    }
+    .cafe-reserve { color: var(--google-gray-500); }
+    iron-icon.star {
+      --iron-icon-width: 16px;
+      --iron-icon-height: 16px;
+      color: var(--paper-amber-500);
+    }
+    iron-icon.star:last-of-type { color: var(--paper-grey-500); }
+  </style>
+  <paper-card image="../../images/salesimage.jpg" style="margin-top:6px;margin-left:15px; cursor:pointer;" on-click="cardgetFn">
+    <div class="cafe-header">{{title}}</div>
+    <div class="card-content">
+      <div class="cafe-reserve">
+        <table>
+          <div hidden>{{po_number}}</div>
+          <div hidden>{{po_date}}</div>
+          <div hidden>{{item_quantity}}</div>
+          <div hidden>{{container_quantity}}</div>
+          <div hidden>{{container_id}}</div>
+          <div hidden>{{unit_of_measure_id}}</div>
+          <tr><td>{{itemname}}</td></tr>
+          <tr><td>{{itemspecification1}}</td></tr>
+          <tr><td>{{suppliername}}</td></tr>
+          <tr><td>{{invoice_no}}  {{invoice_date}}</td></tr>
+          <tr><td>Inward_register_number</td><td>{{inward_register_number}}</td></tr>
+        </table>
+      </div>
+    </div>
+</paper-card>
+  </template>
+  <script>
+  Polymer({
+    is:"GRN-card",
+    ready:function(){
+    },
+    cardgetFn:function(){
+      var arr=[];
+      var itemobj={inward_register_number:this.inward_register_number,
+                   po_number:this.po_number,
+                   po_date:this.po_date,
+                   Itemname:"Item",
+                   itemname:this.itemname,
+                   itemspecification:this.itemspecification1,
+                   Containername:"Container",
+                   container_id:this.container_id,
+                   container_quantity:this.container_quantity,
+                   item_quantity:this.item_quantity,
+                   unit_of_measure_id:this.unit_of_measure_id,
+                   images:"../../images/items.jpg"};
+                   alert(JSON.stringify(itemobj));
+      var supplierobj={suppliername:this.suppliername,
+                       Suppliername:"Supplier",
+                       images:"../../images/salesimage.jpg"};
+      // var containerobj={images:"../../images/container.jpg"};
+      var invoiceobj={Invoice:"Invoice",
+                      invoice_date:this.invoice_date,
+                      invoice_no:this.invoice_no,
+                      images:"../../images/invoice.png"};
+      arr.push(itemobj,supplierobj,invoiceobj);
+      document.querySelector("home-page").FnSetPage("GRNcard-click-function");
+      document.querySelector("GRNcard-click-function").getfunc(arr);
+    }
+  });
+  </script>
+</dom-module>

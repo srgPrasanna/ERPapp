@@ -1,0 +1,28 @@
+<dom-module id="vehicle-in-process-invoiceno">
+<template>
+<style>
+.card-content{
+  width:100%;
+}
+</style>
+  <paper-card elevation="0" style="width:100%;" >
+  <div class="card-content">
+  <paper-input  label="{{invoiceno}}" value="{{invoicevalue}}"></paper-input>
+  <paper-input  label="{{Invoicedate}}" value="{{invoicedatevalue}}"></paper-input>
+   </div>
+ </paper-card>
+ <iron-ajax
+    auto
+    method="get"
+    url="invoicelabel.json"
+    handle-as="json"
+    content-type="application/json"
+    on-response="invoicelabelinfo"
+    last-response="{{jsondata}}"
+    debounce-duration="300">
+ </iron-ajax>
+</template>
+  <script src="vehicle-in-process-invoiceno.js">
+
+  </script>
+</dom-module>

@@ -1,0 +1,39 @@
+<dom-module id="vehicle-in-process-suppliername">
+<template>
+<style>
+.card-content{
+  width:100%;
+}</style>
+<paper-card  elevation="0" style="width:100%;" >
+<div class="card-content">
+   <paper-input  label="{{Suppliername}}" is="" value="{{value}}" on-keydown="FnSearchEnquiry"></paper-input>
+   <paper-listbox class="dropdown-content" id="transportinput2" on-iron-select="FnSelectEnquiry1">
+     <template is="dom-repeat" items="{{itemArray}}" as="item">
+       <paper-item value="{{item.supplierid}}">{{item.itemdes}}</paper-item>
+     </template>
+   </paper-listbox>
+</div>
+</paper-card>
+   <iron-ajax
+     auto
+     method="post"
+     url="http://localhost:4000/supplierautocomplete"
+     handle-as="json"
+     on-response="supplierautocompletefunction">
+   </iron-ajax>
+   <iron-ajax
+      auto
+      method="get"
+      url="suppliername.json"
+      handle-as="json"
+      content-type="application/json"
+      on-response="supplierlabelinfo"
+      last-response="{{jsondata}}"
+      debounce-duration="300">
+   </iron-ajax>
+
+</template>
+  <script src="vehicle-in-process-suppliername.js">
+
+  </script>
+</dom-module>

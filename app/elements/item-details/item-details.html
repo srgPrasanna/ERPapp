@@ -1,0 +1,113 @@
+<link rel="import" href="item-details-ironajax.html">
+<dom-module id="item-details">
+  <style>
+    paper-dropdown-menu {
+        --paper-dropdown-menu: {
+          width: 100%;
+        }
+      }
+  </style>
+  <template>
+    <div hidden>
+    {{tempitemname1}}
+    {{autogenid}}
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <img src="../../dist/img/no_image.jpg" width="60%" height="60%" style="margin-left:110px;margin-top:160px;"/>
+        <div style="margin-top:10%;">
+          <center>
+            <paper-button class="btn btn-app" raised id="disablebutton" on-click="openmapping" disabled><span class="fa fa-users"></span>Add Supplier</paper-button>
+          </center>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <paper-card style="width:100%;" elevation="0">
+          <div class="card-content">
+            <b>Item Details</b>
+            <paper-input label="{{itemid}}" value="{{iid}}" hidden="1"></paper-input>
+            <paper-input  label="{{itemname}}" is="" value="{{value1}}" on-click="expand"  on-keydown="FnSearchEnquiry1"><iron-icon icon="search" suffix on-click="searchdetails" style="cursor:pointer;"></iron-icon></paper-input>
+             <paper-listbox class="dropdown-content" id="transportinput3"  on-iron-select="FnSelectEnquiry2" selected="{{selectedname}}">
+               <template is="dom-repeat" items="{{itemArray1}}" as="item1">
+                 {{item1.itemdes1}}
+                 <paper-item value="{{item1.item_id}}">{{item1.itemdes1}}</paper-item>
+               </template>
+             </paper-listbox>
+            <paper-input label="{{itemspecification1}}" value="{{ispecification1}}" on-click="expand"></paper-input>
+            <paper-input label="{{itemspecification2}}" value="{{ispecification2}}" on-click="expand"></paper-input>
+            <iron-collapse id="collapse" opened="{{colvar}}">
+              <paper-input label="{{itemdescription}}" value="{{idescription}}"></paper-input>
+              <paper-dropdown-menu label="{{itemcontainer}}" value="{{icontainer}}">
+                <paper-listbox class="dropdown-content" attr-for-selected="cvalue" selected="{{selectedcontainer}}">
+                  <template is="dom-repeat" items="{{containerNames}}">
+                    <paper-item cvalue="{{item.container_id}}">{{item.container_name}}</paper-item>
+                  </template>
+                </paper-listbox>
+              </paper-dropdown-menu>
+            <div>
+              <paper-dropdown-menu label="{{itemunit}}" value="{{iunit}}">
+                <paper-listbox class="dropdown-content" attr-for-selected="uvalue" selected="{{selectedunit}}">
+                  <template is="dom-repeat" items="{{itemUnit}}">
+                    <paper-item uvalue="{{item.unit_of_measure_id}}">{{item.unit_of_measure_name}}</paper-item>
+                  </template>
+                </paper-listbox>
+              </paper-dropdown-menu>
+            </div>
+            <div>
+              <paper-dropdown-menu label="{{itemgroup}}" value="{{igroup}}">
+                <paper-listbox class="dropdown-content" attr-for-selected="gvalue" selected="{{selectedgroup}}">
+                  <paper-item gvalue="Mechanical">Mechanical</paper-item>
+                  <paper-item gvalue="Electrical">Electrical</paper-item>
+                  <paper-item gvalue="Electronics">Electronics</paper-item>
+                </paper-listbox>
+              </paper-dropdown-menu>
+            </div>
+            <div>
+              <paper-dropdown-menu label="{{itemtype}}" value="{{itype}}">
+                <paper-listbox class="dropdown-content" attr-for-selected="tvalue" selected="{{selectedtype}}">
+                  <template is="dom-repeat" items="{{itemtypeNames}}">
+                    <paper-item tvalue="{{item.item_type_id}}">{{item.item_type_name}}</paper-item>
+                  </template>
+                </paper-listbox>
+              </paper-dropdown-menu>
+            </div>
+            <div>
+              <paper-dropdown-menu label="{{itempurchasetype}}" value="{{iptype}}">
+                <paper-listbox class="dropdown-content" attr-for-selected="pvalue" selected="{{selectedptype}}">
+                  <paper-item pvalue="Regular">Regular</paper-item>
+                  <paper-item pvalue="Spot">Spot</paper-item>
+                </paper-listbox>
+              </paper-dropdown-menu>
+            </div>
+            <warehouse-details></warehouse-details>
+              <center>
+                <paper-button class="btn btn-app" id="savebutton" on-click="saveitems" raised><span class="fa fa-save"></span>Save</paper-button>
+              </center>
+            </iron-collapse>
+          </div>
+        </paper-card>
+        <iron-pages selected="{{page}}" attr-for-selected="data-category">
+          <section data-category="item-to-addsupplier" style="margin-top:10px;margin-left:12px;">
+            <center>
+              <item-to-addsupplier></item-to-addsupplier>
+            </center>
+          </section>
+        </iron-pages>
+      </div>
+    </div>
+    <div class="row">
+      <template is="dom-repeat" items="{{suppliers}}">
+        <paper-card heading="{{item.supplier_name}}" image="../../dist/img/no_image.jpg">
+          <div class="card-content">
+            Location:{{item.city}}
+          </div>
+        </paper-card>
+      </template>
+    </div>
+    <item-details-ironajax></item-details-ironajax>
+    <check-autogenid stringname="ite"
+                     elementname="item-details">
+    </check-autogenid>
+  </template>
+  <script src="item-details.js"></script>
+</dom-module>

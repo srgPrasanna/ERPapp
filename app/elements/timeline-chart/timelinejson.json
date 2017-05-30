@@ -1,0 +1,7 @@
+[{"vehicleno":"Vehicleno",
+  "vehicleintime":"Vehi in",
+  "vehicleloadstartdatetime":"Load start",
+  "vehicleloadenddatetime":"Load end",
+  "vehicleouttime":"Vehi out",
+  "vehicledelivered":"Delivered"
+  }]

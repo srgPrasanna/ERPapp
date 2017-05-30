@@ -1,0 +1,68 @@
+<dom-module id="call-charts">
+<style is="custom-style">
+ paper-card.size{
+   width: 100%;
+
+ }
+ paper-card.barsize{
+   width: 100%;
+   margin-top: -100px;
+
+ }
+ paper-card.slidersize{
+   width: 100%;
+   height: 370px;
+   margin-top: 30px;
+
+ }
+ paper-card.linesize{
+   height:  335px;
+   margin-top: 15px;
+
+ }
+ paper-card.itemsize{
+   width: 100%;
+
+ }
+ paper-card.vehiclesize{
+   width: 100%;
+    margin-top: 30px;
+
+ }
+ </style>
+<template>
+ <div class="row">
+     <!-- left Side -->
+  <div class="col-sm-6">
+  <div style="margin-top:80px;">
+    <all-design></all-design>
+  </div>
+  </paper-card>
+  </div>
+
+    <!-- Right Side -->
+  <div class="col-sm-6">
+  <paper-card class="linesize">
+  <div style="margin-top:80px;">
+ <timeline-chart></timeline-chart>
+  </div>
+  </paper-card>
+ <paper-card class="slidersize">
+  <div>
+  <slider-bar></slider-bar>
+  </div>
+ </paper-card>
+ <paper-card class="vehiclesize" >
+  <div>
+  <load-vehicle></load-vehicle>
+  </div>
+ </paper-card>
+  </div>
+  </div>
+</template>
+<script>
+ Polymer({
+    is:"call-charts"
+  });
+</script>
+</dom-module>

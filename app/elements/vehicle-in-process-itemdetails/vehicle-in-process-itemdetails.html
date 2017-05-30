@@ -1,0 +1,103 @@
+
+<dom-module id="vehicle-in-process-itemdetails">
+<template>
+  <style>
+  .card-content{
+    width:100%;
+  }
+  </style>
+  <autogen-id></autogen-id>
+  <paper-card  elevation="0" style="width:100%;" >
+  <div class="card-content">
+    <paper-input  on-tap="onclickfun" label="{{Itemname}}" is="" value="{{value}}" on-keydown="FnSearchEnquiry"></paper-input>
+    <paper-listbox style="width:100%;" class="dropdown-content" id="transportinput2" on-iron-select="FnSelectEnquiry1">
+        <template is="dom-repeat" items="{{itemArray}}" as="item">
+          <paper-item value="{{item.itemid}}">{{item.itemdes}}</paper-item>
+        </template>
+    </paper-listbox>
+   <paper-input   label="{{container}}" on-tap="containerfunction" value="{{containergetvalue}}">
+     <div suffix>{{containeridvalue}}</div>
+   </paper-input>
+   <paper-input   label="{{quantityRecieved}}" on-tap="quantityfunction" value="{{qtygetvalue}}">
+       <div suffix>{{qtyidvalue}}</div>
+   </paper-input>
+   <paper-textarea label="{{Remarks}}" value="{{remarksvalue}}"></paper-textarea>
+     </div>
+  <center><a class="btn btn-app" on-click="savebtn" style="margin-right:10px;">
+    <i class="fa fa-save"></i>Save
+  </a>
+</center>
+ </paper-card>
+ <iron-ajax
+    auto
+    method="get"
+    url="itemlabel.json"
+    handle-as="json"
+    content-type="application/json"
+    on-response="itemlabelinfo"
+    last-response="{{jsondata}}"
+    debounce-duration="300">
+ </iron-ajax>
+ <iron-ajax
+   id="itemajax"
+   method="post"
+   url="{{itemrequesturl}}"
+   handle-as="json"
+   params="{{itemparameter}}"
+   on-response="itemautocomplete">
+ </iron-ajax>
+ <iron-ajax
+   id="containerajax"
+   method="post"
+   url="{{containerrequesturl}}"
+   handle-as="json"
+   params="{{containerparameter}}"
+   on-response="containerresponse">
+ </iron-ajax>
+ <iron-ajax
+   id="quantityajax"
+   method="post"
+   url="{{quantityurl}}"
+   handle-as="json"
+   params="{{quantityparameter}}"
+   on-response="quantityresponse">
+ </iron-ajax>
+ <iron-ajax
+   id="invoiceajax"
+   method="post"
+   url="{{invoiceurl}}"
+   handle-as="json"
+   params="{{invoiceparameter}}"
+   on-response="invoiceresponse">
+ </iron-ajax>
+ <iron-ajax
+   id="vehicleajax"
+   method="post"
+   url="{{vehicleurl}}"
+   handle-as="json"
+   params="{{vehicleparameter}}"
+   on-response="vehicleresponse">
+ </iron-ajax>
+ <iron-ajax
+   id="supplieridajax"
+   method="post"
+   url="{{supplierurl}}"
+   handle-as="json"
+   params="{{supplierparameter}}"
+   on-response="supplierresponse">
+ </iron-ajax>
+ <iron-ajax
+   id="itemdetailajax"
+   method="post"
+   url="{{itemdetailurl}}"
+   handle-as="json"
+   params="{{itemdetailparameter}}"
+   on-response="itemdetailresponse">
+ </iron-ajax>
+
+
+</template>
+  <script src="vehicle-in-process-itemdetails.js">
+
+  </script>
+</dom-module>

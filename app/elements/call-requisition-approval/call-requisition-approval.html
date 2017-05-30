@@ -1,0 +1,48 @@
+<dom-module id="call-requisition-approval">
+  <template>
+    <div class="row" style="margin-left:10px;margin-top:15px;">
+      <template is="dom-repeat" items="{{newrequisitions}}">
+        <requisition-approval intnumber={{item.requisition_number}}
+                              intdate={{item.requisition_date}}
+                              requisitiontype={{item.requisition_type_id}}
+                              itemid={{item.item_id}}
+                              iquantity={{item.item_quantity}}
+                              cquantity={{item.container_quantity}}
+                              whstoresid={{item.warehouse_stores_id}}
+                              status={{item.status}}
+                              ireqdate={{item.item_required_date}}
+                              itemid={{item.item_id}}
+                              itemname={{item.item_name}}
+                              itemdescription={{item.item_description}}
+                              itemspecification1={{item.item_specification1}}
+                              itemspecification2={{item.item_specification2}}
+                              containername={{item.container_name}}
+                              unitofmeasures={{item.unit_of_measures}}
+                              itemgroup={{item.item_group}}
+                              itemtypename={{item.item_type_name}}
+                              itemstatus={{item.item_status}}
+                              itempurchasetype={{item.item_purchase_type}}
+                              warehousename={{item.warehouse_stores_name}}
+                              deptname={{item.department_name}}>
+        </requisition-approval>
+      </template>
+    </div>
+    <iron-ajax
+      auto
+      method="post"
+      on-request="requestfun"
+      params="{{loggedrole}}"
+      url="http://localhost:4000/requisitionapproval"
+      handle-as="json"
+      on-response="handlerequisitions">
+    </iron-ajax>
+  </template>
+  <script type="text/javascript">
+  Polymer({
+    is: "call-requisition-approval",
+    handlerequisitions:function(e){
+      this.newrequisitions=e.detail.response.requisitions;
+    }
+  });
+  </script>
+</dom-module>

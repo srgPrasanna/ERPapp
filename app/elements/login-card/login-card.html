@@ -1,0 +1,90 @@
+<link rel="import" href="..\..\bower_components/polymer/polymer.html">
+<link rel="import" href="..\..\bower_components/paper-input/paper-input.html">
+<link rel="import" href="..\..\bower_components/paper-button/paper-button.html">
+<link rel="import" href="..\..\bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="..\..\bower_components/iron-pages/iron-pages.html">
+<link rel="import" href="..\..\bower_components/paper-card/paper-card.html">
+<link rel="import" href="..\..\bower_components/gold-password-input/gold-password-input.html">
+<dom-module id="login-card">
+  <template >
+    <div class="login-box">
+      <div class="login-logo">
+        <a href=""><b>Admin</b> S R G </a>
+      </div>
+      <div class="login-box-body">
+        <p class="login-box-msg">Sign in to start your session</p>
+        <div class="form-group has-feedback">
+          <paper-input label="Employee ID" value="{{empid}}"></paper-input>
+        </div>
+        <div class="form-group has-feedback">
+          <gold-password-input reveal  minlength="6" maxlength="24" label="Password" value="{{password}}"></gold-password-input>
+        </div>
+        <div class="row">
+          <div class="col-xs-8">
+            <div class="checkbox icheck">
+              <label><input type="checkbox"> Remember Me</label>
+            </div>
+          </div>
+          <div class="col-xs-4">
+            <paper-button on-click="login"  class="btn btn-primary btn-block btn-flat">Login</paper-button>
+          </div>
+        </div>
+        <div class="social-auth-links text-center">
+          <p>- OR -</p>
+          <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
+            Facebook</a>
+          <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
+            Google+</a>
+        </div>
+        <a href="#">I forgot my password</a><br>
+        <a href="register.html" class="text-center">Register a new membership</a>
+      </div>
+    </div>
+      <iron-ajax
+        method="post"
+        id="simplecardajax"
+        url="{{login_cardinfourl}}"
+        params="{{saveinfoparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="simpleinfoResponse"
+        debounce-duration="300">
+        <iron-ajax
+          auto
+          method="post"
+          id="connectionajax"
+          url="{{connectionurl}}"
+          params="{{connectionparam}}"
+          handle-as="json"
+          content-type="application/json"
+          on-response="connectionResponse"
+          debounce-duration="300">
+  </template>
+  <script>
+  Polymer({
+      is: 'login-card',
+
+    login:function(){
+      this.login_cardinfourl="http://localhost:4000"+"/login";
+      var obj={};
+      obj.empid=this.empid;
+      obj.password=this.password;
+      this.saveinfoparam=obj;
+      this.$.simplecardajax.generateRequest();
+      },
+
+    simpleinfoResponse:function(e){
+      if(e.detail.response.returnval=="Invalid!"){
+        alert('Employee ID or Password is incorrect!');
+      }
+      else {
+        var arr=e.detail.response.returnval;
+        document.querySelector('header-left').loggedrole=e.detail.response.role;
+        document.querySelector('app-page').page='home-page';
+        document.querySelector('header-left').menuarr=arr;
+        sessionStorage.setItem("logrole",e.detail.response.role);
+        }
+      }
+    });
+  </script>
+</dom-module>

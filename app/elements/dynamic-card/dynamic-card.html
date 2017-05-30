@@ -1,0 +1,104 @@
+<dom-module id="dynamic-card">
+  <template>
+    <p hidden>{{uiname}}</p>
+    <p hidden>{{menuid}}</p>
+    <p on-click="openmenu">{{menuname}}</p>
+  </template>
+  <script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'dynamic-card',
+      openmenu:function(e){
+        if(this.menuid=='1'){
+          var role=sessionStorage.getItem("logrole");
+          document.querySelector('home-page').FnSetPage(this.uiname);
+          document.querySelector(this.uiname).loggedrole(role);
+        }
+        if(this.menuid=='2'){ //call-add-item
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='3'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='4'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='5'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='6'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='7'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='8'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='10'){  //call-ceo-card
+          var role=sessionStorage.getItem("logrole");
+          document.querySelector('home-page').FnSetPage(this.uiname);
+          document.querySelector(this.uiname).loggedrole(role);
+        }
+        if(this.menuid=='11'){  //ceo-customer-card
+          var role=sessionStorage.getItem("logrole");
+          document.querySelector('home-page').FnSetPage(this.uiname);
+          document.querySelector(this.uiname).loggedrole(role);
+        }
+        if(this.menuid=='13'){  //call-add-supplier
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='17'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='18'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='19'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='21'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='29'){  //requisition-process
+          var role=sessionStorage.getItem("logrole");
+          document.querySelector('home-page').FnSetPage(this.uiname);
+          var json={role};
+          document.querySelector('requisition-process-ironajax').loggedrole=json;
+        }
+        if(this.menuid=='33'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='34'){ //requisition-process*
+          var role=sessionStorage.getItem("logrole");
+          document.querySelector('home-page').FnSetPage(this.uiname);
+          var json={role};
+          document.querySelector('call-intent-approval').loggedrole=json;
+        }
+        if(this.menuid=='35'){
+          var role=sessionStorage.getItem("logrole");
+          document.querySelector('home-page').FnSetPage(this.uiname);
+          var json={role};
+          document.querySelector('call-requisition-approval').loggedrole=json;
+        }
+        if(this.menuid=='36'){
+          var role=sessionStorage.getItem("logrole");
+          document.querySelector('home-page').FnSetPage(this.uiname);
+          var json={role};
+          document.querySelector('call-intent-approval').loggedrole=json;
+        }
+        if(this.menuid=='37'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='38'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+        if(this.menuid=='39'){
+          document.querySelector('home-page').FnSetPage(this.uiname);
+        }
+      }
+    });
+  })();
+  </script>
+</dom-module>

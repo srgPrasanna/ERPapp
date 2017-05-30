@@ -1,0 +1,20 @@
+<dom-module id="warehouse-details">
+  <style>
+  paper-dropdown-menu {
+      --paper-dropdown-menu: {
+        width: 100%;
+      }
+    }
+  </style>
+  <template>
+    <paper-dropdown-menu label="{{warehouselabel}}">
+      <paper-listbox class="dropdown-content" on-iron-select="whid" attr-for-selected="wvalue" selected="{{selectedwh}}">
+        <template is="dom-repeat" items="{{warehousestorenames}}">
+          <paper-item wvalue="{{item.warehouse_stores_id}}">{{item.warehouse_stores_name}}</paper-item>
+        </template>
+      </paper-listbox>
+    </paper-dropdown-menu>
+  </template>
+  <warehouse-details-ironajax></warehouse-details-ironajax>
+</dom-module>
+<script src="warehouse-details.js"></script>

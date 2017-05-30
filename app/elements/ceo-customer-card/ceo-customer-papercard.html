@@ -1,0 +1,52 @@
+<dom-module id="ceo-customer-papercard">
+  <template>
+      <paper-card image="../../images/salesimage.jpg">
+      <div elevation="5" class="card-content" width="500" on-click="cardactionFn">
+        <table>
+          <tr><td><b>CustomerId:</b>{{customerid}}</td></tr>
+        </table>
+      </div>
+     <iron-collapse id="collapse">
+      <div class="card-action" id="card1">
+        <table>
+           <tr><td><b>customername:</b>{{customername}}</td></tr>
+           <tr><td><b>customerlocation:</b>{{customerlocation}}</td></tr>
+           <tr><td><b>address1:</b>{{address1}}</td></tr>
+           <tr><td><b>country:</b>{{country}}</td></tr>
+           <tr><td><b>state:</b>{{state}}</td></tr>
+           <tr><td><b>email:</b>{{email}}</td></tr>
+        </table>
+          <paper-radio-group attr-for-selected="value" selected="{{selection}}">
+           <paper-radio-button value="approval">Approval</paper-radio-button>
+           <paper-radio-button value="reject">Reject</paper-radio-button>
+          </paper-radio-group>
+            <center><paper-button raised on-click="approvalFN">approvalFN</paper-button></center>
+      </div>
+    </iron-collapse>
+    </paper-card>
+</template>
+<script>
+(function() {
+   'use strict';
+  Polymer({
+    is:"ceo-customer-papercard",
+      ready:function(){
+      },
+      cardactionFn:function(){
+        this.$.collapse.toggle();
+      },
+      approvalFN:function(){
+        document.querySelector("ceo-customer-papercard").cardactionFn();
+        var obj={cuid:this.customerid,
+                  radio:this.selection};
+        if(obj.radio!=null){
+        document.querySelector("ceo-customer-card-ironajax").sendapprovalFN(obj);
+        }
+        else {
+          alert("please select approval or reject");
+        }
+      }
+  });
+})();
+</script>
+</dom-module>

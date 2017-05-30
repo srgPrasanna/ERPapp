@@ -1,0 +1,38 @@
+<dom-module id="item-display">
+  <template>
+    <style>
+    hr{
+       border-width: 0px;
+     }
+     app-drawer{
+       width: 100%;
+     }
+    </style>
+    <!-- <app-drawer align="right" opened> -->
+    <template is="dom-repeat" items={{getdata}}>
+      <paper-card image="../../images/items.jpg" style="width: 45%;">
+        <div class="card-content" style="width: 45%;">
+          <table style="width: 45%;">
+              <tr><td><b>itemname:</b>{{item.itemname}}</td></tr>
+              <tr><td><b>itemspecification1:</b>{{item.itemspecification1}}</td></tr>
+              <tr><td><b>itemspecification2:</b>{{item.itemspecification2}}</td></tr>
+        </table>
+        </div>
+        <hr>
+        <hr>
+      </paper-card>
+    </template>
+  <!-- </app-drawer> -->
+  </template>
+  <script>
+  Polymer({
+    is:"item-display",
+    ready:function(){
+    },
+    getdataFn(data){
+      alert(JSON.stringify(data));
+      this.getdata=data;
+    }
+  });
+  </script>
+</dom-module>

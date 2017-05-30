@@ -1,0 +1,55 @@
+<dom-module id="ceo-card">
+  <template>
+    <style is="custom-style">
+      .cafe-header { @apply(--paper-font-headline); }
+      .cafe-light { color: var(--paper-grey-600); }
+      .cafe-location {
+        float: right;
+        font-size: 15px;
+        vertical-align: middle;
+      }
+      .cafe-reserve { color: var(--google-blue-500); }
+      iron-icon.star {
+        --iron-icon-width: 16px;
+        --iron-icon-height: 16px;
+        color: var(--paper-amber-500);
+      }
+      iron-icon.star:last-of-type { color: var(--paper-grey-500); }
+    </style>
+    <paper-card image="../../dist/img/no_image.jpg" on-click="openitemdetails" style="margin-top:6px;margin-left:15px;">
+      <div class="cafe-header">&nbsp{{itemname}}</div>
+      <div class="card-content">
+        <div class="rate-name">
+          <table>
+            <tr><td>Item Specification1</td><td>{{itemspecification1}}</td></tr>
+            <tr><td>Item Specification2</td><td>{{itemspecification2}}</td></tr>
+          </table>
+        </div>
+      </div>
+    </paper-card>
+  </template>
+  <script>
+  Polymer({
+    is:"ceo-card",
+    openitemdetails:function(){
+    var itemid=this.itemid;
+    var  itemname=this.itemname;
+    var  itemspecification1=this.itemspecification1;
+    var  itemspecification2=this.itemspecification2;
+    var  itemdescription=this.itemdescription;
+    var  itemcontainer=this.itemcontainer;
+    var  unitofmeasures=this.unitofmeasures;
+    var  itemgroup=this.itemgroup;
+    var  itemtype=this.itemtype;
+    var  itemstatus=this.itemstatus;
+    var  itempurchasetype=this.itempurchasetype;
+      document.querySelector('home-page').FnSetPage("ceo-display-items");
+      document.querySelector('ceo-display-items').ceoItem(itemid,itemname,itemspecification1,
+                                                    itemspecification2,itemdescription,
+                                                    itemcontainer,unitofmeasures,
+                                                    itemgroup,itemtype,itemstatus,
+                                                    itempurchasetype);
+    }
+  })
+  </script>
+</dom-module>

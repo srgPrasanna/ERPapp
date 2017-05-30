@@ -1,0 +1,49 @@
+<dom-module id="header-left">
+<template>
+  <aside class="main-sidebar">
+    <section class="sidebar">
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="../../images/user2-160x160.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p>{{loggedrole}}</p>
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+          <span on-click="sout" style="cursor:pointer;">Sign Out</span>
+        </div>
+      </div>
+      <form action="#" method="get" class="sidebar-form">
+        <div class="input-group">
+          <input type="text" name="q" class="form-control" placeholder="Search...">
+            <span class="input-group-btn">
+              <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+            </span>
+        </div>
+      </form>
+      <ul class="sidebar-menu">
+        <li class="header">MAIN NAVIGATION</li>
+        <template is="dom-repeat" items="{{menuarr}}" as="menu">
+          <li style="cursor:pointer;">
+            <a>
+              <i class="fa fa-th"></i>
+              <span>
+                <dynamic-card menuid="{{menu.menu_id}}" menuname="{{menu.ui_menuname}}" uiname="{{menu.ui_component}}"></dynamic-card>
+              </span>
+              <span class="pull-right-container">
+                <small class="label pull-right bg-green">new</small>
+              </span>
+            </a>
+          </li>
+        </template>
+    </section>
+  </aside>
+</template>
+<script>
+  Polymer({
+    is: 'header-left',
+    sout:function(){
+      window.location.href="http://localhost:4000/";
+    }
+  });
+</script>
+</dom-module>

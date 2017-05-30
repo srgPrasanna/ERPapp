@@ -1,0 +1,84 @@
+
+<dom-module id="item-customerajax">
+    <template>
+             <iron-ajax
+                auto
+                method="get"
+                id="itemid"
+                url="itemdesign.json"
+                handle-as="json"
+                content-type="application/json"
+                on-response="itemResponse"
+                last-response="{{itemjsondata}}"
+                debounce-duration="300">
+            </iron-ajax>
+            <iron-ajax
+                auto
+                method="post"
+                id="itemajax"
+                url="{{itemrequesturl}}"
+                handle-as="json"
+                content-type="application/json"
+                on-response="itemdetails"
+                params="{{itemparams}}"
+                debounce-duration="300">
+          </iron-ajax>
+          <iron-ajax
+                auto
+                method="post"
+                id="customerajax"
+                url="{{customerrequesturl}}"
+                handle-as="json"
+                content-type="application/json"
+                on-response="customerdetails"
+                params="{{customerparams}}"
+                debounce-duration="300">
+          </iron-ajax>
+          <iron-ajax
+                auto
+                method="get"
+                id="supplierid"
+                url="customerdesign.json"
+                handle-as="json"
+                content-type="application/json"
+                on-response="supplierResponse"
+                last-response="{{supplierjsondata}}"
+                debounce-duration="300">
+                </iron-ajax>
+
+  </template>
+<script>
+    Polymer({
+      is: "item-customerajax",
+  	   ready:function(){
+         var salesorderid = sessionStorage.getItem('salesorderid');
+         var itemid = sessionStorage.getItem('itemid');
+         var customerid = sessionStorage.getItem('customerid');
+         var obj={};
+         obj.itemssid=itemid;
+         this.itemparams=obj;
+         this.itemrequesturl="http://localhost:4000/itemfetch";
+         this.$.itemajax.generateRequest();
+
+         var obj2={};
+         obj2.customerid=customerid;
+          this.customerparams=obj2;
+         this.customerrequesturl="http://localhost:4000/customerfetch";
+         this.$.customerajax.generateRequest();
+             },
+
+       itemResponse:function(){
+
+         var labeljsondata=this.itemjsondata;
+         document.querySelector("item-customerdetail").itemgetJsondata(labeljsondata[0].itemname,labeljsondata[0].itemspecification1);
+        },
+        supplierResponse:function(){
+          var labeljsondata=this.supplierjsondata;
+          document.querySelector("item-customerdetail").suppliergetJsondata(labeljsondata[0].customername,labeljsondata[0].city);
+        },
+        customerid:function(){
+          var arr=e.detail.response.returnval;
+        }
+	});
+</script>
+</dom-module>

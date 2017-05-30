@@ -1,0 +1,26 @@
+<dom-module id="ceo-customer-secondpapercard">
+  <template>
+    <p hidden>{{approvaldata}}</p>
+    <paper-card>
+      <div class="card-content">
+        <div><span>{{customername}}</span></div>
+        <div><span>{{customerlocation}}</span></div>
+        <div><span>{{address1}}</span></div>
+        <div><span>{{country}}</span></div>
+        <div><span>{{state}}</span></div>
+        <div><span>{{email}}</span></div>
+      </div>
+      <paper-radio-group attr-for-selected="value" selected="{{selection}}">
+        <paper-radio-button value="approval">Approval</paper-radio-button>
+        <paper-radio-button value="reject">Reject</paper-radio-button>
+      </paper-radio-group>
+        <center><paper-button raised on-click="approvalFN">approvalFN</paper-button></center>
+        </paper-card>
+  </template>
+<script>
+Polymer({
+  is:"ceo-customer-secondpapercard",
+  
+});
+</script>
+</dom-module>

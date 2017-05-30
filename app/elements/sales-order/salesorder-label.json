@@ -1,0 +1,13 @@
+[{
+  "salesorderid":"salesorderid",
+  "customername":"customername",
+  "itemid":"itemid",
+  "itemname":"itemname",
+  "itemdescription":"itemdescription",
+  "itemspecification":"itemspecification",
+  "container":"container",
+  "quantity":"quantity",
+  "availablequantity":"availablequantity",
+  "deliveredquantity":"deliveredquantity",
+  "status":"status"
+}]

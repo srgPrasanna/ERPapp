@@ -1,0 +1,40 @@
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html" />
+<dom-module id="barchart-card-ironajax">
+<template>
+  <iron-ajax
+    auto
+    method="get"
+    id="jsoninfo"
+    url="barchart.json"
+    params="{{param}}"
+    handle-as="json"
+    content-type="application/json"
+    on-response="jsoninforesponse"
+    last-response="{{jsondata}}"
+    debounce-duration="300">
+  </iron-ajax>
+  <iron-ajax
+    method="post"
+    id="readajax"
+    url="{{requesturl}}"
+    handle-as="json"
+    content-type="application/json"
+    on-response="responsebar"
+    debounce-duration="300">
+  </iron-ajax>
+</template>
+<script>
+  Polymer({
+    is:"barchart-card-ironajax",
+    ready:function(){
+      this.requesturl="http://localhost:4000/barcharttablefetch";
+      this.$.readajax.generateRequest();
+  },
+  jsoninforesponse:function()
+  {
+     var itemm=this.jsondata;
+     document.querySelector("barchart-card").barchartloading(itemm);
+  }
+});
+</script>
+</dom-module>

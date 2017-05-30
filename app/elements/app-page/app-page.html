@@ -1,0 +1,31 @@
+<!-- <link rel="import" href="..\..\bower_components/polymer/polymer.html"> -->
+<dom-module id="app-page">
+  <template>
+      <iron-pages selected="{{page}}" attr-for-selected="data-category">
+          <section data-category="login-card">
+              <login-card></login-card>
+          </section>
+          <section data-category="home-page">
+              <home-page></home-page>
+          </section>
+      </iron-pages>
+  </template>
+ <script>
+  (function() {
+    'use strict';
+  Polymer({
+    is: 'app-page',
+    properties: {
+      foo: {
+      type: String,
+      value: 'app-page',
+      notify: true
+      }
+    },
+    ready:function(){
+     this.page='login-card';
+	  }
+    });
+  })();
+  </script>
+</dom-module>

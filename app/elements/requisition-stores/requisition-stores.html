@@ -1,0 +1,25 @@
+<dom-module id="requisition-stores">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+    <template is="dom-repeat" items="{{storesreq}}">
+      <requisition-stores-card  reqnumber={{item.requisition_number}}
+                                reqdate={{item.requisition_date}}
+                                itemquantity={{item.item_quantity}}
+                                itemname={{item.item_name}}
+                                itemspecification1={{item.item_specification1}}
+                                itemtype={{item.item_type_name}}
+                                warehousename={{item.warehouse_stores_name}}
+                                itemreqdate={{item.item_required_date}}
+                                itemcontainer={{item.container_name}}
+                                unitofmeasurename={{item.unit_of_measure_name}}
+                                itemavailablequantity={{item.item_available_quantity}}>
+      </requisition-stores-card>
+    </template>
+    <requisition-stores-ironajax></requisition-stores-ironajax>
+  </template>
+  <script src="requisition-stores.js" charset="utf-8"></script>
+</dom-module>

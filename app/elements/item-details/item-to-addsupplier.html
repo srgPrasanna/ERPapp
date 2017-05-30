@@ -1,0 +1,193 @@
+<dom-module id="item-to-addsupplier">
+  <style>
+  paper-dropdown-menu {
+      --paper-dropdown-menu: {
+        width: 100%;
+      }
+    }
+  </style>
+  <template>
+    <div hidden>
+      {{selectitem}}
+    </div>
+    <paper-card elevation="0">
+      <div class="card-content">
+        <!-- <paper-dropdown-menu label="Choose Item" scrollable>
+          <paper-listbox class="dropdown-content" attr-for-selected="value" selected="{{selectitem}}">
+            <template is="dom-repeat" items="{{itemnames}}">
+              <paper-item value="{{item.itemname}}">{{item.itemname}}</paper-item>
+            </template>
+          </paper-listbox>
+        </paper-dropdown-menu> -->
+        <paper-input  label="Supplier Name" is="" value="{{value1}}"   on-keydown="FnSearchEnquiry1"></paper-input>
+          <paper-listbox class="dropdown-content" id="transportinput3"  on-iron-select="FnSelectEnquiry2" selected="{{selectedname}}">
+            <template is="dom-repeat" items="{{itemArray1}}" as="item1">
+              <paper-item value="{{item1.supplier_id}}">{{item1.itemdes1}}</paper-item>
+            </template>
+          </paper-listbox>
+
+        <!-- <paper-dropdown-menu label="Choose Supplier">
+          <paper-menu class="dropdown-content" attr-for-selected="value" selected="{{selectsupplier}}">
+            <template is="dom-repeat" items="{{suppliernames}}">
+              <paper-item value="{{item.suppliername}}">{{item.suppliername}}</paper-item>
+            </template>
+          </paper-menu>
+        </paper-dropdown-menu> -->
+        <div>
+          <paper-input label="Item Pricing" value="{{iprice}}"></paper-input>
+        </div>
+        <div>
+          <datetime-picker date-string="{{min}}"  disabled min-date="[[max]]" use-not-native></datetime-picker>
+        </div>
+        <div>
+          <center>
+            <a class="btn btn-app" on-click="map" style="margin-top:10px;">
+              <i class="fa fa-users"></i>Add Supplier
+            </a>
+          </center>
+        </div>
+      </div>
+    </paper-card>
+    <iron-ajax
+      auto
+      method="post"
+      url="http://localhost:4000/mapitem"
+      handle-as="json"
+      on-response="handleitem">
+    </iron-ajax>
+    <iron-ajax
+      auto
+      method="post"
+      url="http://localhost:4000/mapsupplier"
+      handle-as="json"
+      on-response="handlesupplier">
+    </iron-ajax>
+    <iron-ajax
+      id="fixsup"
+      method="post"
+      url="http://localhost:4000/fixsupplier"
+      params="{{fsvalues}}"
+      handle-as="json"
+      on-response="fixsupResponse"></iron-ajax>
+      <iron-ajax
+            auto
+            method="post"
+            url="http://localhost:4000/autocompletesuppliername"
+            handle-as="json"
+            on-response="autocompletearr">
+    </iron-ajax>
+  </template>
+  <script>
+  var item1;
+  var autoc_supplier_name="";
+  var autoc_supplier_id="";
+  Polymer({
+    is: "item-to-addsupplier",
+
+    handleitem:function(e){
+      this.itemnames=e.detail.response.returnval;
+    },
+    handlesupplier:function(e){
+      this.suppliernames=e.detail.response.returnval;
+    },
+    map:function(){
+      var jsonobj={};
+      jsonobj.item=this.selectitem;
+      jsonobj.supplier=this.value1;
+      jsonobj.pricing=this.iprice;
+      jsonobj.date=this.min;
+      this.fsvalues=jsonobj;
+      this.$.fixsup.generateRequest();
+    },
+    fixsupResponse:function(e){
+      alert(e.detail.response.returnval)
+    },
+    autocompletearr:function(e)
+    {
+      item1=e.detail.response.returnval;
+    },
+    //autocomplete***********
+    FnSearchEnquiry1:function(e){
+      // item1=this.tempitemname1;
+        if(e.keyCode==13|| e.keyCode==40)
+        this.querySelector('#transportinput3').focus();
+        var arr=[];
+        // arr.push({"itemdes1":""});
+        // this.querySelector('#transportinput3').style.visibility='visible';
+        if(e.keyCode==8){
+          this.itemflag1="true";
+          this.itemval1="";
+          var len=(this.value1).length;
+          if(len<=1){
+            this.querySelector('#transportinput3').style.visibility='hidden';
+            this.itemArray1="";
+            this.itemval1="";
+          }
+          if(len>1){
+            this.querySelector('#transportinput3').style.visibility='visible';
+            var backsubval=(((this.value1).substring(0,(len-1))).trim()).toUpperCase();
+            for(var i=0;i<item1.length;i++)
+            {
+              var subval=((item1[i].supplier_name).trim()).substring(0,backsubval.length);
+              if((item1[i].supplier_name).toUpperCase().indexOf((this.value1).toUpperCase())!=-1)
+              {
+                var obj1={"itemdes1":"","enquiry_no":""};
+                obj1.itemdes1=item1[i].supplier_name;
+                obj1.supplier_id=item1[i].supplier_id;
+                arr.push(obj1);
+              }
+            }
+            this.itemArray1=arr;
+          }
+        }
+        if(e.keyCode!=8&& e.keyCode!=16&& e.keyCode!=13 && e.keyCode!=38&&e.keyCode!=40&&e.keyCode!=37&&e.keyCode!=39){
+          if(this.itemflag1=="true") {
+            this.itemval1 = (this.value1).toUpperCase()+String.fromCharCode((e.keyCode)).toUpperCase();
+            this.itemflag1="false";
+          }
+          else
+          this.itemval1 = this.value1 +String.fromCharCode((e.keyCode));
+          if(this.itemval1.length>0)
+          {
+            for(var i=0;i<item1.length;i++)
+            {
+              var subval=((item1[i].supplier_name).trim()).substring(0,this.itemval1.length);
+              if((item1[i].supplier_name).toUpperCase().indexOf((this.itemval1).toUpperCase())!=-1)
+              {
+                var obj1={"itemdes1":"","enquiry_no":""};
+                obj1.itemdes1=item1[i].supplier_name;
+                obj1.supplier_id=item1[i].supplier_id;
+                arr.push(obj1);
+              }
+            }
+            if(arr.length>0)
+              this.itemArray1=arr;
+            else
+            {
+              var obj1={"itemdes1":"","enquiry_no":""};
+              obj.itemdes1="No items found";
+              arr.push(obj1);
+              this.itemArray1=arr;
+            }
+          }
+        }
+
+
+        },
+        //customerid
+
+        FnSelectEnquiry2:function(e){
+        this.querySelector('#transportinput3').style.visibility='hidden';
+        autoc_supplier_name = e.target.selectedItem.textContent.trim();
+        autoc_supplier_id = e.target.selectedItem.value.trim();
+        this.itemArray1=[];
+        document.querySelector('#transportinput3').selected=-1;
+        this.value1=autoc_supplier_name;
+        // document.querySelector('intentpurchase-process-ironajax').searchitem(this.value1);
+        // document.querySelector('purchase-card').itemname1=supplier_name;
+      },
+    //autocomplete***********End
+
+  });
+  </script>
+</dom-module>

@@ -1,0 +1,36 @@
+<link rel="import" href="salesorder-papercard.html">
+<link rel="import" href="salesorder-mapping-ironajax.html">
+<dom-module id="salesorder-mapping">
+  <template>
+    <center><paper-button raised on-click="saveselectesalesidFn">submit</paper-button></center>
+    <p hidden>{{getvehicleno}}</p>
+    <div hidden id="div1" value="{{data}}"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8"></div>
+        <div class="col-sm-4">
+          <paper-button raised on-click="backto_vehsummary">BACK</paper-button>
+        </div>
+      </div>
+      <div class="row">
+        <template is="dom-repeat" items="{{saleorderdata}}">
+      <div class="col-sm-4">
+        <salesorder-papercard
+                              salesorderid="{{item.salesorderid}}"
+                              customername="{{item.customername}}"
+                              customerlocation="{{item.customerlocation}}"
+                              itemid="{{item.itemid}}"
+                              containerquantity="{{item.containerquantity}}"
+                              orderquantity="{{item.orderquantity}}"
+                              deliveredquantity="{{item.deliveredquantity}}">
+        </salesorder-papercard>
+      </div>
+    </template>
+      </div>
+      <salesorder-mapping-ironajax></salesorder-mapping-ironajax>
+    <div>
+    </div>
+  </div>
+</template>
+  <script src="salesorder-mapping.js"></script>
+</dom-module>

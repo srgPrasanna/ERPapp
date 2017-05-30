@@ -1,0 +1,77 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+<link rel="import" href="item-customerajax.html" />
+<dom-module id="item-customerdetail">
+  <template>
+  <style>
+  .icon {
+    text-align:
+    center;
+    position:
+    relative;
+    }
+    .info {
+      text-align:
+      center;
+      position:
+      relative;
+    }
+  	#item1{
+  		font-size:25px;
+  		font-style:bold;
+  		margin-left:60px;
+
+  		}
+     #item2{
+  	   font-size:25px;
+  	   font-style:bold;
+  	   margin-left:60px;
+  	   }
+  </style>
+  <div id="container">
+     <paper-card>
+    <div class="row">
+      <div class="col-sm-2">
+  	    <div><img src="../../images/user2-160x160.jpg"></img></div>
+  </div>
+   <div class="col-sm-10" style="margin-top:60px;">
+  	 <div id="item1">{{Itemname}}<br>{{Itemspecification1}}</br></div>
+  </div>
+  </div>
+  </paper-card>
+  <paper-card>
+      <div class="row">
+        <div class="col-sm-2">
+    	<div><img src="../../images/user8-128x128.jpg"></img></div>
+    </div>
+    <div class="col-sm-10" style="margin-top:30px;">
+    	<div id="item2"> {{customername1}}<br>{{city1}}</br></div>
+
+    </div>
+    </div>
+  </paper-card>
+  </div>
+    <item-customerajax></item-customerajax>
+  </div>
+</template>
+<script>
+Polymer({
+  is: "item-customerdetail",
+	   ready:function(){
+
+     },
+     itemgetJsondata:function(itemname,itemspecification1){
+     this.Itemname=itemname;
+     this.Itemspecification1=itemspecification1;
+
+     },
+     suppliergetJsondata:function(customername,city){
+      this.customername1=customername;
+      this.city1=city;
+     }
+
+	});
+</script>
+</dom-module>

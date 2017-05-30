@@ -1,0 +1,39 @@
+<dom-module id="ironajax-GRNcard">
+  <template>
+    <iron-ajax
+      auto
+      method="{{grnprocessmethod}}"
+      id="grnprocessId"
+      url="http://localhost:4000/{{name}}"
+      handle-as="json"
+      content-type="application/json"
+      on-response="grnprocessresponse">
+    </iron-ajax>
+  </template>
+<script>
+    Polymer({
+      is:"ironajax-GRNcard",
+      ready:function(){
+        alert("ironajax-GRNcard");
+      },
+      grnprocessresponse:function(e){
+        var jsondata=e.detail.response.returnval;
+        var arr=[];
+        for(var i=0;i<jsondata.length;i++){
+          if(jsondata[i].status=="stores"){
+            arr.push(jsondata[i]);
+            if(arr.length==jsondata.length){
+            document.querySelector("grn-stores").grncardcontent=arr;
+          }
+          }
+          if(jsondata[i].status=="purchase"){
+            arr.push(jsondata[i]);
+            if(arr.length==jsondata.length){
+            document.querySelector("grn-purchase").grncardcontent=arr;
+          }
+          }
+        }
+      }
+    });
+</script>
+</dom-module>

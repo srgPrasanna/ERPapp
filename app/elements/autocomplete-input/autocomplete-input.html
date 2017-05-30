@@ -1,0 +1,112 @@
+<dom-module id="autocomplete-input">
+ <template>
+   <paper-input  label="Student Name" is="" value="{{value}}" on-keydown="FnSearchEnquiry"></paper-input>
+   <paper-listbox class="dropdown-content" id="transportinput2" on-iron-select="FnSelectEnquiry">
+   <template is="dom-repeat" items="{{itemArray}}" as="item">
+   <paper-item value="{{item.customername}}">{{item.itemdes}}</paper-item>
+  </template>
+   </paper-listbox>
+  <iron-ajax
+    auto
+    method="post"
+    url="http://localhost:4000/autocomplete"
+    handle-as="json"
+    on-response="autocompletearr"></iron-ajax>
+  </template>
+<script>
+  Polymer({
+   is:"autocomplete-input",
+   ready:function(){
+   },
+   autocompletearr:function(e)
+       {
+          item=e.detail.response.returnval;
+       },
+       //backspace item display
+   FnSearchEnquiry:function(e){
+       if(e.keyCode==13|| e.keyCode==40)
+       this.querySelector('#transportinput2').focus();
+
+       var arr=[];
+       arr.push({"itemdes":"-----Select-----"});
+       this.querySelector('#transportinput2').style.visibility='visible';
+
+       if(e.keyCode==8){
+         this.itemflag="true";
+         this.itemval="";
+         var len=(this.value).length;
+         if(len<=1){
+           this.querySelector('#transportinput2').style.visibility='hidden';
+           this.itemArray="";
+           this.itemval="";
+         }
+         if(len>1){
+           this.querySelector('#transportinput2').style.visibility='visible';
+           var backsubval=(((this.value).substring(0,(len-1))).trim()).toUpperCase();
+           for(var i=0;i<item.length;i++)
+           {
+             var subval=((item[i].customername).trim()).substring(0,backsubval.length);
+             if((item[i].customername).toUpperCase().indexOf((this.value).toUpperCase())!=-1)
+             {
+               var obj={"itemdes":""};;
+
+               obj.customername=item[i].customername;
+               var obj1={"itemdes":obj.customername};
+
+               arr.push(obj1);
+             }
+           }
+           this.itemArray=arr;
+         }
+       }
+
+       //while typing item display
+       if(e.keyCode!=8&& e.keyCode!=16&& e.keyCode!=13 && e.keyCode!=38&&e.keyCode!=40&&e.keyCode!=37&&e.keyCode!=39)
+       {
+         if(this.itemflag=="true") {
+           this.itemval = (this.value).toUpperCase()+String.fromCharCode((e.keyCode)).toUpperCase();
+           this.itemflag="false";
+         }
+         else
+         this.itemval = this.value +String.fromCharCode((e.keyCode));
+
+         if(this.itemval.length>0)
+         {
+           for(var i=0;i<item.length;i++)
+           {
+             var subval=((item[i].customername).trim()).substring(0,this.itemval.length);
+            if(this.itemval == subval)
+            {
+             if((item[i].customername).toUpperCase().indexOf((this.itemval).toUpperCase())!=-1)
+             {
+               var obj={"itemdes":""};
+               obj.customername=item[i].customername;
+               var obj1={"itemdes":obj.customername};
+               arr.push(obj1);
+             }
+           }
+           }
+           if(arr.length>0)
+             this.itemArray=arr;
+           else
+           {
+             var obj={"itemdes":"No items found"};
+             obj.itemdes;
+             arr.push(obj);
+             this.itemArray=arr;
+           }
+         }
+       }
+     },
+
+     FnSelectEnquiry:function(e){
+     this.querySelector('#transportinput2').style.visibility='hidden';
+     var student_name = e.target.selectedItem.textContent.trim();
+     localStorage.setItem("curr_sess_studentname",student_name);
+     this.itemArray=[];
+     document.querySelector('#transportinput2').selected=-1;
+     this.value=student_name;
+     }
+ });
+</script>
+</dom-module>

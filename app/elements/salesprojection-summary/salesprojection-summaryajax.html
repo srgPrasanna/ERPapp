@@ -1,0 +1,28 @@
+<link rel="import" href="salesprojection-summary.html">
+<dom-module id="salesprojection-summaryajax">
+<template>
+    <iron-ajax
+          auto
+          method="post"
+          id="readajax"
+          url="http://localhost:4000/fetch1"
+          handle-as="json"
+          content-type="application/json"
+          on-response="searchitemdetails"
+          debounce-duration="300">
+    </iron-ajax>
+</template>
+  <script>
+  (function() {
+    'use strict';
+     Polymer({
+      is: 'salesprojection-summaryajax',
+        searchitemdetails:function(e)
+     			 {
+            var array1=e.detail.response.returnval;
+            document.querySelector("salesprojection-summary").fetchfunction(array1);
+    			 }
+     });
+ })();
+  </script>
+</dom-module>

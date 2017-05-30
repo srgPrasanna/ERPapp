@@ -1,0 +1,33 @@
+<dom-module id="call-security-card-ironajax">
+  <template>
+    <iron-ajax
+        id="securityAjax"
+        method="post"
+        url="http://localhost:4000/securityinfo"
+        params="{{securityjsonparams}}"
+        handle-as="json"
+        on-response="securityhandleResponse"></iron-ajax>
+     <iron-ajax
+        id="securitysearchAjax"
+        method="post"
+        url="http://localhost:4000/securitysearchinfo"
+        params="{{securitysearchparams}}"
+        handle-as="json"
+        on-response="securitysearchResponse"></iron-ajax>
+      <iron-ajax
+        id="loopsecuritysearchAjax"
+        method="post"
+        url="http://localhost:4000/loopsecuritysearchinfo"
+        params="{{loopsecuritysearchparams}}"
+        handle-as="json"
+        on-response="loopsecuritysearchResponse"></iron-ajax>
+      <iron-ajax
+        auto
+        id="autosecuritysearchAjax"
+        method="post"
+        url="http://localhost:4000/autosecuritysearchinfo"
+        handle-as="json"
+        on-response="autosecuritysearchResponse"></iron-ajax>
+  </template>
+  <script src="call-security-card-ironajax.js"></script>
+</dom-module>

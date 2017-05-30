@@ -1,0 +1,6 @@
+.git*
+test/
+.editorconfig
+.babelrc
+.travis.yml
+.DS_Store

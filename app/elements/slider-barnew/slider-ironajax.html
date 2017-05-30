@@ -1,0 +1,40 @@
+<link rel="import" href="slider-barnew.html">
+<dom-module id="slider-ironajax">
+  <template>
+        <iron-ajax
+                auto
+                method="post"
+                id="sliderajax"
+                url="{{requesturl}}"
+                handle-as="json"
+                params="{{parameters}}"
+                content-type="application/json"
+                on-response="slideritemdetails"
+                debounce-duration="300">
+       </iron-ajax>
+  </template>
+  <script>
+  (function() {
+  'use strict';
+  Polymer({
+      is: 'slider-ironajax',
+          ready:function(){
+              var salesorderid = sessionStorage.getItem('salesorderid');
+              var itemid = sessionStorage.getItem('itemid');
+              var obj={};
+              obj.salesid=salesorderid;
+              obj.itemssid=itemid;
+              this.parameters=obj;
+              this.requesturl="http://localhost:4000/sliderchange";
+              this.$.sliderajax.generateRequest();
+                        },
+
+          slideritemdetails:function(e){
+        	var arr=e.detail.response.returnval;
+          alert(JSON.stringify(arr));
+          	document.querySelector("slider-barnew").sliderfunction(arr);
+          }
+    });
+  })();
+  </script>
+</dom-module>

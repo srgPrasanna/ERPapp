@@ -1,0 +1,55 @@
+
+<dom-module id="generic-mapping">
+  <template>
+        <div hidden>
+        {{id1}}
+        {{id2}}
+        {{dbtoken}}
+      </div>
+    <iron-ajax
+      id="dbnamefetchajax"
+      method="post"
+      url="{{dbnameurl}}"
+      handle-as="json"
+      params="{{dbnameparams}}"
+      on-response="dbnamecomplete">
+    </iron-ajax>
+
+
+  </template>
+  <!-- *****to fetch db name and col name -->
+
+ <script>
+  (function() {
+    'use strict';
+    var dbtoken="";
+    var field1="";
+    var field2="";
+    var targettablename="";
+  Polymer({
+    is: 'generic-mapping',
+
+    ready:function(){
+      var dbnameobj1={};
+      dbnameobj1.dbtoken=this.dbtoken;
+      dbnameobj1.id1=this.id1;
+      dbnameobj1.id2=this.id2;
+      this.dbnameparams=dbnameobj1;
+      this.dbnameurl="http://localhost:4000/dbnamefetch";
+      this.$.dbnamefetchajax.generateRequest();
+    },
+
+    dbnamecomplete:function(e){
+          var arr=e.detail.response.returnval;
+          alert(JSON.stringify(arr));
+
+    }
+
+
+
+
+
+    });
+  })();
+  </script>
+</dom-module>

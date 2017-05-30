@@ -1,0 +1,29 @@
+<link rel="import" href="../ironajax-GRNcard/ironajax-GRNcard.html">
+<dom-module id="grn-stores">
+  <template>
+    <ironajax-GRNcard grnprocessmethod="post"
+                      name="stores"></ironajax-GRNcard>
+    <template is="dom-repeat" items="{{grncardcontent}}">
+      <GRN-card title="stores"
+                itemname="{{item.itemname}}"
+                itemspecification1="{{item.itemspecification1}}"
+                suppliername="{{item.suppliername}}"
+                invoice_no="{{item.invoice_no}}"
+                invoice_date="{{item.invoice_date}}"
+                inward_register_number="{{item.inward_register_number}}"
+                item_quantity="{{item.item_quantity}}"
+                container_quantity="{{item.container_quantity}}"
+                container_id="{{item.container_id}}"
+                unit_of_measure_id="{{item.unit_of_measure_id}}"
+                po_number="{{item.po_number}}"
+                po_date="{{item.po_date}}"></GRN-card>
+    </template>
+  </template>
+  <script>
+      Polymer({
+        is:"grn-stores",
+        ready:function(){
+        }
+        });
+  </script>
+</dom-module>

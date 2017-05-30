@@ -1,0 +1,17 @@
+<element name="my-element">
+    <template>
+        <g-progress id="myprogress" value="0.2"></g-progress>
+        <p>
+            <label for="mytext">Change this to update the progress bar</label>
+            <input id="mytext" type="text" value="{{myValue}}">
+        </p>
+    </template>
+    <script>
+        Polymer.register(this, {
+            myValue: 50,
+            myValueChanged: function() {
+                this.$.myprogress.value = this.myValue / 100;
+            }
+        });
+    </script>
+</element>

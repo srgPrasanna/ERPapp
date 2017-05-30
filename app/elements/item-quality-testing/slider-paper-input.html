@@ -1,0 +1,271 @@
+<dom-module id="slider-paper-input">
+  <style>
+    :host {
+      display: block;
+    }
+    input[type=range] {
+      -webkit-appearance: none;
+      margin: 10px 0;
+      width: 100%;
+    }
+    input[type=range]:focus {
+      outline: none;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 10px;
+      cursor: pointer;
+      animate: 0.2s;
+      background: #C6C4C4;
+      border-radius: 5px;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      box-shadow: 1px 1px 1px #000000;
+      border: 1px solid #000000;
+      height: 20px;
+      width: 10px;
+      border-radius: 5px;
+      background: #FFFFFF;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -6px;
+    }
+    input[type=range]:focus::-webkit-slider-runnable-track {
+      background: #C6C4C4;
+    }
+    input[type=range]::-moz-range-track {
+      width: 100%;
+      height: 10px;
+      cursor: pointer;
+      animate: 0.2s;
+      box-shadow: 1px 1px 1px #000000;
+      background: #3071A9;
+      border-radius: 5px;
+      border: 1px solid #000000;
+    }
+    input[type=range]::-moz-range-thumb {
+      box-shadow: 1px 1px 1px #000000;
+      border: 1px solid #000000;
+      height: 30px;
+      width: 15px;
+      border-radius: 5px;
+      background: #FFFFFF;
+      cursor: pointer;
+    }
+    input[type=range]::-ms-track {
+      width: 100%;
+      height: 10px;
+      cursor: pointer;
+      animate: 0.2s;
+      background: transparent;
+      border-color: transparent;
+      color: transparent;
+    }
+    input[type=range]::-ms-fill-lower {
+      background: #3071A9;
+      border: 1px solid #000000;
+      border-radius: 10px;
+      box-shadow: 1px 1px 1px #000000;
+    }
+    input[type=range]::-ms-fill-upper {
+      background: #3071A9;
+      border: 1px solid #000000;
+      border-radius: 10px;
+      box-shadow: 1px 1px 1px #000000;
+    }
+    input[type=range]::-ms-thumb {
+      box-shadow: 1px 1px 1px #000000;
+      border: 1px solid #000000;
+      height: 30px;
+      width: 15px;
+      border-radius: 5px;
+      background: #FFFFFF;
+      cursor: pointer;
+    }
+    input[type=range]:focus::-ms-fill-lower {
+      background: #3071A9;
+    }
+    input[type=range]:focus::-ms-fill-upper {
+      background: #3071A9;
+    }
+    /*#trrow{
+      width:100%;
+    }*/
+    #para{
+      width:22%;
+      /*padding-left:3%;*/
+    }
+    #slider{
+      width:56%;
+      /*padding-left:20%;*/
+    }
+    #paperinput{
+      /*width:30%;*/
+      padding-left:2%;
+    }
+    #statusicon{
+      /*padding-left:10%;*/
+      width:7%;
+    }
+    .range.range-primary output {
+        background-color: rgb(66, 139, 202);
+         margin-left: 155px;
+        /*margin-left: 500px;*/
+        margin-top: 10px;
+    }
+    .range output {
+        display: table;
+        /*padding: 3px 5px 2px;*/
+        min-width: 40px;
+        color: rgb(255, 255, 255);
+        background-color: rgb(153, 153, 153);
+        text-align: center;
+        text-decoration: none;
+        border-radius: 4px;
+        border-bottom-left-radius: 0;
+        border-top-left-radius: 0;
+        width:50px ;
+        white-space: nowrap;
+        vertical-align: middle;
+        /*margin-left: 500px;*/
+        -webkit-transition: all 0.5s ease;
+        -moz-transition: all 0.5s ease;
+        -o-transition: all 0.5s ease;
+        -ms-transition: all 0.5s ease;
+        transition: all 0.5s ease;
+
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: -moz-none;
+        -o-user-select: none;
+        user-select: none;
+      }
+      .maximumordered {
+          /*display: table;*/
+          /*padding: 3px 5px 2px;*/
+          min-width: 40px;
+          color: rgb(255, 255, 255);
+          background-color: rgb(153, 153, 153);
+          text-align: center;
+
+          text-decoration: none;
+          border-radius: 4px;
+          border-bottom-left-radius: 0;
+          border-top-left-radius: 0;
+          width:50px ;
+          white-space: nowrap;
+          vertical-align: middle;
+          /*margin-left: 500px;*/
+          -webkit-transition: all 0.5s ease;
+          -moz-transition: all 0.5s ease;
+          -o-transition: all 0.5s ease;
+          -ms-transition: all 0.5s ease;
+          transition: all 0.5s ease;
+
+          -webkit-user-select: none;
+          -khtml-user-select: none;
+          -moz-user-select: -moz-none;
+          -o-user-select: none;
+          user-select: none;
+        }
+     .maximumordered{
+         margin-left: 358px;
+         background-color: rgb(66, 139, 202);
+        /*margin-top: 20px;*/
+      }
+     .rate-header { @apply(--paper-font-headline);
+           font-size: 20px;
+       }
+     .totaldesign
+     {
+         margin-left: 65px;
+
+     }
+
+  </style>
+  <template>
+    <div hidden>
+      {{uid}}
+    </div>
+    <table  class="">
+        <tr id="trrow">
+            <td id="para">{{parametername}}</td>
+            <td id="slider"><input type="range" min="{{min}}" max="{{max}}" value="{{actualval}}"></input><span>{{minimumvalue}}&#8195&#8195&#8195&#8195
+              &#8195&#8195&#8195&#8195&#8195&#8195&#8195&#8195&#8195{{maximumvalue}}</span></td>
+            <td id="paperinput"><paper-input label="" value={{actualval}} on-change="actuals"></paper-input></td>
+            <td id="statusicon">
+              <span style="color:#A2CD6F;" class="fa fa-check" hidden="{{check}}"></span>
+              <span style="color:red;" class="fa fa-close" hidden="{{close}}"></span>
+            </td>
+        </tr>
+    </table>
+    <iron-ajax
+      auto
+      method="post"
+      url="http://localhost:4000/testingdata"
+      handle-as="json"
+      on-response="handletestingdata">
+    </iron-ajax>
+  </template>
+</dom-module>
+<script type="text/javascript">
+var dbdata;
+var tempActualsVal=[];
+// var tempjson={};
+  Polymer({
+    is: "slider-paper-input",
+    actuals:function(){
+
+      tempActualsVal.push(this.actualval);
+      if(tempActualsVal.length<=this.dbdata.length){
+        document.querySelector('item-quality-testing').inputvalues(this.actualval);
+      }
+      // alert("temp"+tempActualsVal);
+      // tempActualsVal.push(tempjson);
+      // tempjson[tempActualsVal];
+      // alert(tempActualsVal);
+      // if(tempActualsVal.length>this.dbdata.length){
+      //   tempActualsVal.splice(0,1,this.actualval);
+      //   // tempActualsVal.move(0,3);
+      //   alert("splice"+tempActualsVal);
+      // }
+      // if(tempActualsVal.length==this.dbdata.length){
+      //   document.querySelector('slider-bar').inputvalues(tempActualsVal);
+      // }
+      // tempActualsVal.push(this.actualval);
+      // alert(tempActualsVal);
+      // tempActualsVal.slice(-1);
+      // alert("splice"+tempActualsVal);
+    //   for(var j=0;j<tempActualsVal.length;j++){
+    //     alert("for"+tempActualsVal);
+    //   if(tempActualsVal.length>this.dbdata.length){
+    //     tempActualsVal=[];
+    //           alert("if"+tempActualsVal);
+    //   }
+    // }
+    // temp=this.actualval;
+    // temp.push(this.actualval);
+    // alert(temp[0]);
+    for(var i=0;i<this.dbdata.length;i++){
+        if(this.actualval<this.dbdata[i].minimum_value||this.actualval>this.dbdata[i].maximum_value){
+          this.check=1;
+          this.close=0;
+          // i=this.dbdata.length;
+        }
+        else {
+          this.close=1;
+          this.check=0;
+          // i=this.dbdata.length;
+        }
+      }
+    },
+    handletestingdata:function(e){
+      this.dbdata=e.detail.response.testingdata;
+      document.querySelector('item-quality-testing').dbResponse(this.dbdata);
+    },
+    // ready:function(){
+    //   alert(this.uid);
+    //   this.uid++;
+    // }
+  });
+</script>

@@ -1,0 +1,39 @@
+<link rel="import" href="../../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<dom-module id="vehicle-card">
+  <template>
+    <style is="custom-style">
+    paper-card.size{
+     width: 50%;
+    }
+    </style>
+      <paper-card heading="Vehicle Details" class="size">
+      <div class="card-content">
+        <paper-input label="{{VehicleNo}}" value="{{VehicleNoval}}"  required></paper-input>
+        <paper-input label="{{VehicleName}}" value="{{VehicleNameval}}"  required></paper-input>
+        <paper-input label="{{DriverName}}" value="{{DriverNameval}}" required></paper-input>
+        <paper-input label="{{DrivMobNumber1}}" value="{{DrivMobNumberval1}}" required></paper-input>
+        <paper-input label="{{DrivMobNumber2}}" value="{{DrivMobNumberval2}}" required></paper-input>
+        <paper-input label="{{OwnerName}}" value="{{OwnerNameval}}" required></paper-input>
+        <paper-input label="{{OwnMobNumber}}" value="{{OwnMobNumberval}}" required></paper-input>
+        <paper-input label="{{Vehintime}}" value="{{Vehintimeval}}" required></paper-input>
+        <paper-input label="{{Vehindate}}" value="{{Vehindateval}}" required></paper-input>
+
+          <span>{{typelabel}}</span>
+          <paper-radio-group att-for-selected="name" selected="{{selectedstate}}">
+            <paper-radio-button id='in' name="in" noink>{{s1value}}</paper-radio-button>
+            <paper-radio-button id='out' name="out" noink>{{s2value}}</paper-radio-button>
+          </paper-radio-group>
+
+      <vehiclecard-ironajax></vehiclecard-ironajax>
+      </div>
+      <div class="card-actions">
+        <center>
+          <paper-button raised on-click="submitFn">Save</paper-button>
+        </center>
+      </div>
+    </paper-card>
+
+  </template>
+  <script src="vehicle-cardjs.js"></script>
+
+</dom-module>

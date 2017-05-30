@@ -1,0 +1,48 @@
+<dom-module id="salesorder-papercard">
+  <template>
+    <p id="p1" hidden>{{arr}}</p>
+    <p hidden>{{getvehdata}}</p>
+        <paper-card image="/../images/default.jpg" elevation="5">
+          <div class="card-content" width="500">
+            <div><span value="{{salesorderid}}">{{salesorderid}}</span></div>
+            <div><span>{{customername}}</span></div>
+            <div><span>{{customerlocation}}</span></div>
+            <div><span>{{itemid}}</span></div>
+            <div><span>{{containerquantity}}</span></div>
+            <div><span>{{orderquantity}}</span></div>
+            <div><span>{{deliveredquantity}}</span></div>
+            <center><paper-checkbox on-change="checkboxChanged">select salesorderid</paper-checkbox></center>
+
+          </div>
+        </paper-card>
+  </template>
+<script>
+(function() {
+   'use strict';
+   var arr=[];
+  Polymer({
+    is:"salesorder-papercard",
+          ready:function(){
+
+          },
+          getsalesdatafn:function(data){
+
+            this.saleorderdata=data;
+          },
+          checkboxChanged : function(event){
+            if(event.target.checked) {
+                if(event.target.value=="on"){
+                  if(event!=0){
+                      arr.push(this.salesorderid);
+                      document.querySelector("salesorder-mapping").salesappendFn(arr);
+                  }
+                  else{
+
+                }
+              }
+            }
+        }
+  });
+})();
+</script>
+</dom-module>

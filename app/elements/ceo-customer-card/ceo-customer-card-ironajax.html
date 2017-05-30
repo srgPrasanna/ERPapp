@@ -1,0 +1,29 @@
+<dom-module id="ceo-customer-card-ironajax">
+  <template>
+    <iron-ajax
+      auto
+      id="ceocustomercardAjax"
+      method="post"
+      url="http://localhost:4000/ceocustomerajaxinfo"
+      handle-as="json"
+      on-response="ceocustomercardAjaxresponse">
+    </iron-ajax>
+    <iron-ajax
+      id="ceocustomercardjsonreadAjax"
+      method="get"
+      url="ceo-customer-card.json"
+      handle-as="json"
+      last-response="{{customerjsondata}}"
+      on-response="ceocustomercardjsonreadresponse">
+    </iron-ajax>
+    <iron-ajax
+      id="ceocustomercardapprovalAjax"
+      method="post"
+      params="{{approvalparams}}"
+      url="http://localhost:4000/ceocustomerapprovalinfo"
+      handle-as="json"
+      on-response="ceocustomercardapprovalresponse">
+    </iron-ajax>
+</template>
+  <script src="ceo-customer-card-ironajax.js"></script>
+</dom-module>

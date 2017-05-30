@@ -1,0 +1,58 @@
+<dom-module id="call-ceo-card">
+  <template>
+      <a on-click="opentableview" style="cursor:pointer;">
+        <i class="fa fa-table"></i>Table View
+      </a>
+    <div class="row" style="margin-left:10px;margin-top:15px;">
+      <div>
+        <b>Finished Goods Items</b>
+      </div>
+      <template is="dom-repeat" items="{{newitemsfg}}">
+        <ceo-card itemid="{{item.item_id}}"
+                  itemname="{{item.item_name}}"
+                  itemdescription="{{item.item_description}}"
+                  itemspecification1="{{item.item_specification1}}"
+                  itemspecification2="{{item.item_specification2}}"
+                  itemcontainer="{{item.container_id}}"
+                  unitofmeasures="{{item.unit_of_measure_id}}"
+                  itemgroup="{{item.item_group}}"
+                  itemtype="{{item.item_type_id}}"
+                  itemstatus="{{item.item_status}}"
+                  itempurchasetype="{{item.item_purchase_type}}"
+                  status="{{item.status}}"
+                  hidevar="1">
+        </ceo-card>
+      </template>
+    </div>
+
+    <div class="row" style="margin-left:10px;margin-top:15px;">
+      <div>
+        <b>Purchased Items</b>
+      </div>
+    <template is="dom-repeat" items="{{newitems}}">
+      <ceo-card itemid="{{item.item_id}}"
+                itemname="{{item.item_name}}"
+                itemdescription="{{item.item_description}}"
+                itemspecification1="{{item.item_specification1}}"
+                itemspecification2="{{item.item_specification2}}"
+                itemcontainer="{{item.container_id}}"
+                unitofmeasures="{{item.unit_of_measure_id}}"
+                itemgroup="{{item.item_group}}"
+                itemtype="{{item.item_type_id}}"
+                itemstatus="{{item.item_status}}"
+                itempurchasetype="{{item.item_purchase_type}}"
+                status="{{item.status}}"
+                hidevar="1">
+      </ceo-card>
+    </template>
+  </div>
+    <iron-ajax
+      auto
+      method="post"
+      url="http://localhost:4000/ceoitemsearch"
+      handle-as="json"
+      on-response="handleResponse">
+    </iron-ajax>
+  </template>
+  <script src="call-ceo-card.js"></script>
+</dom-module>

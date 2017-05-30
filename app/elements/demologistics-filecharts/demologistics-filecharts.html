@@ -1,0 +1,87 @@
+<dom-module id="demologistics-filecharts">
+  <style>
+      div.slidersize{
+        width: 100%;
+
+      }
+      paper-card.linesize{
+        height: auto;
+        width: 100%;
+      }
+      paper-card.driver{
+        height: auto;
+        width: 100%;
+        margin-top: 30px;
+      }
+      hr{
+        border-width: 0px;
+      }
+      .rate-header { @apply(--paper-font-headline);
+        font-size: 20px;
+       }
+      #stock{
+        margin-top: 100px;
+        margin-left: 50px;
+      }
+      #vehicle{
+        margin-top: 12px;
+        margin-left: 50px;
+      }
+
+  </style>
+<template>
+  <div class="row">
+  <!-- <paper-card> -->
+  <div class="col-sm-6">
+      <!-- item customer details -->
+      <div  style="margin-left:50px;">
+        <item-customerdetail></item-customerdetail>
+      </div>
+        <br><br><br><br>
+      <!-- //barchart -->
+      <div class="rate-header" style="margin-left:50px;">Item Stock Details</div>
+      <div class="card-content" style="margin-top:12px;">
+        <barchart-card></barchart-card>
+      </div>
+      </div>
+
+  <div class="col-sm-6">
+    <div id="vehicle" class="rate-header">Vehicle Status Tracking</div>
+     <!-- //Time Line chart -->
+     <paper-card  elevation="0" style="width:100%;">
+  <div>
+      <timeline-chartlogistics></timeline-chartlogistics>
+  </div>
+</paper-card>
+
+  <div>
+    <div id="stock" class="rate-header">Stock Tracking</div>
+    <paper-card  elevation="0"  style="width:100%;">
+  <div class="card-content" style="height:100px;">
+        <slider-barnew></slider-barnew>
+  </div>
+    </paper-card>
+  </div>
+
+    <hr>
+    <!-- //Driver Details -->
+  <div style="margin-left:50px;">
+    <driver-details></driver-details>
+
+  </div>
+  </div>
+
+  </div>
+</template>
+<script>
+  (function() {
+    'use strict';
+    Polymer({
+      is: 'demologistics-filecharts',
+        ready:function(){
+
+        }
+    });
+  })();
+</script>
+</dom-module>

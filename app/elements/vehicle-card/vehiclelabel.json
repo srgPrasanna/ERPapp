@@ -1,0 +1,13 @@
+[{"vno":"goodsvehiclenumber",
+  "vname":"goodsvehiclename",
+  "dname":"goodsvehicledrivername",
+  "dno1":"goodsvehicledriverphonenumber",
+  "dno2":"goodsvehicledriverphonenumber2",
+  "ownname":"goodsvehicleownername",
+  "ownno":"goodsvehicleownerphonenumber",
+  "vintime":"goodsvehicleintime",
+  "vindate":"goodsvehicleindate",
+  "typelab":"State",
+  "sin":"In",
+  "sout":"Out"
+  }]

@@ -1,0 +1,49 @@
+<dom-module id="autogen-id">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+    <p hidden>{{getstring}}</p>
+    <iron-ajax
+      id="autogen"
+      method="post"
+      url="http://localhost:4000/autogenerateid"
+      handle-as="json"
+      on-response="handleautogenerateid">
+    </iron-ajax>
+  </template>
+</dom-module>
+<script type="text/javascript">
+  Polymer({
+    is: "autogen-id",
+    handleautogenerateid:function(e){
+      var getid=e.detail.response.returnid;
+      if(this.getstring=="sup"){
+        var supstringid="sup"+getid;
+        document.querySelector("call-add-supplier").submitFn(supstringid);
+      }
+      if(this.getstring=="cus"){
+        var cusstringid="cus"+getid;
+        document.querySelector("call-add-customer").submitFn(cusstringid);
+      }
+      if(this.getstring=="ite"){
+        var itestringid="ite"+getid;
+        document.querySelector("item-details").save(itestringid);
+      }
+      if(this.getstring=="irn"){
+        var irnstringid="irn"+getid;
+        document.querySelector("vehicle-in-process-itemdetails").saveitemauto(irnstringid);
+      }
+      if(this.getstring=="btno"){
+        var btnostringid="btno"+getid;
+        document.querySelector("GRNcard-container-domrepeat").getbtno_id(btnostringid);
+      }
+    },
+    send:function(data){
+      this.getstring=data;
+      this.$.autogen.generateRequest();
+    }
+  });
+</script>

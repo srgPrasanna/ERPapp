@@ -1,0 +1,25 @@
+<dom-module id="warehouse-details-ironajax">
+  <style>
+    :host {
+      display: block;
+    }
+  </style>
+  <template>
+    <iron-ajax
+      auto
+      method="get"
+      url="warehouse-details-label.json"
+      handle-as="json"
+      on-response="handleWarehouselabel"
+      last-response="{{warehouseddlabel}}">
+    </iron-ajax>
+    <iron-ajax
+      auto
+      method="post"
+      url="http://localhost:4000/warehousedetails"
+      handle-as="json"
+      on-response="handleWarehouseDetails">
+    </iron-ajax>
+  </template>
+</dom-module>
+<script src="warehouse-details-ironajax.js"></script>
