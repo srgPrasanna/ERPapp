@@ -187,9 +187,10 @@
             <div class="rate-name">
               <table>
                 <tr><td>{{whname}}</td></tr>
-                <tr><td>{{reqno}}</td></tr>
-                <tr><td>{{reqdate}}</td></tr>
               </table>
+              <div style="margin-left:15%;margin-top:18%;">
+                {{reqno}}, {{reqdate}}
+              </div>
             </div>
           </div>
         </div>
@@ -199,11 +200,10 @@
       <paper-card style="width:100%;" elevation="0">
         <div class="card-content">
           <b>Requisition</b>
+          <input disabled type="range" min="{{iquantity}}" max="{{availablequantity}}" value="{{supplyquantity}}"></input>Available at Stores:{{availablequantity}}&#8195&#8195&#8195<span style="color:{{requiredcolor}};">Required:{{iquantity}} {{unitofmeasureid}}</span>
           <paper-input label="Item Specification1" value="{{itemspecification1}}" readonly></paper-input>
           <paper-input label="Item Type" value="{{itemtype}}" readonly></paper-input>
-          <paper-input label="Item Required" value="{{iquantity}} {{unitofmeasures}}" readonly></paper-input>
           <paper-input label="Item Required Date" value="{{itemreqdate}}" readonly></paper-input>
-          <input disabled type="range" min="{{iquantity}}" max="{{availablequantity}}" value="{{supplyquantity}}"></input>Required:{{iquantity}}&#8195&#8195&#8195Available at Stores:{{availablequantity}}
           <paper-input label="Number of {{itemcontainer}}(s)" value="{{cquantity}}" disabled="{{inputvar}}"></paper-input>
           <paper-input label="Enter the Amount of Item to Supply" value={{supplyquantity}} on-value-changed="test" disabled="{{inputvar}}"><span class="fa fa-share"></span></paper-input>
           <datetime-picker date-string="{{min}}" time-string={{timevar}} disabled min-date="[[max]]" use-not-native hidden></datetime-picker>
@@ -211,6 +211,11 @@
             <paper-button class="btn btn-app" id="supplybutton" raised on-click="supply" disabled="{{buttonvar}}"><span class="fa fa-share"></span>Supply</paper-button>
           </center>
         </div>
+        <inventory-service elementname="display-requisition-stores" returnfunction="returnServiceObject"></inventory-service>
+        <!-- <requisition-required-itemquantity-service requisitionnumber="{{reqnumber}}"
+                                                   elementname="display-requisition-stores"
+                                                   onreturn="check1">
+        </requisition-required-itemquantity-service> -->
       </paper-card>
     </div>
     <iron-ajax
@@ -233,7 +238,7 @@ var availablequantity1;
 var supplybuttonFlag;
   Polymer({
     is: "display-requisition-stores",
-    requisitionbind:function(reqnumber,reqdate,itemquantity,itemname,itemspecification1,itemtype,warehousename,itemreqdate,itemcontainer,itemavailablequantity,unitofmeasurename){
+    requisitionbind:function(reqnumber,reqdate,itemquantity,itemname,itemid,itemspecification1,itemtype,warehousename,itemreqdate,itemcontainer,itemavailablequantity,unitofmeasureid,unitofmeasurename){
       this.reqno=reqnumber;
       this.itemname=itemname;
       this.itemspecification1=itemspecification1;
@@ -245,12 +250,30 @@ var supplybuttonFlag;
       this.whname=warehousename;
       this.itemreqdate=itemreqdate;
       this.availablequantity=itemavailablequantity;
+      this.unitofmeasureid=unitofmeasureid;
       availablequantity1=itemavailablequantity;
+      // var uielement = document.querySelector("#showpage");
+      // if (uielement) {
+      //   uielement.parentNode.removeChild(uielement);
+      // }
+      // var element=document.createElement("requisition-required-itemquantity-service");
+      // var ironpage=document.querySelector("#showpage");
+      // Polymer.dom(ironpage).appendChild(element);
+      // document.querySelector("requisition-required-itemquantity-service").bind(reqnumber,"display-requisition-stores","check1");
       if(Number(availablequantity1)<Number(itemquantity)){
         this.buttonvar=true;
         this.inputvar=true;
+        this.requiredcolor="red";
         alert("Stores has not enough quantity for this requisition!");
       }
+      if(Number(availablequantity1)>Number(itemquantity)){
+        this.requiredcolor="green";
+      }
+      if(Number(availablequantity1)==Number(itemquantity)){
+        this.requiredcolor="yellow";
+      }
+      var jsonInputDetail={"inventory_itemid":"ite842"};
+      document.querySelector('inventory-service').inventoryServiceInvoke(jsonInputDetail);
     },
     supply:function(){
       if(Number(this.supplyquantity)<Number(this.iquantity)){
@@ -277,6 +300,7 @@ var supplybuttonFlag;
       document.querySelector('home-page').FnSetPage("requisition-stores");
     },
     ready: function() {
+      // document.querySelector().requisitionnumber=
       this.buttonvar=false;
     },
     test:function(){
@@ -287,6 +311,12 @@ var supplybuttonFlag;
         else {
           this.buttonvar=false;
         }
+    },
+    returnServiceObject:function(x){
+      // alert("check"+x);
+    },
+    check1:function(x){
+      alert(JSON.stringify(x));
     }
   });
 </script>

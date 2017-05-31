@@ -1,0 +1,33 @@
+
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+
+<dom-module id='inventory-service'>
+    <template>
+      <div hidden>{{elementname}}{{returnfunction}}</div>
+        <iron-ajax
+            method="post"
+            id="getInventorySum"
+            params="{{getInventoryParam}}"
+            url="http://localhost:4000/productioninventory"
+            handle-as="json"
+            on-response="sumInventory">
+        </iron-ajax>
+    </template>
+
+    <script>
+        (function(){
+            Polymer({
+              is:'inventory-service',
+              sumInventory:function(e){
+                  var sumQuantity=e.detail.response.itdata;
+                  document.querySelector(this.elementname)[this.returnfunction](sumQuantity);
+              },
+              inventoryServiceInvoke:function(data){
+              
+                this.getInventoryParam=data;
+                this.$.getInventorySum.generateRequest();
+              }
+            })
+        })();
+    </script>
+</dom-module>

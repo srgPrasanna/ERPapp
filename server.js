@@ -1166,6 +1166,36 @@ app.post ('/productionsales', urlencodedParser, function (req, res) {
   });
 });
 
+
+//This for Getting Quantity value of Inventory for the Item
+var inventoryServiceDB=require("./app/elements/inventory-service/inventory-dbservice.js");
+app.post ('/productioninventory', urlencodedParser, function (req, res) {
+  // global.connection.query('SELECT  sum(item_available_quantity) as avail_item_qty from od_item_inventory where item_id= "'+req.query.inventory_itemid +'"',function(err,result){
+  // //  console.log(response);
+  // if(result.length>0)
+  //   res.status(200).json({'message': result});
+  // else
+  //   res.status(200).json({'message': "Data not available!"});
+  // });
+    inventoryServiceDB.getInventoryDetails(req.query.inventory_itemid, function(itdata){
+      if(itdata.length>0){
+        res.status(200).json({'itdata': itdata});
+      }
+      else
+        res.status(200).json({'itdata': "No Data!"});
+    });
+});
+
+var requisitionRequiredItemquantityServiceDB=require("./app/elements/requisition-required-itemquantity-service/requisition-required-itemquantity-dbservice.js");
+app.post ('/requisitionRequiredItemquantityService', urlencodedParser, function (req,res) {
+  requisitionRequiredItemquantityServiceDB.searchitemquantity(req.query.requisitionnumber, function(callback){
+    if(callback!=null)
+      res.status(200).json({'quantity': callback});
+    else
+      res.status(200).json({'quantity': "Quantity not available!"});
+  });
+});
+
 var server=app.listen(4000,'127.0.0.1',function(err){
   var host=server.address().address;
   var port=server.address().port;
