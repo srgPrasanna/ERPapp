@@ -16,14 +16,24 @@ exports.ceosearchitem=function(callback){
 exports.ceoresponse=function(respond,id,type,callback){
   if(type=="FG"){
   connection.query('update md_sales_finishedgoods_item_detail set item_status="'+respond+'" where item_id="'+id+'"',function(err,rows){
-    return callback("Updated");
+    if(rows.affectedRows>0){
+        return callback("Updated");
+      }
+    else {
+        return callback("Not Updated!");
+      }
   })
 }
   else if(type!="FG"){
   connection.query('update md_procurement_item_detail set item_status="'+respond+'" where item_id="'+id+'"',function(err,rows){
-    return callback("Updated");
-  })
-}
+    if(rows.affectedRows>0){
+        return callback("Updated");
+      }
+    else {
+        return callback("Not Updated!");
+      }
+    })
+  }
 
   else {
     return callback("Not Updated!")

@@ -56,6 +56,9 @@
           this.$.ceorespond.generateRequest();
         }
         document.querySelector("home-page").FnSetPage("table-view");
+      },
+      handleResponse:function(e){
+        alert(e.detail.response.returnval);
       }
     });
 </script>

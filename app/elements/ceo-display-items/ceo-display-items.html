@@ -31,7 +31,7 @@
       params="{{responseparam}}"
       url="http://localhost:4000/ceoresponse"
       handle-as="json"
-      on-response="handleResponse">
+      on-response="updateResponse">
     </iron-ajax>
   </template>
 </dom-module>
@@ -61,7 +61,7 @@
         this.$.ceorespond.generateRequest();
         document.querySelector('home-page').FnSetPage("call-ceo-card");
       },
-      handleResponse:function(e){
+      updateResponse:function(e){
         alert(e.detail.response.returnval);
       }
   });
