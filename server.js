@@ -101,7 +101,7 @@ app.post('/insertitems', urlencodedParser, function (req, res) { //add items sav
 });
 //add item search process
 app.post('/searchitem', urlencodedParser, function (req, res) { //add item search process
-  itemdetailsdb.searchitem(req.query.name,function(itemdetails,suppliers){
+  itemdetailsdb.itemdetailssearchitem(req.query.name,function(itemdetails,suppliers){
     if(itemdetails||suppliers!=null)
       res.status(200).json({'returnval':itemdetails,'returnval1':suppliers});
     else
@@ -113,7 +113,7 @@ app.post('/searchitem', urlencodedParser, function (req, res) { //add item searc
 //*********************************CEO APPROVAL PROCESSES
 var itemapprovaldb=require("./app/elements/call-ceo-card/call-ceo-card-todb.js")
 app.post('/ceoitemsearch', urlencodedParser, function (req, res) {
-  itemapprovaldb.searchitem(function(callback,fgrows){ // Other than Finished Goods
+  itemapprovaldb.ceosearchitem(function(callback,fgrows){ // Other than Finished Goods
     if(callback||fgrows!=null){
       res.status(200).json({'returnval': callback,'returnfg': fgrows});
     }
@@ -216,7 +216,7 @@ app.post ('/searchrequisitionitem', urlencodedParser, function (req, res) {
 });
 
 app.post ('/searchitemnames', urlencodedParser, function (req, res) {
-  requisitionDB.searchitem(req.query.role,function(itemnames){
+  requisitionDB.requisitionsearchitem(req.query.role,function(itemnames){
     if(itemnames.length>0)
       res.status(200).json({'itemnames': itemnames});
     else

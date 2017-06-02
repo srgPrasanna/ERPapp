@@ -36,7 +36,7 @@ exports.insertitems=function(sid,id,name,description,specification1,specificatio
  }
 }
 
-exports.searchitem=function(name,callback){
+exports.itemdetailssearchitem=function(name,callback){
     connection.query("select * from md_procurement_item_detail where item_name='"+name+"'",function(err,rows){
       if(rows.length>0){
         connection.query("select * from md_procurement_supplier_detail left join od_procurement_item_supplier_mapping on od_procurement_item_supplier_mapping.supplier_id=md_procurement_supplier_detail.supplier_id left join md_procurement_item_detail on md_procurement_item_detail.item_id=od_procurement_item_supplier_mapping.item_id where md_procurement_item_detail.item_name='"+name+"'",function(err,suppliers){

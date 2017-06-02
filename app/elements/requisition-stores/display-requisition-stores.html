@@ -77,99 +77,98 @@
                      elementname="display-requisition-stores">
     </check-autogenid>
   </template>
-<script type="text/javascript">
-  var supplyStatus;
-  var availablequantity1;
-  var supplybuttonFlag;
-  var iquantity;
-  var supplying;
-  var itemrequired;
-  var inventoryitemqty;
-  Polymer({
-    is: "display-requisition-stores",
-    requisitionbind:function(reqnumber,reqdate,itemquantity,itemname,itemid,itemspecification1,itemtype,warehousename,itemreqdate,itemcontainer,itemavailablequantity,unitofmeasureid,unitofmeasurename){
-      this.reqno=reqnumber;
-      this.itemname=itemname;
-      this.itemspecification1=itemspecification1;
-      this.itemcontainer=itemcontainer;
-      this.unitofmeasures=unitofmeasurename;
-      this.reqdate=reqdate;
-      this.itemtype=itemtype;
-      this.iquantity=itemquantity;
-      this.whname=warehousename;
-      this.itemreqdate=itemreqdate;
-      this.availablequantity=itemavailablequantity;
-      this.unitofmeasureid=unitofmeasureid;
-      availablequantity1=itemavailablequantity;
-      iquantity=itemquantity;
-      var json={"reqnumber":reqnumber,"elementname":"display-requisition-stores","onreturn":"check"};
-      var array=[json];
-      this.reqnum=array;
-      if(Number(availablequantity1)<Number(itemquantity)){
-        alert("Stores has not enough quantity for this requisition!");
-      }
-      var jsonInputDetail={"inventory_itemid":itemid};
-      document.querySelector('inventory-service').inventoryServiceInvoke(jsonInputDetail);
-      var chart = new CanvasJS.Chart("chartContainer1",{
-        title:{
-        text: "Quantity Status"
-        },
-        animationEnabled: true,
-        theme: "theme3",
-        data: [{
-          type: "column",
-          dataPoints: [
-          {y: Number(availablequantity1), label: "At stores"},
-          {y: Number(iquantity),  label: "Required" }
-          ]
-        }]
-      });
-      chart.render();
-    },
-    supply:function(){
-      document.querySelector('check-autogenid').call();
-      // if(Number(this.supplyquantity)<Number(this.iquantity)){
-      //   supplyStatus="Partially Fulfilled";
-      // }
-      // else {
-      //   supplyStatus="Fulfilled";
-      // }
-      // var jsonobject={};
-      // jsonobject.autoid=autoid;
-      // jsonobject.reqno=this.reqno;
-      // jsonobject.supplyquantity=this.supplyquantity;
-      // jsonobject.containerquantity=this.cquantity;
-      // jsonobject.datetime=this.min+" "+this.timevar;
-      // jsonobject.status=supplyStatus;
-      // this.moveparam=jsonobject;
-      // this.$.requisitionstores.generateRequest();
-    },
-    save:function(id){
-      if(Number(this.supplyquantity)<Number(this.iquantity)){
-        supplyStatus="Partially Fulfilled";
-      }
-      else {
-        supplyStatus="Fulfilled";
-      }
-      var jsonobject={};
-      jsonobject.autoid=id;
-      jsonobject.reqno=this.reqno;
-      jsonobject.supplyquantity=this.supplyquantity;
-      jsonobject.containerquantity=this.cquantity;
-      jsonobject.datetime=this.min+" "+this.timevar;
-      jsonobject.status=supplyStatus;
-      this.moveparam=jsonobject;
-      this.$.requisitionstores.generateRequest();
-    },
-    checkid:function(x){
-      alert("autoid"+autoid);
-      autoid=x;
-    },
-    handleSupplyResponse:function(y){
-      alert(y.detail.response.processstatus);
-      document.querySelector('home-page').FnSetPage("requisition-stores");
-    },
-    beingsupplied:function(){
+  <script type="text/javascript">
+    var supplyStatus;
+    var availablequantity1;
+    var supplybuttonFlag;
+    var iquantity;
+    var supplying;
+    var itemrequired;
+    var inventoryitemqty;
+    Polymer({
+      is: "display-requisition-stores",
+      requisitionbind:function(reqnumber,reqdate,itemquantity,itemname,itemid,itemspecification1,itemtype,warehousename,itemreqdate,itemcontainer,itemavailablequantity,unitofmeasureid,unitofmeasurename){
+        this.reqno=reqnumber;
+        this.itemname=itemname;
+        this.itemspecification1=itemspecification1;
+        this.itemcontainer=itemcontainer;
+        this.unitofmeasures=unitofmeasurename;
+        this.reqdate=reqdate;
+        this.itemtype=itemtype;
+        this.iquantity=itemquantity;
+        this.whname=warehousename;
+        this.itemreqdate=itemreqdate;
+        this.availablequantity=itemavailablequantity;
+        this.unitofmeasureid=unitofmeasureid;
+        availablequantity1=itemavailablequantity;
+        iquantity=itemquantity;
+        var json={"reqnumber":reqnumber,"elementname":"display-requisition-stores","onreturn":"check"};
+        var array=[json];
+        this.reqnum=array;
+        if(Number(availablequantity1)<Number(itemquantity)){
+          alert("Stores has not enough quantity for this requisition!");
+        }
+        var jsonInputDetail={"inventory_itemid":itemid};
+        document.querySelector('inventory-service').inventoryServiceInvoke(jsonInputDetail);
+        var chart = new CanvasJS.Chart("chartContainer1",{
+          title:{
+            text: "Quantity Status"
+          },
+          animationEnabled: true,
+          theme: "theme3",
+          data: [{
+            type: "column",
+            dataPoints: [
+              {y: Number(availablequantity1), label: "At stores"},
+              {y: Number(iquantity),  label: "Required" }
+            ]
+          }]
+        });
+        chart.render();
+      },
+      supply:function(){
+        document.querySelector('check-autogenid').call();
+        // if(Number(this.supplyquantity)<Number(this.iquantity)){
+        //   supplyStatus="Partially Fulfilled";
+        // }
+        // else {
+        //   supplyStatus="Fulfilled";
+        // }
+        // var jsonobject={};
+        // jsonobject.autoid=autoid;
+        // jsonobject.reqno=this.reqno;
+        // jsonobject.supplyquantity=this.supplyquantity;
+        // jsonobject.containerquantity=this.cquantity;
+        // jsonobject.datetime=this.min+" "+this.timevar;
+        // jsonobject.status=supplyStatus;
+        // this.moveparam=jsonobject;
+        // this.$.requisitionstores.generateRequest();
+      },
+      save:function(id){
+        if(Number(this.supplyquantity)<Number(this.iquantity)){
+          supplyStatus="Partially Fulfilled";
+        }
+        else {
+          supplyStatus="Fulfilled";
+        }
+        var jsonobject={};
+        jsonobject.autoid=id;
+        jsonobject.reqno=this.reqno;
+        jsonobject.supplyquantity=this.supplyquantity;
+        jsonobject.containerquantity=this.cquantity;
+        jsonobject.datetime=this.min+" "+this.timevar;
+        jsonobject.status=supplyStatus;
+        this.moveparam=jsonobject;
+        this.$.requisitionstores.generateRequest();
+      },
+      checkid:function(x){
+        autoid=x;
+      },
+      handleSupplyResponse:function(y){
+        alert(y.detail.response.processstatus);
+        document.querySelector('home-page').FnSetPage("requisition-stores");
+      },
+      beingsupplied:function(){
         if (Number(this.supplyquantity)>Number(this.iquantity)) {
           this.buttonvar=true;
           alert("Exceeding the Required Amount!");
@@ -178,7 +177,8 @@
           if (Number(availablequantity1)<Number(this.supplyquantity)) {
             alert("Exceeding the stores quantity!");
             this.buttonvar=true;
-          }else {
+          }
+          else {
             this.buttonvar=false;
           }
         }
@@ -200,18 +200,18 @@
           }]
         });
         chart.render();
-    },
-    returnServiceObject:function(x){
-      inventoryitemqty=x[0].avail_item_qty;
-    },
-    check:function(x){
-      itemrequired=x[0].item_quantity;
-    },
-    ready: function() {
-      this.buttonvar=false;
-      this.chartContainer1hide=0;
-      this.chartContainer2hide=1;
-    },
-  });
-</script>
+      },
+      returnServiceObject:function(x){
+        inventoryitemqty=x[0].avail_item_qty;
+      },
+      check:function(x){
+        itemrequired=x[0].item_quantity;
+      },
+      ready: function() {
+        this.buttonvar=false;
+        this.chartContainer1hide=0;
+        this.chartContainer2hide=1;
+      },
+    });
+  </script>
 </dom-module>

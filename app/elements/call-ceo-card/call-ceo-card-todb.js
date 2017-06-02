@@ -1,6 +1,6 @@
 var mysql=require('mysql');
 
-exports.searchitem=function(callback){
+exports.ceosearchitem=function(callback){
   connection.query("select * from md_procurement_item_detail where item_status='Created'",function(err,rows){
   	if(rows.length>0){
       connection.query("select * from md_sales_finishedgoods_item_detail where item_status='Created'",function(err,fgrows){

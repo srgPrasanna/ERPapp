@@ -1,6 +1,6 @@
 var mysql=require('mysql');
 
-exports.searchitem=function(role,callback){
+exports.requisitionsearchitem=function(role,callback){
   connection.query("select distinct T1.item_name from md_procurement_item_detail as T1 JOIN md_procurement_requisition_itemtype_department_mapping as T2 on T1.item_type_id = T2.item_type_id and T1.item_status='active' JOIN md_hr_department_detail as T3 on T3.department_id=T2.requisition_reviewer_department JOIN od_hr_employee_role as T4 on T4.role=T3.department_name where T4.role='"+role+"';",function(err,itemnames){
     if(itemnames.length>0){
       return callback(itemnames);
