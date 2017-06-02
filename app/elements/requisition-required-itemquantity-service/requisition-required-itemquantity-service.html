@@ -1,10 +1,5 @@
 <dom-module id="requisition-required-itemquantity-service">
   <template>
-    <div hidden>
-      {{requisitionnumber}}
-      {{elementname}}
-      {{onreturn}}
-    </div>
     <iron-ajax
       id="required"
       method="post"
@@ -17,6 +12,7 @@
 <script type="text/javascript">
   Polymer({
     is: "requisition-required-itemquantity-service",
+
     ready: function() {
       var jsonobject={};
       jsonobject.requisitionnumber=this.requisitionnumber;

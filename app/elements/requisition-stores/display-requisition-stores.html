@@ -1,164 +1,6 @@
+<script type="text/javascript" src="canvasjs.min.js"></script>
 <dom-module id="display-requisition-stores">
-  <style is="custom-style">
-    input[type=range] {
-      -webkit-appearance: none;
-      margin: 10px 0;
-      width: 100%;
-    }
-    input[type=range]:focus {
-      outline: none;
-    }
-    input[type=range]::-webkit-slider-runnable-track {
-      width: 100%;
-      height: 10px;
-      cursor: pointer;
-      animate: 0.2s;
-      background: #C6C4C4;
-      border-radius: 5px;
-    }
-    input[type=range]::-webkit-slider-thumb {
-      box-shadow: 1px 1px 1px #000000;
-      border: 1px solid #000000;
-      height: 20px;
-      width: 10px;
-      border-radius: 5px;
-      background: #FFFFFF;
-      cursor: pointer;
-      -webkit-appearance: none;
-      margin-top: -6px;
-    }
-    input[type=range]:focus::-webkit-slider-runnable-track {
-      background: #C6C4C4;
-    }
-    input[type=range]::-moz-range-track {
-      width: 100%;
-      height: 10px;
-      cursor: pointer;
-      animate: 0.2s;
-      box-shadow: 1px 1px 1px #000000;
-      background: #3071A9;
-      border-radius: 5px;
-      border: 1px solid #000000;
-    }
-    input[type=range]::-moz-range-thumb {
-      box-shadow: 1px 1px 1px #000000;
-      border: 1px solid #000000;
-      height: 30px;
-      width: 15px;
-      border-radius: 5px;
-      background: #FFFFFF;
-      cursor: pointer;
-    }
-    input[type=range]::-ms-track {
-      width: 100%;
-      height: 10px;
-      cursor: pointer;
-      animate: 0.2s;
-      background: transparent;
-      border-color: transparent;
-      color: transparent;
-    }
-    input[type=range]::-ms-fill-lower {
-      background: #3071A9;
-      border: 1px solid #000000;
-      border-radius: 10px;
-      box-shadow: 1px 1px 1px #000000;
-    }
-    input[type=range]::-ms-fill-upper {
-      background: #3071A9;
-      border: 1px solid #000000;
-      border-radius: 10px;
-      box-shadow: 1px 1px 1px #000000;
-    }
-    input[type=range]::-ms-thumb {
-      box-shadow: 1px 1px 1px #000000;
-      border: 1px solid #000000;
-      height: 30px;
-      width: 15px;
-      border-radius: 5px;
-      background: #FFFFFF;
-      cursor: pointer;
-    }
-    input[type=range]:focus::-ms-fill-lower {
-      background: #3071A9;
-    }
-    input[type=range]:focus::-ms-fill-upper {
-      background: #3071A9;
-    }
-    .range.range-primary output {
-        background-color: rgb(66, 139, 202);
-        margin-left: 155px;
-        margin-left: 500px;
-        margin-top: 10px;
-    }
-    .range output {
-        display: table;
-        padding: 3px 5px 2px;
-        min-width: 40px;
-        color: rgb(255, 255, 255);
-        background-color: rgb(153, 153, 153);
-        text-align: center;
-        text-decoration: none;
-        border-radius: 4px;
-        border-bottom-left-radius: 0;
-        border-top-left-radius: 0;
-        width:50px ;
-        white-space: nowrap;
-        vertical-align: middle;
-        margin-left: 500px;
-        -webkit-transition: all 0.5s ease;
-        -moz-transition: all 0.5s ease;
-        -o-transition: all 0.5s ease;
-        -ms-transition: all 0.5s ease;
-        transition: all 0.5s ease;
-
-        -webkit-user-select: none;
-        -khtml-user-select: none;
-        -moz-user-select: -moz-none;
-        -o-user-select: none;
-        user-select: none;
-      }
-      .maximumordered {
-          display: table;
-          padding: 3px 5px 2px;
-          min-width: 40px;
-          color: rgb(255, 255, 255);
-          background-color: rgb(153, 153, 153);
-          text-align: center;
-
-          text-decoration: none;
-          border-radius: 4px;
-          border-bottom-left-radius: 0;
-          border-top-left-radius: 0;
-          width:50px ;
-          white-space: nowrap;
-          vertical-align: middle;
-          margin-left: 500px;
-          -webkit-transition: all 0.5s ease;
-          -moz-transition: all 0.5s ease;
-          -o-transition: all 0.5s ease;
-          -ms-transition: all 0.5s ease;
-          transition: all 0.5s ease;
-
-          -webkit-user-select: none;
-          -khtml-user-select: none;
-          -moz-user-select: -moz-none;
-          -o-user-select: none;
-          user-select: none;
-        }
-     .maximumordered{
-         margin-left: 358px;
-         background-color: rgb(66, 139, 202);
-        margin-top: 20px;
-      }
-     .rate-header { @apply(--paper-font-headline);
-           font-size: 20px;
-       }
-     .totaldesign
-     {
-         margin-left: 65px;
-
-     }
+  <style>
     paper-card.rate { @apply(--layout-horizontal); }
     .rate-image {
       width: 45%;
@@ -198,24 +40,29 @@
     </div>
     <div class="col-md-6">
       <paper-card style="width:100%;" elevation="0">
+        <div id="chartContainer1" style="height: 140px; width: 100;" hidden="{{chartContainer1hide}}"></div>
+        <div id="chartContainer2" style="height: 140px; width: 100;" hidden="{{chartContainer2hide}}"></div>
+      </paper-card>
+      <paper-card style="width:100%;" elevation="0">
         <div class="card-content">
           <b>Requisition</b>
-          <input disabled type="range" min="{{iquantity}}" max="{{availablequantity}}" value="{{supplyquantity}}"></input>Available at Stores:{{availablequantity}}&#8195&#8195&#8195<span style="color:{{requiredcolor}};">Required:{{iquantity}} {{unitofmeasureid}}</span>
           <paper-input label="Item Specification1" value="{{itemspecification1}}" readonly></paper-input>
           <paper-input label="Item Type" value="{{itemtype}}" readonly></paper-input>
           <paper-input label="Item Required Date" value="{{itemreqdate}}" readonly></paper-input>
           <paper-input label="Number of {{itemcontainer}}(s)" value="{{cquantity}}" disabled="{{inputvar}}"></paper-input>
-          <paper-input label="Enter the Amount of Item to Supply" value={{supplyquantity}} on-value-changed="test" disabled="{{inputvar}}"><span class="fa fa-share"></span></paper-input>
+          <paper-input label="Enter the Amount of Item to Supply" value={{supplyquantity}} on-value-changed="beingsupplied" disabled="{{inputvar}}"><span class="fa fa-share"></span></paper-input>
           <datetime-picker date-string="{{min}}" time-string={{timevar}} disabled min-date="[[max]]" use-not-native hidden></datetime-picker>
           <center>
             <paper-button class="btn btn-app" id="supplybutton" raised on-click="supply" disabled="{{buttonvar}}"><span class="fa fa-share"></span>Supply</paper-button>
           </center>
         </div>
         <inventory-service elementname="display-requisition-stores" returnfunction="returnServiceObject"></inventory-service>
-        <!-- <requisition-required-itemquantity-service requisitionnumber="{{reqnumber}}"
-                                                   elementname="display-requisition-stores"
-                                                   onreturn="check1">
-        </requisition-required-itemquantity-service> -->
+        <template is="dom-repeat" items="{{reqnum}}">
+          <requisition-required-itemquantity-service requisitionnumber="{{item.reqnumber}}"
+                                                     elementname="{{item.elementname}}"
+                                                     onreturn="{{item.onreturn}}">
+          </requisition-required-itemquantity-service>
+        </template>
       </paper-card>
     </div>
     <iron-ajax
@@ -230,12 +77,14 @@
                      elementname="display-requisition-stores">
     </check-autogenid>
   </template>
-</dom-module>
 <script type="text/javascript">
-var supplyStatus;
-var autoid;
-var availablequantity1;
-var supplybuttonFlag;
+  var supplyStatus;
+  var availablequantity1;
+  var supplybuttonFlag;
+  var iquantity;
+  var supplying;
+  var itemrequired;
+  var inventoryitemqty;
   Polymer({
     is: "display-requisition-stores",
     requisitionbind:function(reqnumber,reqdate,itemquantity,itemname,itemid,itemspecification1,itemtype,warehousename,itemreqdate,itemcontainer,itemavailablequantity,unitofmeasureid,unitofmeasurename){
@@ -252,30 +101,50 @@ var supplybuttonFlag;
       this.availablequantity=itemavailablequantity;
       this.unitofmeasureid=unitofmeasureid;
       availablequantity1=itemavailablequantity;
-      // var uielement = document.querySelector("#showpage");
-      // if (uielement) {
-      //   uielement.parentNode.removeChild(uielement);
-      // }
-      // var element=document.createElement("requisition-required-itemquantity-service");
-      // var ironpage=document.querySelector("#showpage");
-      // Polymer.dom(ironpage).appendChild(element);
-      // document.querySelector("requisition-required-itemquantity-service").bind(reqnumber,"display-requisition-stores","check1");
+      iquantity=itemquantity;
+      var json={"reqnumber":reqnumber,"elementname":"display-requisition-stores","onreturn":"check"};
+      var array=[json];
+      this.reqnum=array;
       if(Number(availablequantity1)<Number(itemquantity)){
-        this.buttonvar=true;
-        this.inputvar=true;
-        this.requiredcolor="red";
         alert("Stores has not enough quantity for this requisition!");
       }
-      if(Number(availablequantity1)>Number(itemquantity)){
-        this.requiredcolor="green";
-      }
-      if(Number(availablequantity1)==Number(itemquantity)){
-        this.requiredcolor="yellow";
-      }
-      var jsonInputDetail={"inventory_itemid":"ite842"};
+      var jsonInputDetail={"inventory_itemid":itemid};
       document.querySelector('inventory-service').inventoryServiceInvoke(jsonInputDetail);
+      var chart = new CanvasJS.Chart("chartContainer1",{
+        title:{
+        text: "Quantity Status"
+        },
+        animationEnabled: true,
+        theme: "theme3",
+        data: [{
+          type: "column",
+          dataPoints: [
+          {y: Number(availablequantity1), label: "At stores"},
+          {y: Number(iquantity),  label: "Required" }
+          ]
+        }]
+      });
+      chart.render();
     },
     supply:function(){
+      document.querySelector('check-autogenid').call();
+      // if(Number(this.supplyquantity)<Number(this.iquantity)){
+      //   supplyStatus="Partially Fulfilled";
+      // }
+      // else {
+      //   supplyStatus="Fulfilled";
+      // }
+      // var jsonobject={};
+      // jsonobject.autoid=autoid;
+      // jsonobject.reqno=this.reqno;
+      // jsonobject.supplyquantity=this.supplyquantity;
+      // jsonobject.containerquantity=this.cquantity;
+      // jsonobject.datetime=this.min+" "+this.timevar;
+      // jsonobject.status=supplyStatus;
+      // this.moveparam=jsonobject;
+      // this.$.requisitionstores.generateRequest();
+    },
+    save:function(id){
       if(Number(this.supplyquantity)<Number(this.iquantity)){
         supplyStatus="Partially Fulfilled";
       }
@@ -283,7 +152,7 @@ var supplybuttonFlag;
         supplyStatus="Fulfilled";
       }
       var jsonobject={};
-      jsonobject.autoid=autoid;
+      jsonobject.autoid=id;
       jsonobject.reqno=this.reqno;
       jsonobject.supplyquantity=this.supplyquantity;
       jsonobject.containerquantity=this.cquantity;
@@ -293,30 +162,56 @@ var supplybuttonFlag;
       this.$.requisitionstores.generateRequest();
     },
     checkid:function(x){
+      alert("autoid"+autoid);
       autoid=x;
     },
     handleSupplyResponse:function(y){
       alert(y.detail.response.processstatus);
       document.querySelector('home-page').FnSetPage("requisition-stores");
     },
-    ready: function() {
-      // document.querySelector().requisitionnumber=
-      this.buttonvar=false;
-    },
-    test:function(){
+    beingsupplied:function(){
         if (Number(this.supplyquantity)>Number(this.iquantity)) {
           this.buttonvar=true;
-          alert("Exceeding the Required Amount");
+          alert("Exceeding the Required Amount!");
         }
         else {
-          this.buttonvar=false;
+          if (Number(availablequantity1)<Number(this.supplyquantity)) {
+            alert("Exceeding the stores quantity!");
+            this.buttonvar=true;
+          }else {
+            this.buttonvar=false;
+          }
         }
+        supplying=this.supplyquantity;
+        this.chartContainer1hide=1;
+        this.chartContainer2hide=0;
+        var chart = new CanvasJS.Chart("chartContainer2",{
+          title:{
+            text: "Quantity Status"
+          },
+          theme: "theme3",
+          data: [{
+            type: "column",
+            dataPoints: [
+            {y: Number(inventoryitemqty), label: "At stores"},
+            {y: Number(itemrequired),  label: "Required" },
+            {y: Number(supplying),  label: "Supplying"}
+            ]
+          }]
+        });
+        chart.render();
     },
     returnServiceObject:function(x){
-      // alert("check"+x);
+      inventoryitemqty=x[0].avail_item_qty;
     },
-    check1:function(x){
-      alert(JSON.stringify(x));
-    }
+    check:function(x){
+      itemrequired=x[0].item_quantity;
+    },
+    ready: function() {
+      this.buttonvar=false;
+      this.chartContainer1hide=0;
+      this.chartContainer2hide=1;
+    },
   });
 </script>
+</dom-module>

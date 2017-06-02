@@ -1,7 +1,7 @@
 var mysql=require('mysql');
 
 exports.getstoresrequisitions=function(callback){
-    connection.query("select t1.*,t2.*,t3.*,t4.*,t5.*,t6.*,t7.* from od_procurement_requisition as t1 join md_procurement_item_detail as t2 on t1.item_id=t2.item_id join md_item_container_name_detail as t3 on t2.container_id=t3.container_id join md_item_unit_of_measure_detail as t4 on t2.unit_of_measure_id = t4.unit_of_measure_id join md_item_item_type_detail as t5 on t2.item_type_id=t5.item_type_id join md_warehouse_warehouse_detail as t6 on t2.warehouse_stores_id = t6.warehouse_stores_id join od_item_inventory as t7 on t7.item_id=t1.item_id where status='active';",function(err,requisitionstoresdata){
+    connection.query("select t1.*,t2.*,t3.*,t4.*,t5.*,t6.*,t7.* from od_procurement_requisition as t1 left join md_procurement_item_detail as t2 on t1.item_id=t2.item_id left join md_item_container_name_detail as t3 on t3.container_id=t2.container_id left join md_item_unit_of_measure_detail as t4 on t4.unit_of_measure_id = t2.unit_of_measure_id left join md_item_item_type_detail as t5 on t5.item_type_id=t2.item_type_id left join md_warehouse_warehouse_detail as t6 on t6.warehouse_stores_id = t2.warehouse_stores_id left join od_item_inventory as t7 on t1.item_id=t7.item_id where t1.status='active';",function(err,requisitionstoresdata){
       if(requisitionstoresdata.length>0){
         return callback(requisitionstoresdata);
       }
