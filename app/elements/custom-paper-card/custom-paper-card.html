@@ -1,0 +1,53 @@
+<dom-module id="custom-paper-card">
+  <style is="custom-style">
+  paper-card.rate { @apply(--layout-horizontal); }
+  .rate-content {
+    @apply(--layout-flex);
+    float: left;
+  }
+  .rate-header { @apply(--paper-font-headline); }
+  .rate-name { color: var(--paper-grey-600); margin: 10px 0; }
+  paper-icon-button.rate-icon {
+    --iron-icon-fill-color: white;
+    --iron-icon-stroke-color: var(--paper-grey-600);
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
+  </style>
+  <template>
+    <paper-card class="rate">
+      <div class="rate-content">
+        <div class="card-content">
+          <div class="rate-header">{{header}}</div>
+          <div class="rate-name">{{number1}}</div>
+          <div class="rate-name">{{number2}}</div>
+          <div class="rate-name">{{number3}}</div>
+          <div>{{text1}}</div>
+          <div>{{text2}}</div>
+          <div>{{text3}}</div>
+          <div>{{text4}}</div>
+          <div>{{text5}}</div>
+        </div>
+      </div>
+      <div>
+        <img src="{{image}}"></img>
+      </div>
+    </paper-card>
+  </template>
+</dom-module>
+<script type="text/javascript">
+  Polymer({
+    is: "custom-paper-card",
+  });
+</script>
+<!-- <div>
+  <custom-paper-card header="heading"
+  number1="1"
+  number2="2"
+  number3="3"
+  text1="asdf"
+  text2="sadf"
+  image="../../images/no_image.jpg"></custom-paper-card>
+</div> -->
