@@ -1,9 +1,18 @@
 <script type="text/javascript" src="canvasjs.min.js"></script>
 <dom-module id="display-requisition-stores">
   <style>
+  #piunderline{
+    paper-input {
+      --paper-input-container-underline: {
+        border-bottom: none;
+      };
+    }
+  }
+  </style>
+  <style>
     paper-card.rate { @apply(--layout-horizontal); }
     .rate-image {
-      width: 45%;
+      width: 100%;
       height: 120px;
       background: url('../../elements/requisition-process/images/no_image.jpg');
       background-size: cover;
@@ -21,7 +30,7 @@
   </style>
   <template>
     <div class="col-sm-6" style="margin-top:15%;">
-      <div style="margin-left:15%;"class="rate-header">{{itemname}}</div>
+      <div style="margin-left:15%;" class="rate-header">{{itemname}}</div>
       <paper-card class="rate" elevation="0">
         <div class="rate-image"></div>
         <div class="rate-content">
@@ -30,8 +39,8 @@
               <table>
                 <tr><td>{{whname}}</td></tr>
               </table>
-              <div style="margin-left:15%;margin-top:18%;">
-                {{reqno}}, {{reqdate}}
+              <div>  <!--style="margin-left:15%;margin-top:18%;"-->
+              {{reqno}}, {{reqdate}}
               </div>
             </div>
           </div>
@@ -40,15 +49,15 @@
     </div>
     <div class="col-md-6">
       <paper-card style="width:100%;" elevation="0">
+        <b>Requisition</b>
         <div id="chartContainer1" style="height: 140px; width: 100;" hidden="{{chartContainer1hide}}"></div>
         <div id="chartContainer2" style="height: 140px; width: 100;" hidden="{{chartContainer2hide}}"></div>
       </paper-card>
       <paper-card style="width:100%;" elevation="0">
         <div class="card-content">
-          <b>Requisition</b>
-          <paper-input label="Item Specification1" value="{{itemspecification1}}" readonly></paper-input>
-          <paper-input label="Item Type" value="{{itemtype}}" readonly></paper-input>
-          <paper-input label="Item Required Date" value="{{itemreqdate}}" readonly></paper-input>
+          <paper-input id="piunderline" label="Item Specification1" value="{{itemspecification1}}" readonly></paper-input>
+          <paper-input id="piunderline" label="Item Type" value="{{itemtype}}" readonly></paper-input>
+          <paper-input id="piunderline" label="Item Required Date" value="{{itemreqdate}}" readonly></paper-input>
           <paper-input label="Number of {{itemcontainer}}(s)" value="{{cquantity}}" disabled="{{inputvar}}"></paper-input>
           <paper-input label="Enter the Amount of Item to Supply" value={{supplyquantity}} on-value-changed="beingsupplied" disabled="{{inputvar}}"><span class="fa fa-share"></span></paper-input>
           <datetime-picker date-string="{{min}}" time-string={{timevar}} disabled min-date="[[max]]" use-not-native hidden></datetime-picker>
@@ -105,9 +114,9 @@
         var json={"reqnumber":reqnumber,"elementname":"display-requisition-stores","onreturn":"check"};
         var array=[json];
         this.reqnum=array;
-        if(Number(availablequantity1)<Number(itemquantity)){
-          alert("Stores has not enough quantity for this requisition!");
-        }
+        // if(Number(availablequantity1)<Number(itemquantity)){
+        //   alert("Stores has not enough quantity for this requisition!");
+        // }
         var jsonInputDetail={"inventory_itemid":itemid};
         document.querySelector('inventory-service').inventoryServiceInvoke(jsonInputDetail);
         var chart = new CanvasJS.Chart("chartContainer1",{

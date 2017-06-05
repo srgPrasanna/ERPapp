@@ -17,6 +17,9 @@
   </style>
   <template>
     <paper-card image="../../elements/requisition-process/images/no_image.jpg" on-click="openrequisition" style="margin-top:6px;margin-left:15px;">
+      <span hidden="{{successhide}}" class="label label-success">Can supply</span>
+      <span hidden="{{warninghide}}" class="label label-warning">Can supply</span>
+      <span hidden="{{dangerhide}}"class="label label-danger">Not enough quantity!</span>
       <div class="cafe-header">&nbsp{{itemname}}</div>
       <div class="card-content">
         <div class="rate-name">
@@ -49,6 +52,23 @@
                                                                            this.itemavailablequantity,
                                                                            this.unitofmeasureid,
                                                                            this.unitofmeasurename);
-    }
+    },
+    ready: function() {
+      if (Number(this.itemavailablequantity)>Number(this.itemquantity)) {
+        this.successhide=0;
+        this.warninghide=1;
+        this.dangerhide=1;
+      }
+      else if (Number(this.itemavailablequantity)==Number(this.itemquantity)) {
+        this.successhide=1;
+        this.warninghide=0;
+        this.dangerhide=1;
+      }
+      else {
+        this.successhide=1;
+        this.warninghide=1;
+        this.dangerhide=0;
+      }
+    },
   });
 </script>
