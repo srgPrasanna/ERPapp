@@ -209,6 +209,9 @@
           }]
         });
         chart.render();
+        if(Number(this.supplyquantity)==0){
+          this.buttonvar=true;
+        }
       },
       returnServiceObject:function(x){
         inventoryitemqty=x[0].avail_item_qty;
