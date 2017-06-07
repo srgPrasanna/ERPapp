@@ -1,4 +1,3 @@
-<script src="countries.js"></script>
 <dom-module id="address-card">
   <style>
     paper-item {
@@ -27,8 +26,9 @@
         </template>
       </paper-listbox>
     </paper-dropdown-menu>
-    <paper-input label="City" value="{{cityname}}" on-change="setCity"></paper-input>
-    <paper-input label="Pincode" value="{{pincode}}" on-change="setPincode"></paper-input>
+    <paper-input label="City" value="{{cityname}}" on-value-changed="setCity"></paper-input>
+    <paper-input label="Street" value="{{streetname}}" on-value-changed="setStreet"></paper-input>
+    <paper-input label="Pincode" value="{{pincode}}" on-value-changed="setPincode"></paper-input>
   </template>
 </dom-module>
 <script type="text/javascript">
@@ -4423,6 +4423,9 @@ var globalstate;
     },
     setPincode:function(){
       sessionStorage.setItem("pincode",this.pincode);
+    },
+    setStreet:function(){
+      sessionStorage.setItem("street",this.streetname);
     }
   });
 </script>
