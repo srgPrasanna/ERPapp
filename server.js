@@ -297,6 +297,8 @@ app.post ('/requisitionitemsupply', urlencodedParser, function (req, res) {
   });
 });
 //********************************END
+
+//*******************************Insert and update element
 var insertQueryPath=require("./app/elements/insert-update/insert-update-todb.js");
 app.post ('/testinsert', urlencodedParser, function (req, res) {
   insertQueryPath.insert(req.query.mySQLQuery,function(callback){
@@ -306,6 +308,30 @@ app.post ('/testinsert', urlencodedParser, function (req, res) {
       res.status(200).json({'status': "Not Inserted!"});
   });
 });
+//******************************END
+
+//********************************Customer billing and shipping address
+//Customer billing address
+var customerbillshipPath=require("./app/elements/billing-address/customer-bill-ship-todb.js");
+app.post ('/insertcustomerbill', urlencodedParser, function (req, res) {
+  customerbillshipPath.insertcustomerbill(req.query,function(callback){
+    if(callback=="Billed")
+      res.status(200).json({'status': "Billed Successfully"});
+    else
+      res.status(200).json({'status': "Error While Billing!"});
+  });
+});
+//CUstomer shipping address
+app.post ('/insertcustomership', urlencodedParser, function (req, res) {
+  customerbillshipPath.insertcustomership(req.query,function(callback){
+    if(callback=="Shipped")
+      res.status(200).json({'status': "Shipped Successfully"});
+    else
+      res.status(200).json({'status': "Error While Shipping!"});
+  });
+});
+//*******************************END
+
 //salessummary
 // var salessummarydb=require("./app/elements/salesorder-summary/salessummarydb.js");
 // app.post('/fetch', urlencodedParser, function (req, res) {
