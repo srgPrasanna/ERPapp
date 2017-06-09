@@ -78,6 +78,7 @@
 
     dbinforesponse:function(a){
       alert(a.detail.response.datavalue);
+      document.querySelector('call-add-customer').billShipButton(a.detail.response.datavalue);
         },
         searchsidFN:function(obj){
           this.searchparams=obj;

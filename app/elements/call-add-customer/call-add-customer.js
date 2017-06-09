@@ -254,5 +254,13 @@ Polymer({
         $('#shiptag').fadeIn();
         // $('#shiptag').append('<div style="position: absolute;top:0;left:0;width: 100%;height:100%;z-index:2;opacity:0.4;filter: alpha(opacity = 50)"></div>');
       }
+    },
+    billShipButton:function(x){
+      if(x=="Saved!"){
+        document.querySelector('#billShipButtonid').disabled=false;
+      }
+      else {
+        document.querySelector('#billShipButtonid').disabled=true;
+      }
     }
 });

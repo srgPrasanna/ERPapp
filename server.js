@@ -589,7 +589,7 @@ app.post('/savedata', urlencodedParser, function (req, res) {
       res.status(200).json({'datavalue': "Saved!"});
     }
     else {
-      res.status(200).json({'datavalue': "Saved!"});
+      res.status(200).json({'datavalue': "Not Saved!"});
     }
   });
 });
