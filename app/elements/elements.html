@@ -1,73 +1,67 @@
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/parse/1.9.2/parse.min.js"></script>
+<script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+
 <link rel="import" href="../bower_components/app-layout/app-layout.html">
+
+<link rel="import" href="../bower_components/datetime-picker/datetime-picker.html">
 
 <link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
 <link rel="import" href="../bower_components/iron-collapse/iron-collapse.html">
+<link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
 <link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../bower_components/iron-icons/iron-icons.html">
 <link rel="import" href="../bower_components/iron-pages/iron-pages.html">
 <link rel="import" href="../bower_components/iron-selector/iron-selector.html">
-<link rel="import" href="../bower_components/iron-flex-layout/iron-flex-layout.html">
-<link rel="import" href="../bower_components/iron-pages/iron-pages.html">
-<link rel="import" href="../bower_components/iron-demo-helpers/demo-pages-shared-styles.html">
 
 <link rel="import" href="../bower_components/paper-card/paper-card.html">
 <link rel="import" href="../bower_components/paper-checkbox/paper-checkbox.html">
+<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
 <link rel="import" href="../bower_components/paper-drawer-panel/paper-drawer-panel.html">
 <link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
-
-<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html">
 <link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/paper-input/paper-input.html">
 <link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-input/paper-textarea.html" />
+<link rel="import" href="../bower_components/paper-listbox/paper-listbox.html">
 <link rel="import" href="../bower_components/paper-material/paper-material.html">
-<link rel="import" href="../bower_components/datetime-picker/datetime-picker.html">
 <link rel="import" href="../bower_components/paper-menu/paper-menu.html">
-<link rel="import" href="../bower_components/paper-radio-group/paper-radio-group.html">
 <link rel="import" href="../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../bower_components/paper-radio-group/paper-radio-group.html">
 <link rel="import" href="../bower_components/paper-scroll-header-panel/paper-scroll-header-panel.html">
+<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
 <link rel="import" href="../bower_components/paper-styles/typography.html">
+<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
 <link rel="import" href="../bower_components/paper-toast/paper-toast.html">
 <link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
-<link rel="import" href="../bower_components/paper-tabs/paper-tabs.html">
-<link rel="import" href="../bower_components/paper-slider/paper-slider.html">
 <link rel="import" href="../bower_components/paper-tooltip/paper-tooltip.html">
-<link rel="import" href="../bower_components/paper-header-panel/paper-header-panel.html">
-<link rel="import" href="../bower_components/paper-toolbar/paper-toolbar.html">
+
+<link rel="import" href="../bower_components/polymer-bootstrap/admin-fouts.html">
+<link rel="import" href="../bower_components/polymer-bootstrap/Admin-LTE.html">
+<link rel="import" href="../bower_components/polymer-bootstrap/Adminsrg-min.html">
+<link rel="import" href="../bower_components/polymer-bootstrap/all-skinsmin.html">
+<link rel="import" href="../bower_components/polymer-bootstrap/blue-card.html">
+<link rel="import" href="../bower_components/polymer-bootstrap/blue-innercard.html">
+<link rel="import" href="../bower_components/polymer-bootstrap/bootstrap-min.html">
+<link rel="import" href="../bower_components/polymer/polymer.html">
+
+<link rel="import" href="../bower_components/vaadin-date-picker-master/vaadin-date-picker.html">
+<link rel="import" href="../bower_components/webcomponentsjs/webcomponents.js">
+
+<link rel="import" href="routing.html">
+<link rel="import" href="../styles/app-theme.html">
+<link rel="import" href="../styles/shared-styles.html">
 <!-- <link rel="import" href="../bower_components/paper-autocomplete-master/paper-autocomplete-suggestions.html">
 <link rel="import" href="../bower_components/paper-autocomplete-master/paper-autocomplete.html"> -->
-<link rel="import" href="../bower_components/paper-drawer-panel/paper-drawer-panel.html">
 <!-- <link rel="import" href="../bower_components/highcharts-chart-master/highcharts-chart-master.html"> -->
 <!-- <link rel="import" href="../bower_components/paper-date-picker-item-master/paper-datetime-picker-item.html">
 <link rel="import" href="../bower_components/paper-date-picker-item-master/paper-date-picker-edit-dialog.html"> -->
 
 <!-- <link rel="import" href="../bower_components/vaadin-combo-box-master/vaadin-combo-box.html"> -->
-<link rel="import" href="../bower_components/paper-input/paper-textarea.html" />
-
-
-<link rel="import" href="../bower_components/paper-dialog-scrollable/paper-dialog-scrollable.html">
-<link rel="import" href="../bower_components/vaadin-date-picker-master/vaadin-date-picker.html">
-
-<link rel="import" href="../bower_components/polymer-bootstrap/admin-fouts.html">
-<link rel="import" href="../bower_components/polymer-bootstrap/Admin-LTE.html">
-<link rel="import" href="../bower_components/polymer-bootstrap/bootstrap-min.html">
-<link rel="import" href="../bower_components/polymer-bootstrap/blue-card.html">
-<link rel="import" href="../bower_components/polymer-bootstrap/all-skinsmin.html">
-<link rel="import" href="../bower_components/polymer-bootstrap/blue-innercard.html">
-<link rel="import" href="../bower_components/polymer-bootstrap/Adminsrg-min.html">
 <!-- <link rel="import" href="../bower_components/paper-shadow-master/paper-shadow.html"> -->
-<link rel="import" href="../bower_components/polymer/polymer.html">
-<link rel="import" href="../bower_components/vaadin-date-picker-master/vaadin-date-picker.html">
-<link rel="import" href="../bower_components/paper-dialog/paper-dialog.html">
 
-<link rel="import" href="../bower_components/webcomponentsjs/webcomponents.js">
-<script src="../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
-<link rel="import" href="routing.html">
-
-<link rel="import" href="../styles/app-theme.html">
-<link rel="import" href="../styles/shared-styles.html">
-
-<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.1.1.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/parse/1.9.2/parse.min.js"></script>
 <!-- <script src="all-design/alldesign.json"></script>
 <script src="all-design/alldesignsupplier.json"></script>
 <script src="all-design/supplierjson.json"></script> -->
@@ -77,52 +71,95 @@
 <link rel="import" href="paperslider-json/paperslider-json.html"> -->
 
 <!-- <link rel="import" href="addsupplierdynamic-ironajax/addsupplierdynamic-ironajax.html"> -->
+<link rel="import" href="address-card/address-card.html">
 <link rel="import" href="app-page/app-page.html">
+<link rel="import" href="autogen-id/autogen-id.html">
+
+<link rel="import" href="barchart-card/barchart-card.html">
+<link rel="import" href="barchart-card/barchart-card-ironajax.html">
+<link rel="import" href="billing-address/billing-address.html">
+
+<link rel="import" href="call-add-customer/call-add-customer.html">
 <link rel="import" href="call-add-item/call-add-item.html">
+<link rel="import" href="call-add-supplier/call-add-supplier.html">
 <link rel="import" href="call-ceo-card/call-ceo-card.html">
-<link rel="import" href="ceo-card/ceo-card.html">
-<link rel="import" href="ceo-display-items/ceo-display-items.html">
 <link rel="import" href="call-requisition-approval/call-requisition-approval.html">
 <link rel="import" href="call-sales-order/call-sales-order.html">
-<link rel="import" href="salesprojection-summary/salesprojection-summary.html">
-<link rel="import" href="sales-projection/sales-projection.html">
-<link rel="import" href="call-add-supplier/call-add-supplier.html">
-<link rel="import" href="salesorder-projection/salesorder-projection.html">
-<link rel="import" href="call-add-customer/call-add-customer.html">
 <link rel="import" href="call-security-card/call-security-card.html">
+<link rel="import" href="call-charts/call-charts.html">
+<link rel="import" href="ceo-card/ceo-card.html">
 <link rel="import" href="ceo-customer-card/ceo-customer-card.html">
+<link rel="import" href="ceo-display-items/ceo-display-items.html">
+<link rel="import" href="custom-paper-card/custom-paper-card.html">
+
+<link rel="import" href="demologistics-filecharts/demologistics-filecharts.html">
+<link rel="import" href="demo-filecharts/demo-filecharts.html">
 <link rel="import" href="display-requisition-approval/display-requisition-approval.html">
-<!-- <link rel="import" href="emp-login/emp-login.html"> -->
-<!-- <link rel="import" href="excise-card/excise-card.html"> -->
-<link rel="import" href="login-card/login-card.html">
+<link rel="import" href="driver-details/driver-details.html">
+<link rel="import" href="dynamic-card/dynamic-card.html">
+
+<link rel="import" href="grn-stores/grnstores-calling.html">
+<link rel="import" href="grn-purchase/grnpurchase-calling.html">
+<link rel="import" href="GRN-card/GRN-card.html">
+<link rel="import" href="GRN-card/GRNcard-click-function.html">
+
 <link rel="import" href="home-page/home-page.html">
-<link rel="import" href="timeline-chart/timeline-chart.html">
-<link rel="import" href="requisition-process/requisition-process.html">
-<link rel="import" href="requisition-approval/requisition-approval.html">
-<link rel="import" href="requisition-stores/requisition-stores.html">
-<link rel="import" href="requisition-stores/requisition-stores-ironajax.html">
-<link rel="import" href="requisition-stores/requisition-stores-card.html">
-<link rel="import" href="requisition-stores/display-requisition-stores.html">
+
+<link rel="import" href="insert-update/insert-update.html">
+<link rel="import" href="inventory-service/inventory-service.html">
+<link rel="import" href="item-customerdetail/item-customerdetail.html">
 <link rel="import" href="item-details/item-details.html">
 <link rel="import" href="item-details/item-to-addsupplier.html">
-<link rel="import" href="sales-order/sales-order.html">
-<link rel="import" href="salesorder-summary/salesorder-summary.html">
-<!-- <link rel="import" href="all-design/all-design.html"> -->
 <link rel="import" href="item-quality-testing/item-quality-testing.html">
 <link rel="import" href="item-quality-testing/slider-paper-input.html">
+<link rel="import" href="item-salesorderquantity-service/item-salesorderquantity-service.html">
+
+<link rel="import" href="login-card/login-card.html">
+
+<link rel="import" href="production-details-sales/production-details-sales.html">
+
+<link rel="import" href="requisition-approval/requisition-approval.html">
+<link rel="import" href="requisition-process/requisition-process.html">
+<link rel="import" href="requisition-required-itemquantity-service/requisition-required-itemquantity-service.html">
+<link rel="import" href="requisition-stores/display-requisition-stores.html">
+<link rel="import" href="requisition-stores/requisition-stores.html">
+<link rel="import" href="requisition-stores/requisition-stores-card.html">
+<link rel="import" href="requisition-stores/requisition-stores-ironajax.html">
+
+<link rel="import" href="salesorder-mapping/salesorder-mapping.html">
+<link rel="import" href="sales-order/sales-order.html">
+<link rel="import" href="salesorder-summary/salesorder-summary.html">
+<link rel="import" href="salesorder-summary-logistics/salesorder-summary-logistics.html">
+<link rel="import" href="salesprojection-summary/salesprojection-summary.html">
+<link rel="import" href="sales-projection/sales-projection.html">
+<link rel="import" href="salesorder-projection/salesorder-projection.html">
+<link rel="import" href="shipping-address/shipping-address.html">
 <link rel="import" href="slider-barnew/slider-barnew.html">
+
+<link rel="import" href="table-view/check-close-icon.html">
 <link rel="import" href="table-view/table-view.html">
 <link rel="import" href="table-view/table-view-data.html">
-<link rel="import" href="table-view/check-close-icon.html">
-<link rel="import" href="insert-update/insert-update.html">
-<!-- <link rel="import" href="check-close-icon/check-close-icon.html"> -->
-<!-- <link rel="import" href="load-vehicle/load-vehicle.html"> -->
+<link rel="import" href="timeline-chart/timeline-chart.html">
+<link rel="import" href="timeline-chartlogistics/timeline-chartlogistics.html">
+
+<link rel="import" href="vehicle-in-process-invoiceno/vehicle-in-process-invoiceno.html" />
+<link rel="import" href="vehicle-in-process-driverdetails/vehicle-in-process-driverdetails.html"/>
+<link rel="import" href="vehicle-in-process-suppliername/vehicle-in-process-suppliername.html"/>
+<link rel="import" href="vehicle-in-process-itemdetails/vehicle-in-process-itemdetails.html"/>
 <link rel="import" href="vehicle-card/vehiclecard-ironajax.html">
 <link rel="import" href="vehicleorder-summary/vehicleorder-summary.html">
 <link rel="import" href="vehicle-card/vehicle-card.html">
-<link rel="import" href="salesorder-mapping/salesorder-mapping.html">
+<link rel="import" href="vehicle-in-process/vehicle-in-process.html"/>
 
-<link rel="import" href="call-charts/call-charts.html">
+<link rel="import" href="warehouse-details/warehouse-details.html">
+<link rel="import" href="warehouse-details/warehouse-details-ironajax.html">
+
+<!-- <link rel="import" href="emp-login/emp-login.html"> -->
+<!-- <link rel="import" href="excise-card/excise-card.html"> -->
+<!-- <link rel="import" href="all-design/all-design.html"> -->
+<!-- <link rel="import" href="check-close-icon/check-close-icon.html"> -->
+<!-- <link rel="import" href="load-vehicle/load-vehicle.html"> -->
+
 <!-- <link rel="import" href="item-repeat/item-repeat.html"> -->
 <!-- <link rel="import" href="autocompleteitemlist-card/autocompleteitemlist-card.html"> -->
 
@@ -131,37 +168,7 @@
 <!-- <link rel="import" href="paper-card1/paper-card1.html">
 <link rel="import" href="paper-card2/paper-card2.html">
 <link rel="import" href="paper-card3/paper-card3.html"> -->
-<link rel="import" href="dynamic-card/dynamic-card.html">
 <!-- <link rel="import" href="addsupplier-card/addsupplier-card.html">
 <link rel="import" href="highcharts-chart/highcharts-chart.html"> -->
-<link rel="import" href="barchart-card/barchart-card.html">
-<link rel="import" href="barchart-card/barchart-card-ironajax.html">
 <!-- <link rel="import" href="item-icon/item-icon.html"> -->
-<link rel="import" href="demo-filecharts/demo-filecharts.html">
-<link rel="import" href="driver-details/driver-details.html">
-<link rel="import" href="item-customerdetail/item-customerdetail.html">
-<link rel="import" href="autogen-id/autogen-id.html">
-<link rel="import" href="grn-stores/grnstores-calling.html">
-<link rel="import" href="grn-purchase/grnpurchase-calling.html">
-<link rel="import" href="GRN-card/GRN-card.html">
-<link rel="import" href="GRN-card/GRNcard-click-function.html">
-<link rel="import" href="vehicle-in-process/vehicle-in-process.html"/>
 <!-- <link rel="import" href="vehiclein-detail/vehiclein-detail.html"/> -->
-<link rel="import" href="vehicle-in-process-invoiceno/vehicle-in-process-invoiceno.html" />
-<link rel="import" href="vehicle-in-process-driverdetails/vehicle-in-process-driverdetails.html"/>
-<link rel="import" href="vehicle-in-process-suppliername/vehicle-in-process-suppliername.html"/>
-<link rel="import" href="vehicle-in-process-itemdetails/vehicle-in-process-itemdetails.html"/>
-<link rel="import" href="autogen-id/autogen-id.html" />
-<link rel="import" href="salesorder-summary-logistics/salesorder-summary-logistics.html">
-<link rel="import" href="demologistics-filecharts/demologistics-filecharts.html">
-<link rel="import" href="timeline-chartlogistics/timeline-chartlogistics.html">
-<link rel="import" href="warehouse-details/warehouse-details.html">
-<link rel="import" href="warehouse-details/warehouse-details-ironajax.html">
-<link rel="import" href="item-salesorderquantity-service/item-salesorderquantity-service.html">
-<link rel="import" href="production-details-sales/production-details-sales.html">
-<link rel="import" href="inventory-service/inventory-service.html">
-<link rel="import" href="requisition-required-itemquantity-service/requisition-required-itemquantity-service.html">
-<link rel="import" href="custom-paper-card/custom-paper-card.html">
-<link rel="import" href="address-card/address-card.html">
-<link rel="import" href="billing-address/billing-address.html">
-<link rel="import" href="shipping-address/shipping-address.html">
