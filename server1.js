@@ -321,6 +321,27 @@ app.post ('/requisitionRequiredItemquantityService', urlencodedParser, function 
 });
 //********************************END
 
+//********************************Customer billing and shipping address
+//Customer billing address
+app.post ('/insertcustomerbill', urlencodedParser, function (req, res) {
+  queryFile.insertcustomerbill(req.query,function(callback){
+    if(callback=="Billed")
+      res.status(200).json({'status': "Billed Successfully"});
+    else
+      res.status(200).json({'status': "Error While Billing!"});
+  });
+});
+//CUstomer shipping address
+app.post ('/insertcustomership', urlencodedParser, function (req, res) {
+  queryFile.insertcustomership(req.query,function(callback){
+    if(callback=="Shipped")
+      res.status(200).json({'status': "Shipped Successfully"});
+    else
+      res.status(200).json({'status': "Error While Shipping!"});
+  });
+});
+//*******************************END
+
 var server=app.listen(4000,'127.0.0.1',function(err){
   var host=server.address().address;
   var port=server.address().port;
