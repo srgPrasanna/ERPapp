@@ -13,6 +13,6 @@ Polymer({
     var getQty=e.detail.response.message;
     //document.querySelector(name).checkid(id);
     alert("getQty................."+JSON.stringify(getQty));
-    document.querySelector("item-salesorderquantity-service").
+    // document.querySelector("item-salesorderquantity-service").
   }
 });

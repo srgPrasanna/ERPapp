@@ -1,17 +1,11 @@
 <dom-module id="item-to-addsupplier">
-  <style>
-  paper-dropdown-menu {
-      --paper-dropdown-menu: {
-        width: 100%;
-      }
-    }
-  </style>
   <template>
     <div hidden>
       {{selectitem}}
     </div>
-    <paper-card elevation="0">
+    <paper-card style="width:100%;" elevation="0">
       <div class="card-content">
+        <b>Add Supplier</b>
         <!-- <paper-dropdown-menu label="Choose Item" scrollable>
           <paper-listbox class="dropdown-content" attr-for-selected="value" selected="{{selectitem}}">
             <template is="dom-repeat" items="{{itemnames}}">
@@ -19,8 +13,8 @@
             </template>
           </paper-listbox>
         </paper-dropdown-menu> -->
-        <paper-input  label="Supplier Name" is="" value="{{value1}}"   on-keydown="FnSearchEnquiry1"></paper-input>
-          <paper-listbox class="dropdown-content" id="transportinput3"  on-iron-select="FnSelectEnquiry2" selected="{{selectedname}}">
+        <paper-input label="Supplier Name" is="" value="{{value1}}" on-keydown="FnSearchEnquiry1"></paper-input>
+          <paper-listbox class="dropdown-content" id="transportinput3" on-iron-select="FnSelectEnquiry2" selected="{{selectedname}}">
             <template is="dom-repeat" items="{{itemArray1}}" as="item1">
               <paper-item value="{{item1.supplier_id}}">{{item1.itemdes1}}</paper-item>
             </template>
@@ -37,13 +31,11 @@
           <paper-input label="Item Pricing" value="{{iprice}}"></paper-input>
         </div>
         <div>
-          <datetime-picker date-string="{{min}}"  disabled min-date="[[max]]" use-not-native></datetime-picker>
+          <datetime-picker date-string="{{min}}"  disabled min-date="[[max]]" use-not-native hidden></datetime-picker>
         </div>
         <div>
           <center>
-            <a class="btn btn-app" on-click="map" style="margin-top:10px;">
-              <i class="fa fa-users"></i>Add Supplier
-            </a>
+            <paper-button class="btn btn-app" on-click="map" style="margin-top:10px;" raised><span class="fa fa-users"></span>Add Supplier</paper-button>
           </center>
         </div>
       </div>
