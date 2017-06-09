@@ -29,7 +29,6 @@
             <paper-input  label="{{itemname}}" is="" value="{{value1}}" on-click="expand"  on-keydown="FnSearchEnquiry1"><iron-icon icon="search" suffix on-click="searchdetails" style="cursor:pointer;"></iron-icon></paper-input>
              <paper-listbox class="dropdown-content" id="transportinput3"  on-iron-select="FnSelectEnquiry2" selected="{{selectedname}}">
                <template is="dom-repeat" items="{{itemArray1}}" as="item1">
-                 {{item1.itemdes1}}
                  <paper-item value="{{item1.item_id}}">{{item1.itemdes1}}</paper-item>
                </template>
              </paper-listbox>
