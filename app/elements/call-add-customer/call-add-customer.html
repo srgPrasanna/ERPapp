@@ -93,7 +93,11 @@
     <table-config-element
                         elementname="call-add-customer"
                         return_function="check"></table-config-element>
-    <paper-button class="btn btn-app" on-click="addBillShipAddress" id="billShipButtonid" disabled><i class="fa fa-home"></i>Add Billing and Shipping Address</paper-button>
+    <div class="row">
+      <center>
+        <paper-button class="btn btn-app" on-click="addBillShipAddress" id="billShipButtonid" disabled><i class="fa fa-home"></i>Add Billing and Shipping Address</paper-button>
+      </center>
+    </div>
     <iron-pages selected="{{page}}" attr-for-selected="data-category">
       <section data-category="billing" style="">
         <div class="row">
@@ -105,10 +109,10 @@
           </div>
         </div>
         <div class="row">
-          <span style="margin-left:3%;">Ship to billing address<paper-checkbox on-click="fadeShip" checked="{{checkvalue}}" noink></paper-checkbox></span>
+          <span style="margin-left:3%;">Ship to billing address&nbsp<paper-checkbox on-click="fadeShip" checked="{{checkvalue}}" noink></paper-checkbox></span>
           <center>
-            <paper-button raised on-click="newBillShipAddress">New Address</paper-button>
-            <paper-button raised on-click="saveBillShipAddress">Save</paper-button>
+            <paper-button class="btn btn-app" raised on-click="newBillShipAddress"><i class="fa fa-home"></i>New Address</paper-button>
+            <paper-button class="btn btn-app" raised on-click="saveBillShipAddress"><i class="fa fa-save"></i>Save</paper-button>
           </center>
         </div>
       </section>

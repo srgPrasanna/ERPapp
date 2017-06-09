@@ -1,5 +1,5 @@
 exports.insertcustomerbill=function(details,callback){
-  var response={"customer_id":details.customerid,
+  var response={"customer_id":details.billcustomerid,
                 "country_code":details.billcountry,
                 "state_code":details.billstate,
                 "city_name":details.billcity,
@@ -18,7 +18,8 @@ exports.insertcustomerbill=function(details,callback){
 }
 
 exports.insertcustomership=function(details,callback){
-  var response={"country_code":details.shipcountry,
+  var response={"customer_id":details.shipcustomerid,
+                "country_code":details.shipcountry,
                 "state_code":details.shipstate,
                 "city_name":details.shipcity,
                 "street_name":details.shipstreet,

@@ -12,14 +12,14 @@
       }
   </style>
   <template>
-    <paper-dropdown-menu label="Country">
+    <paper-dropdown-menu label="Country" value="{{countryvalue}}">
       <paper-listbox class="dropdown-content" on-iron-select="displayStates" attr-for-selected="countryvalue" selected="{{ccode}}" style="cursor:pointer;">
         <template is="dom-repeat" items="{{countries}}">
           <paper-item countryvalue="{{item.code}}">{{item.name}}</paper-item>
         </template>
       </paper-listbox>
     </paper-dropdown-menu>
-    <paper-dropdown-menu label="States">
+    <paper-dropdown-menu label="States" value="{{statevalue}}">
       <paper-listbox class="dropdown-content" on-iron-select="setState" attr-for-selected="statevalue" selected="{{scode}}" style="cursor:pointer;">
         <template is="dom-repeat" items="{{statename}}">
           <paper-item statevalue="{{item.no}}">{{item.states}}</paper-item>

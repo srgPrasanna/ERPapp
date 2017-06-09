@@ -88,6 +88,7 @@
           var getdata=e.detail.response.returnval;
           alert(JSON.stringify(getdata));
           document.querySelector("call-add-customer").datafetchFn(getdata);
+          document.querySelector('call-add-customer').billShipButton(e.detail.response.returnval);
           if(getdata[0].item_name != null){
           document.querySelector("call-add-customer").getironpageFn(getdata);
         }

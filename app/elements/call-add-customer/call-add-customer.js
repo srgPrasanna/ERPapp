@@ -27,6 +27,8 @@ Polymer({
     document.querySelector("call-add-customer-ironajax").searchsidFN(obj);
   }
   else {
+    // document.querySelector('#billShipButtonid').disabled=true;
+    this.$.billShipButtonid.disabled=true;
     alert("please enter valid customer_name");
   }
   },
@@ -210,24 +212,26 @@ Polymer({
       var billcity=document.querySelector('#billaddressid').cityname;
       var billstreet=document.querySelector('#billaddressid').streetname;
       var billpincodeno=document.querySelector('#billaddressid').pincode;
-      billjsonobj.customerid=customerid;
+      billjsonobj.billcustomerid=customerid;
       billjsonobj.billcountry=billcountry;
       billjsonobj.billstate=billstate;
       billjsonobj.billcity=billcity;
       billjsonobj.billstreet=billstreet;
       billjsonobj.billpincodeno=billpincodeno;
+      var shipcustomerid=document.querySelector('#shipinput').value;
       var shipcountry=document.querySelector('#shipaddressid').ccode;
       var shipstate=document.querySelector('#shipaddressid').scode;
       var shipcity=document.querySelector('#shipaddressid').cityname;
       var shipstreet=document.querySelector('#shipaddressid').streetname;
       var shippincodeno=document.querySelector('#shipaddressid').pincode;
+      shipjsonobj.shipcustomerid=shipcustomerid;
       shipjsonobj.shipcountry=shipcountry;
       shipjsonobj.shipstate=shipstate;
       shipjsonobj.shipcity=shipcity;
       shipjsonobj.shipstreet=shipstreet;
       shipjsonobj.shippincodeno=shippincodeno;
       if(this.checkvalue==true){
-        shipjsonobj={shipcountry:billjsonobj.billcountry,shipstate:billjsonobj.billstate,shipcity:billjsonobj.billcity,shipstreet:billjsonobj.billstreet,shippincodeno:billjsonobj.billpincodeno};
+        shipjsonobj={shipcustomerid:billjsonobj.billcustomerid,shipcountry:billjsonobj.billcountry,shipstate:billjsonobj.billstate,shipcity:billjsonobj.billcity,shipstreet:billjsonobj.billstreet,shippincodeno:billjsonobj.billpincodeno};
       }
       else{
 
@@ -236,9 +240,13 @@ Polymer({
       document.querySelector('call-add-customer-ironajax').bindShipdata(shipjsonobj);
     },
     newBillShipAddress:function(){
+      document.querySelector('#billaddressid').countryvalue="";
+      document.querySelector('#billaddressid').statevalue="";
       document.querySelector('#billaddressid').cityname="";
       document.querySelector('#billaddressid').streetname="";
       document.querySelector('#billaddressid').pincode="";
+      document.querySelector('#shipaddressid').countryvalue="";
+      document.querySelector('#shipaddressid').statevalue="";
       document.querySelector('#shipaddressid').cityname="";
       document.querySelector('#shipaddressid').streetname="";
       document.querySelector('#shipaddressid').pincode="";
@@ -256,11 +264,14 @@ Polymer({
       }
     },
     billShipButton:function(x){
-      if(x=="Saved!"){
+      if(x.length>0){
         document.querySelector('#billShipButtonid').disabled=false;
       }
-      else {
+      if(x=="please enter valid customername") {
         document.querySelector('#billShipButtonid').disabled=true;
+      }
+      if(x=="Saved!") {
+        document.querySelector('#billShipButtonid').disabled=false;
       }
     }
 });
