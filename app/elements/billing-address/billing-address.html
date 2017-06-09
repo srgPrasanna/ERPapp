@@ -1,9 +1,19 @@
 <dom-module id="billing-address">
+  <style>
+  #billinput{
+  paper-input {
+    --paper-input-container-underline: {
+      border-bottom: none;
+    };
+  }
+  }
+  </style>
   <template>
     <paper-card style="width:100%;" elevation="0">
       <div class="card-content">
         <b>Billing Address</b>
-        <address-card id="bill"></address-card>
+        <paper-input id="billinput" label="Customer Name" readonly></paper-input>
+        <address-card id="billaddressid"></address-card>
       </div>
     </paper-card>
   </template>

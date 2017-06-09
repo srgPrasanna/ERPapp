@@ -39,15 +39,6 @@
       content-type="application/json"
       last-response="{{stateresponsejson}}">
     </iron-ajax>
-    <!-- <iron-ajax
-      auto
-      method="post"
-      url="http://localhost:4000/autocomplete"
-      handle-as="json"
-      content-type="application/json"
-      on-response="autocompleteFn"
-      last-response="{{autocompleteresponsedata}}">
-    </iron-ajax> -->
     <iron-ajax
       method="post"
       id="searchcidAjax"
@@ -56,6 +47,22 @@
       handle-as="json"
       content-type="application/json"
       on-response="searchcidresponse">
+    </iron-ajax>
+    <iron-ajax
+      id="customerbill"
+      method="post"
+      url="http://localhost:4000/insertcustomerbill"
+      params="{{customerbilladdress}}"
+      handle-as="json"
+      on-response="handleBillResponse">
+    </iron-ajax>
+    <iron-ajax
+      id="customership"
+      method="post"
+      url="http://localhost:4000/insertcustomership"
+      params="{{customershipaddress}}"
+      handle-as="json"
+      on-response="handleShipResponse">
     </iron-ajax>
   </template>
 <script>
@@ -77,10 +84,10 @@
           this.$.searchcidAjax.generateRequest();
         },
         searchcidresponse:function(e){
-          alert(e.detail.response.returnval);
           var getdata=e.detail.response.returnval;
+          alert(JSON.stringify(getdata));
           document.querySelector("call-add-customer").datafetchFn(getdata);
-          if(getdata[0].itemname != null){
+          if(getdata[0].item_name != null){
           document.querySelector("call-add-customer").getironpageFn(getdata);
         }
         },
@@ -106,7 +113,21 @@
           }
         }
   }
-}
+},
+  bindBilldata:function(x){
+    this.customerbilladdress=x;
+    this.$.customerbill.generateRequest();
+  },
+  bindShipdata:function(x){
+    this.customershipaddress=x;
+    this.$.customership.generateRequest();
+  },
+  handleBillResponse:function(x){
+    alert(x.detail.response.status);
+  },
+  handleShipResponse:function(x){
+    alert(x.detail.response.status);
+  }
 });
 </script>
 </dom-module>

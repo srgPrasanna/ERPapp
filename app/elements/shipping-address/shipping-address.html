@@ -3,7 +3,8 @@
     <paper-card style="width:100%;" elevation="0">
       <div class="card-content">
         <b>Shipping Address</b>
-        <address-card id="ship"></address-card>
+        <paper-input id="shipinput" label="Name"></paper-input>
+        <address-card id="shipaddressid"></address-card>
       </div>
     </paper-card>
   </template>
@@ -11,7 +12,6 @@
 <script type="text/javascript">
   Polymer({
     is: "shipping-address",
-
   });
 </script>
 <!-- var country=sessionStorage.getItem("countrycode");
