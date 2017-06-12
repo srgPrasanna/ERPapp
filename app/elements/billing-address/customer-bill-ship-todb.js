@@ -28,7 +28,8 @@ exports.insertcustomership=function(details,callback){
                 "city_name":details.shipcity,
                 "street_name":details.shipstreet,
                 "pincode":details.shippincodeno,
-                "mobile_number":details.shipmobile
+                "mobile_number":details.shipmobile,
+                "billing_customer_id":details.billcustomerid
               };
     connection.query("insert into od_sales_customer_shipping_address_details set ?",[response],function(err,shippingstatus){
       if(shippingstatus.affectedRows>0){
@@ -49,7 +50,8 @@ exports.insertcustomership=function(details,callback){
                     "city_name":details.shipcity,
                     "street_name":details.shipstreet,
                     "pincode":details.shippincodeno,
-                    "mobile_number":details.shipmobile
+                    "mobile_number":details.shipmobile,
+                    "billing_customer_id":details.billcustomerid
                   };
         connection.query("insert into od_sales_customer_shipping_address_details set ?",[response],function(err,shippingstatus){
           if(shippingstatus.affectedRows>0){
@@ -62,4 +64,28 @@ exports.insertcustomership=function(details,callback){
         });
     });
   }
+}
+
+exports.searchcustomerbills=function(details,callback){
+    connection.query('select t1.*,t2.*,t3.*,t4.* from md_sales_customer_detail as t1 left join od_sales_customer_billing_address_details as t2 on t2.customer_id=t1.customer_id left join md_country as t3 on t3.country_id=t2.country_code left join md_state as t4 on t4.state_id=t2.state_code and t4.country_id=t2.country_code where t1.customer_name="'+details.searchcustomername+'";',function(err,data){
+      if(data.length>0){
+        return callback(data);
+        }
+      else{
+        console.log(err);
+        return callback("No Billing Address found!");
+        }
+    });
+}
+
+exports.searchcustomership=function(details,callback){
+    connection.query('select t1.*,t2.*,t3.*,t4.* from md_sales_customer_detail as t1 left join od_sales_customer_shipping_address_details as t2 on t2.customer_id=t1.customer_id left join md_country as t3 on t3.country_id=t2.country_code left join md_state as t4 on t4.state_id=t2.state_code and t4.country_id=t2.country_code where t1.customer_name="'+details.searchshipcustomername+'";',function(err,data){
+      if(data.length>0){
+        return callback(data);
+        }
+      else{
+        console.log(err);
+        return callback("No Shipping Address found!");
+        }
+    });
 }

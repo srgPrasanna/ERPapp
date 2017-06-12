@@ -341,6 +341,24 @@ app.post ('/insertcustomership', urlencodedParser, function (req, res) {
       res.status(200).json({'status': "Error While Shipping!"});
   });
 });
+//search customer all billing address
+app.post ('/searchcustomerbilladdress', urlencodedParser, function (req, res) {
+  customerbillshipPath.searchcustomerbills(req.query,function(callback){
+    if(callback!=null)
+      res.status(200).json({'data': callback});
+    else
+      res.status(200).json({'data': "No Billing Address found!"});
+  });
+});
+//search customer all shipping address
+app.post ('/searchcustomershipaddress', urlencodedParser, function (req, res) {
+  customerbillshipPath.searchcustomership(req.query,function(callback){
+    if(callback!=null)
+      res.status(200).json({'data': callback});
+    else
+      res.status(200).json({'data': "No Billing Address found!"});
+  });
+});
 //*******************************END
 
 //salessummary

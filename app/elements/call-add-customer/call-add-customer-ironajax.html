@@ -64,6 +64,22 @@
       handle-as="json"
       on-response="handleShipResponse">
     </iron-ajax>
+    <iron-ajax
+      id="searchbilling"
+      method="post"
+      params="{{searchcustomerbilldata}}"
+      url="http://localhost:4000/searchcustomerbilladdress"
+      handle-as="json"
+      on-response="handleCustomerBillData">
+    </iron-ajax>
+    <iron-ajax
+      id="searchshiping"
+      method="post"
+      params="{{searchcustomershipdata}}"
+      url="http://localhost:4000/searchcustomershipaddress"
+      handle-as="json"
+      on-response="handleCustomerShipData">
+    </iron-ajax>
   </template>
 <script>
   Polymer({
@@ -129,6 +145,20 @@
   },
   handleShipResponse:function(x){
     alert(x.detail.response.status);
+  },
+  searchdatabind:function(x){
+    this.searchcustomerbilldata=x;
+    this.$.searchbilling.generateRequest();
+  },
+  handleCustomerBillData:function(x){
+    document.querySelector('call-add-customer').allbillingaddress(x.detail.response.data);
+  },
+  searchshipdata:function(x){
+    this.searchcustomershipdata=x;
+    this.$.searchshiping.generateRequest();
+  },
+  handleCustomerShipData:function(x){
+    document.querySelector('call-add-customer').allshippingingaddress(x.detail.response.data);
   }
 });
 </script>

@@ -7,6 +7,7 @@ var copyBillAddress;
 Polymer({
   is:"call-add-customer",
   ready:function(){
+    this.searchaddresshide=1;
     this.colvar=true;
   },
   checkid:function(data){
@@ -38,7 +39,7 @@ Polymer({
     this.$.suppliercollapse.toggle();
     this.page="customer-to-additem";
     document.querySelector("customer-to-additem").check();
-     document.querySelector("customer-to-additem").getsupId=this.cuid;
+    document.querySelector("customer-to-additem").getsupId=this.cuid;
   },
   savebuttonFn:function(){
     document.querySelector("autogen-id").send("cus");
@@ -233,6 +234,7 @@ Polymer({
                      shipstreet:billjsonobj.billstreet,
                      shippincodeno:billjsonobj.billpincodeno,
                      shipmobile:billjsonobj.billmobile,
+                     "billcustomerid":billjsonobj.billcustomerid,
                      "copyBillAddress":copyBillAddress};
       }
       else{
@@ -254,21 +256,27 @@ Polymer({
         shipjsonobj.shippincodeno=shippincodeno;
         shipjsonobj.shipmobile=shipmobile;
         shipjsonobj.copyBillAddress=copyBillAddress;
+        shipjsonobj.billcustomerid=customerid;
       }
       document.querySelector('call-add-customer-ironajax').bindBilldata(billjsonobj);
       document.querySelector('call-add-customer-ironajax').bindShipdata(shipjsonobj);
     },
     newBillShipAddress:function(){
+      document.querySelector('#billemail').value="";
       document.querySelector('#billaddressid').countryvalue="";
       document.querySelector('#billaddressid').statevalue="";
       document.querySelector('#billaddressid').cityname="";
       document.querySelector('#billaddressid').streetname="";
       document.querySelector('#billaddressid').pincode="";
+      document.querySelector('#billmobile').value="";
+
+      document.querySelector('#shipemail').value="";
       document.querySelector('#shipaddressid').countryvalue="";
       document.querySelector('#shipaddressid').statevalue="";
       document.querySelector('#shipaddressid').cityname="";
       document.querySelector('#shipaddressid').streetname="";
       document.querySelector('#shipaddressid').pincode="";
+      document.querySelector('#shipmobile').value="";
     },
     fadeShip:function(){
       if(this.checkvalue==true){
@@ -292,5 +300,26 @@ Polymer({
       if(x=="Saved!") {
         document.querySelector('#billShipButtonid').disabled=false;
       }
+    },
+    searchcustomerbill:function(){
+      var jsonobject={};
+      jsonobject.searchcustomername=this.searchcustomername;
+      document.querySelector('call-add-customer-ironajax').searchdatabind(jsonobject);
+    },
+    allbillingaddress:function(x){
+      this.searchaddresshide=0;
+      this.customerallbilladdress=x;
+    },
+    searchcustomership:function(){
+      var jsonobject={};
+      jsonobject.searchshipcustomername=this.searchshipcustomername;
+      document.querySelector('call-add-customer-ironajax').searchshipdata(jsonobject);
+    },
+    allshippingingaddress:function(x){
+      this.searchaddresshide=0;
+      this.customerallshipaddress=x;
+    },
+    searchBillShipAddress:function(){
+      this.page="searchbillandship";
     }
 });
