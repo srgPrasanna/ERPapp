@@ -5,6 +5,17 @@ var jsonfile   = require('jsonfile');
 var app = express();
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 
+var server=app.listen(4000,'127.0.0.1',function(err){
+  var host=server.address().address;
+  var port=server.address().port;
+  if(!err){
+    console.log("Listening at http://%s:%s", host, port);
+  }
+  else {
+    console.error(err);
+  }
+})
+
 var connection;
 var connectdb=require("./app/script/connectdb.js");
   require('fs').readFile('./app/config/getconnection.json','utf8',function(err,data){
@@ -1221,14 +1232,3 @@ app.post ('/requisitionRequiredItemquantityService', urlencodedParser, function 
       res.status(200).json({'quantity': "Quantity not available!"});
   });
 });
-
-var server=app.listen(4000,'127.0.0.1',function(err){
-  var host=server.address().address;
-  var port=server.address().port;
-  if(!err){
-    console.log("Listening at http://%s:%s", host, port);
-  }
-  else {
-    console.error(err);
-  }
-})

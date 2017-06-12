@@ -3,6 +3,7 @@ var supplier_name="";
 var supplier_id="";
 var tablename;
 var customerid;
+var copyBillAddress;
 Polymer({
   is:"call-add-customer",
   ready:function(){
@@ -202,39 +203,57 @@ Polymer({
     },
     addBillShipAddress:function(){
       this.page="billing";
-      document.querySelector('#billinput').value=this.value1;
+      document.querySelector('#billcustomername').value=this.value1;
     },
     saveBillShipAddress:function(){
       var billjsonobj={};
       var shipjsonobj={};
+      var billemail=document.querySelector('#billemail').value;
       var billcountry=document.querySelector('#billaddressid').ccode;
       var billstate=document.querySelector('#billaddressid').scode;
       var billcity=document.querySelector('#billaddressid').cityname;
       var billstreet=document.querySelector('#billaddressid').streetname;
       var billpincodeno=document.querySelector('#billaddressid').pincode;
+      var billmobile=document.querySelector('#billmobile').value;
       billjsonobj.billcustomerid=customerid;
+      billjsonobj.billemail=billemail;
       billjsonobj.billcountry=billcountry;
       billjsonobj.billstate=billstate;
       billjsonobj.billcity=billcity;
       billjsonobj.billstreet=billstreet;
       billjsonobj.billpincodeno=billpincodeno;
-      var shipcustomerid=document.querySelector('#shipinput').value;
-      var shipcountry=document.querySelector('#shipaddressid').ccode;
-      var shipstate=document.querySelector('#shipaddressid').scode;
-      var shipcity=document.querySelector('#shipaddressid').cityname;
-      var shipstreet=document.querySelector('#shipaddressid').streetname;
-      var shippincodeno=document.querySelector('#shipaddressid').pincode;
-      shipjsonobj.shipcustomerid=shipcustomerid;
-      shipjsonobj.shipcountry=shipcountry;
-      shipjsonobj.shipstate=shipstate;
-      shipjsonobj.shipcity=shipcity;
-      shipjsonobj.shipstreet=shipstreet;
-      shipjsonobj.shippincodeno=shippincodeno;
+      billjsonobj.billmobile=billmobile;
       if(this.checkvalue==true){
-        shipjsonobj={shipcustomerid:billjsonobj.billcustomerid,shipcountry:billjsonobj.billcountry,shipstate:billjsonobj.billstate,shipcity:billjsonobj.billcity,shipstreet:billjsonobj.billstreet,shippincodeno:billjsonobj.billpincodeno};
+        copyBillAddress=1;
+        shipjsonobj={shipname:billjsonobj.billcustomerid,
+                     shipemail:billjsonobj.billemail,
+                     shipcountry:billjsonobj.billcountry,
+                     shipstate:billjsonobj.billstate,
+                     shipcity:billjsonobj.billcity,
+                     shipstreet:billjsonobj.billstreet,
+                     shippincodeno:billjsonobj.billpincodeno,
+                     shipmobile:billjsonobj.billmobile,
+                     "copyBillAddress":copyBillAddress};
       }
       else{
-
+        copyBillAddress=0;
+        var shipname=document.querySelector('#shipcustomername').value;
+        var shipemail=document.querySelector('#shipemail').value;
+        var shipcountry=document.querySelector('#shipaddressid').ccode;
+        var shipstate=document.querySelector('#shipaddressid').scode;
+        var shipcity=document.querySelector('#shipaddressid').cityname;
+        var shipstreet=document.querySelector('#shipaddressid').streetname;
+        var shippincodeno=document.querySelector('#shipaddressid').pincode;
+        var shipmobile=document.querySelector('#shipmobile').value;
+        shipjsonobj.shipname=shipname;
+        shipjsonobj.shipemail=shipemail;
+        shipjsonobj.shipcountry=shipcountry;
+        shipjsonobj.shipstate=shipstate;
+        shipjsonobj.shipcity=shipcity;
+        shipjsonobj.shipstreet=shipstreet;
+        shipjsonobj.shippincodeno=shippincodeno;
+        shipjsonobj.shipmobile=shipmobile;
+        shipjsonobj.copyBillAddress=copyBillAddress;
       }
       document.querySelector('call-add-customer-ironajax').bindBilldata(billjsonobj);
       document.querySelector('call-add-customer-ironajax').bindShipdata(shipjsonobj);
