@@ -94,6 +94,7 @@
     var supplying;
     var itemrequired;
     var inventoryitemqty;
+    var itemid1;
     Polymer({
       is: "display-requisition-stores",
       requisitionbind:function(reqnumber,reqdate,itemquantity,itemname,itemid,itemspecification1,itemtype,warehousename,itemreqdate,itemcontainer,itemavailablequantity,unitofmeasureid,unitofmeasurename){
@@ -111,6 +112,7 @@
         this.unitofmeasureid=unitofmeasureid;
         availablequantity1=itemavailablequantity;
         iquantity=itemquantity;
+        itemid1=itemid;
         var json={"reqnumber":reqnumber,"elementname":"display-requisition-stores","onreturn":"check"};
         var array=[json];
         this.reqnum=array;
@@ -167,6 +169,7 @@
         jsonobject.containerquantity=this.cquantity;
         jsonobject.datetime=this.min+" "+this.timevar;
         jsonobject.status=supplyStatus;
+        jsonobject.itemid=itemid1;
         this.moveparam=jsonobject;
         this.$.requisitionstores.generateRequest();
       },

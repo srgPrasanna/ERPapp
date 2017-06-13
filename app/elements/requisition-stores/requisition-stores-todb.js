@@ -12,7 +12,7 @@ exports.getstoresrequisitions=function(callback){
     });
 }
 
-exports.supplyitem=function(autoid,reqno,containerquantity,supplyquantity,datetime,status,callback){
+exports.supplyitem=function(autoid,reqno,containerquantity,supplyquantity,datetime,status,itemid,callback){
   var response={"item_movement_id":autoid,
                 "requisition_number":reqno,
                 "container_quantity":containerquantity,
@@ -22,8 +22,22 @@ exports.supplyitem=function(autoid,reqno,containerquantity,supplyquantity,dateti
               };
     connection.query("insert into od_stores_item_movement set ?",[response],function(err,requisitionsupply){
       if(requisitionsupply.affectedRows>0){
-        connection.query('update od_procurement_requisition set status="'+status+'" where requisition_number="'+reqno+'"',function(err){
-          return callback("Item Supplied");
+        connection.query('update od_procurement_requisition set status="'+status+'" where requisition_number="'+reqno+'"',function(err,detail){
+          if(detail.affectedRows>0){
+            connection.query('UPDATE od_item_inventory SET item_available_quantity = item_available_quantity - "'+supplyquantity+'" where item_id="'+itemid+'";',function(err,status){
+              if(status.affectedRows>0){
+                return callback("Item Supplied");
+              }
+              else{
+                console.log(err);
+                return callback("Item supplied, Supplied Status updated but failed update available quantity!");
+              }
+            });
+          }
+          else{
+            console.log(err);
+            return callback("Item Supplied but failed to update supplied status!");
+          }
         })
       }
       else{

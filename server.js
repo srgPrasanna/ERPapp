@@ -300,7 +300,7 @@ app.post ('/storesrequisitions', urlencodedParser, function (req, res) {
 });
 
 app.post ('/requisitionitemsupply', urlencodedParser, function (req, res) {
-  requisitionStoresDB.supplyitem(req.query.autoid,req.query.reqno,req.query.containerquantity,req.query.supplyquantity,req.query.datetime,req.query.status,function(requisitionsupply){
+  requisitionStoresDB.supplyitem(req.query.autoid,req.query.reqno,req.query.containerquantity,req.query.supplyquantity,req.query.datetime,req.query.status,req.query.itemid,function(requisitionsupply){
     if(requisitionsupply=="Item Supplied")
       res.status(200).json({'processstatus': "Item Supplied"});
     else
