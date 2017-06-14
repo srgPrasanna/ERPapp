@@ -10,7 +10,14 @@ exports.insertcustomerbill=function(details,callback){
               };
     connection.query("insert into od_sales_customer_billing_address_details set ?",[response],function(err,billingstatus){
       if(billingstatus.affectedRows>0){
-          return callback("Billed");
+        connection.query('insert into od_customer_bill_mapping (customer_id,billing_id) values ("'+details.billcustomerid+'","'+details.billid+'");',function(err,billmapstatus){
+          if(billmapstatus.affectedRows>0){
+            return callback("Billed");
+          }
+          else {
+            return callback("Billed but Failed to map!");
+          }
+        });
       }
       else{
         console.log(err);
@@ -28,12 +35,18 @@ exports.insertcustomership=function(details,callback){
                 "city_name":details.shipcity,
                 "street_name":details.shipstreet,
                 "pincode":details.shippincodeno,
-                "mobile_number":details.shipmobile,
-                "billing_customer_id":details.billcustomerid
+                "mobile_number":details.shipmobile
               };
     connection.query("insert into od_sales_customer_shipping_address_details set ?",[response],function(err,shippingstatus){
       if(shippingstatus.affectedRows>0){
-          return callback("Shipped");
+        connection.query('insert into od_customer_ship_mapping (customer_id,shipping_id) values ("'+details.shipname+'","'+details.shipid+'");',function(err,shipmapstatus){
+          if(shipmapstatus.affectedRows>0){
+            return callback("Shipped");
+          }
+          else {
+            return callback("Shipped but Failed to map!");
+          }
+        });
       }
       else{
         console.log(err);
@@ -50,12 +63,18 @@ exports.insertcustomership=function(details,callback){
                     "city_name":details.shipcity,
                     "street_name":details.shipstreet,
                     "pincode":details.shippincodeno,
-                    "mobile_number":details.shipmobile,
-                    "billing_customer_id":details.billcustomerid
+                    "mobile_number":details.shipmobile
                   };
         connection.query("insert into od_sales_customer_shipping_address_details set ?",[response],function(err,shippingstatus){
           if(shippingstatus.affectedRows>0){
-              return callback("Shipped");
+            connection.query('insert into od_customer_ship_mapping (customer_id,shipping_id) values ("'+customerdetails[0].customer_id+'","'+details.shipid+'");',[response],function(err,shipmapstatus){
+              if(shipmapstatus.affectedRows>0){
+                return callback("Shipped");
+              }
+              else {
+                return callback("Shipped but Failed to map!");
+              }
+            });
           }
           else{
             console.log(err);

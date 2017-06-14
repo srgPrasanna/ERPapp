@@ -54,6 +54,14 @@
         content-type="application/json"
         on-response="searchsidresponse">
       </iron-ajax>
+      <iron-ajax
+        id="supplierbill"
+        method="post"
+        url="http://localhost:4000/insertsupplierbill"
+        params="{{supplierbilladdress}}"
+        handle-as="json"
+        on-response="handleBillResponse">
+      </iron-ajax>
   </template>
 <script>
   Polymer({
@@ -81,7 +89,8 @@
     document.querySelector("call-add-supplier").getcountryjsondata(this.countryresponsejson);
   },
   searchsidresponse:function(e){
-    alert(e.detail.response.returnval);
+    alert("response"+e.detail.response.returnval);
+    document.querySelector('call-add-supplier').billShipButton(e.detail.response.returnval);
     var getdata=e.detail.response.returnval;
     document.querySelector("call-add-supplier").datafetchFn(getdata);
     if(getdata[0].itemname != null){
@@ -98,7 +107,15 @@
           }
         }
   }
-}
+},
+  bindBilldata:function(x){
+    alert("bind bill");
+    this.supplierbilladdress=x;
+    this.$.supplierbill.generateRequest();
+  },
+  handleBillResponse:function(x){
+    alert(x.detail.response.status);
+  }
 });
 </script>
 </dom-module>

@@ -361,6 +361,18 @@ app.post ('/searchcustomershipaddress', urlencodedParser, function (req, res) {
 });
 //*******************************END
 
+//*******************************Supplier Billing Address
+var supplierbillPath=require("./app/elements/call-add-supplier/supplier-billing-todb.js");
+app.post ('/insertsupplierbill', urlencodedParser, function (req, res) {
+  supplierbillPath.insertsupplierbill(req.query,function(callback){
+    if(callback=="Billed")
+      res.status(200).json({'status': "Billed Successfully"});
+    else
+      res.status(200).json({'status': "Error While Billing!"});
+  });
+});
+
+//*******************************END
 //salessummary
 // var salessummarydb=require("./app/elements/salesorder-summary/salessummarydb.js");
 // app.post('/fetch', urlencodedParser, function (req, res) {
@@ -459,6 +471,7 @@ app.post('/securityinfo', urlencodedParser, function (req, res) {
         // });
 //searchcustomer
 app.post('/searchcustomerid', urlencodedParser, function (req,res) {
+  console.log(req.query.supname);
           var response={supname:req.query.supname}
           connectdb.searchcustomeridFn(response,function(rows){
             if(rows!="not get"){
@@ -644,7 +657,7 @@ app.post('/savesupplierdata', urlencodedParser, function (req, res) {
       res.status(200).json({'datavalue': "Saved!"});
     }
     else {
-      res.status(200).json({'datavalue': "Saved!"});
+      res.status(200).json({'datavalue': "Not Saved!"});
     }
   });
 });

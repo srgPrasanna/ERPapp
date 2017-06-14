@@ -207,6 +207,9 @@ Polymer({
       document.querySelector('#billcustomername').value=this.value1;
     },
     saveBillShipAddress:function(){
+      document.querySelector('check-autogenid').call();
+    },
+    save:function(id){
       var billjsonobj={};
       var shipjsonobj={};
       var billemail=document.querySelector('#billemail').value;
@@ -216,6 +219,7 @@ Polymer({
       var billstreet=document.querySelector('#billaddressid').streetname;
       var billpincodeno=document.querySelector('#billaddressid').pincode;
       var billmobile=document.querySelector('#billmobile').value;
+      billjsonobj.billid="bill"+id;
       billjsonobj.billcustomerid=customerid;
       billjsonobj.billemail=billemail;
       billjsonobj.billcountry=billcountry;
@@ -226,7 +230,8 @@ Polymer({
       billjsonobj.billmobile=billmobile;
       if(this.checkvalue==true){
         copyBillAddress=1;
-        shipjsonobj={shipname:billjsonobj.billcustomerid,
+        shipjsonobj={shipid:"ship"+id,
+                     shipname:billjsonobj.billcustomerid,
                      shipemail:billjsonobj.billemail,
                      shipcountry:billjsonobj.billcountry,
                      shipstate:billjsonobj.billstate,
@@ -234,7 +239,6 @@ Polymer({
                      shipstreet:billjsonobj.billstreet,
                      shippincodeno:billjsonobj.billpincodeno,
                      shipmobile:billjsonobj.billmobile,
-                     "billcustomerid":billjsonobj.billcustomerid,
                      "copyBillAddress":copyBillAddress};
       }
       else{
@@ -247,6 +251,7 @@ Polymer({
         var shipstreet=document.querySelector('#shipaddressid').streetname;
         var shippincodeno=document.querySelector('#shipaddressid').pincode;
         var shipmobile=document.querySelector('#shipmobile').value;
+        shipjsonobj.shipid="ship"+id;
         shipjsonobj.shipname=shipname;
         shipjsonobj.shipemail=shipemail;
         shipjsonobj.shipcountry=shipcountry;
@@ -256,7 +261,6 @@ Polymer({
         shipjsonobj.shippincodeno=shippincodeno;
         shipjsonobj.shipmobile=shipmobile;
         shipjsonobj.copyBillAddress=copyBillAddress;
-        shipjsonobj.billcustomerid=customerid;
       }
       document.querySelector('call-add-customer-ironajax').bindBilldata(billjsonobj);
       document.querySelector('call-add-customer-ironajax').bindShipdata(shipjsonobj);
@@ -319,7 +323,7 @@ Polymer({
       this.searchaddresshide=0;
       this.customerallshipaddress=x;
     },
-    searchBillShipAddress:function(){
-      this.page="searchbillandship";
-    }
+    // searchBillShipAddress:function(){
+    //   this.page="searchbillandship";
+    // }
 });

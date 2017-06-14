@@ -291,15 +291,18 @@ connection.query(query,function(err,rows){
     }
   else{
     connection.query("select * from md_procurement_supplier_detail where supplier_name='"+data.supname+"'",function(err,rows){
-    return callback(rows);
+      if(!err)
+        return callback(rows);
+      else {
+        return callback("not get");
+      }
   });
   }
-  return callback("not get");
+  // return callback("not get");
 });
 }
 exports.searchcustomeridFn=function(data,callback){
-  var query=
-  "SELECT md_sales_customer_detail.customer_id,md_sales_customer_detail.customer_name,md_sales_customer_detail.address_1,md_sales_customer_detail.address_2,md_sales_customer_detail.address_3,md_sales_customer_detail.city,md_sales_customer_detail.state,md_sales_customer_detail.country,md_sales_customer_detail.pincode,md_sales_customer_detail.mobile_1,md_sales_customer_detail.mobile_2,md_sales_customer_detail.email,md_sales_customer_detail.status,md_sales_finishedgoods_item_detail.item_id,md_sales_finishedgoods_item_detail.item_name,md_sales_finishedgoods_item_detail.item_description,md_sales_finishedgoods_item_detail.item_specification1,md_sales_finishedgoods_item_detail.item_specification2,md_sales_finishedgoods_item_detail.container_id,md_sales_finishedgoods_item_detail.unit_of_measure_id,md_sales_finishedgoods_item_detail.item_group,md_sales_finishedgoods_item_detail.item_type_id,md_sales_finishedgoods_item_detail.item_status,md_sales_finishedgoods_item_detail.item_purchase_type,md_sales_finishedgoods_item_detail.item_status FROM md_sales_customer_detail LEFT JOIN md_sales_finishedgoods_item_detail ON  md_sales_finishedgoods_item_detail.item_id  LEFT JOIN  od_sales_item_customer_mapping ON od_sales_item_customer_mapping.customer_id=md_sales_customer_detail.customer_id  WHERE md_sales_customer_detail.customer_name='"+data.supname+"'";
+  var query="SELECT md_sales_customer_detail.customer_id,md_sales_customer_detail.customer_name,md_sales_customer_detail.address_1,md_sales_customer_detail.address_2,md_sales_customer_detail.address_3,md_sales_customer_detail.city,md_sales_customer_detail.state,md_sales_customer_detail.country,md_sales_customer_detail.pincode,md_sales_customer_detail.mobile_1,md_sales_customer_detail.mobile_2,md_sales_customer_detail.email,md_sales_customer_detail.status,md_sales_finishedgoods_item_detail.item_id,md_sales_finish dgoods_item_detail.item_name,md_sales_finishedgoods_item_detail.item_description,md_sales_finishedgoods_item_detail.item_specification1,md_sales_finishedgoods_item_detail.item_specification2,md_sales_finishedgoods_item_detail.container_id,md_sales_finishedgoods_item_detail.unit_of_measure_id,md_sales_finishedgoods_item_detail.item_group,md_sales_finishedgoods_item_detail.item_type_id,md_sales_finishedgoods_item_detail.item_status,md_sales_finishedgoods_item_detail.item_purchase_type,md_sales_finishedgoods_item_detail.item_status FROM md_sales_customer_detail LEFT JOIN md_sales_finishedgoods_item_detail ON  md_sales_finishedgoods_item_detail.item_id  LEFT JOIN  od_sales_item_customer_mapping ON od_sales_item_customer_mapping.customer_id=md_sales_customer_detail.customer_id  WHERE md_sales_customer_detail.customer_name='"+data.supname+"'";
 connection.query(query,function(err,rows){
   if(rows.length>0){
       return callback(rows);
@@ -320,7 +323,7 @@ connection.query(" INSERT INTO md_sales_customer_detail SET ?",[data],function(r
   }
   else{
     // console.log(err);
-    return callback("saved");
+    return callback("Not saved!");
   }
   });
 }

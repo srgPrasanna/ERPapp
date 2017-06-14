@@ -1,3 +1,4 @@
+var billsupplierid;
 Polymer({
   is:"call-add-supplier",
 
@@ -73,21 +74,21 @@ Polymer({
     this.statuslabel=status;
   },
   datafetchFn:function(data){
-    this.SupIdval=data[0].supplierid;
-    this.SupNameval=data[0].suppliername;
-    this.Add1val=data[0].address1;
-    this.Add2val=data[0].address2;
-    this.Add3val=data[0].address3;
+    billsupplierid=data[0].supplier_id;
+    this.SupIdval=data[0].supplier_id;
+    this.value1=data[0].supplier_name;
+    this.Add1val=data[0].address_1;
+    this.Add2val=data[0].address_2;
+    this.Add3val=data[0].address_3;
     this.selection=data[0].country;
     this.selectionstate=data[0].state;
     this.Citynameval=data[0].city;
     this.Pinval=data[0].pincode;
-    this.MobNumberval1=data[0].mobile1;
-    this.MobNumberval2=data[0].mobile2;
+    this.MobNumberval1=data[0].mobile_1;
+    this.MobNumberval2=data[0].mobile_2;
     this.EmIDval=data[0].email;
     this.staval=data[0].status;
     this.suid=this.SupIdval;
-
   },
   getcountryjsondata:function(retrvjsondata){
     this.countryitems=retrvjsondata;
@@ -108,5 +109,52 @@ Polymer({
   else {
     alert("please enter supplier name");
   }
-  }
+},
+  addBillAddress:function(){
+    this.page="billing";
+    document.querySelector('#billcustomername').value=this.SupNameval;
+  },
+  billShipButton:function(x){
+    if(x.length>0){
+      document.querySelector('#billShipButtonid').disabled=false;
+    }
+    if(x=="please enter valid customername") {
+      document.querySelector('#billShipButtonid').disabled=true;
+    }
+    if(x=="Saved!") {
+      document.querySelector('#billShipButtonid').disabled=false;
+    }
+  },
+  newBillAddress:function(){
+    document.querySelector('#billemail').value="";
+    document.querySelector('#billaddressid').countryvalue="";
+    document.querySelector('#billaddressid').statevalue="";
+    document.querySelector('#billaddressid').cityname="";
+    document.querySelector('#billaddressid').streetname="";
+    document.querySelector('#billaddressid').pincode="";
+    document.querySelector('#billmobile').value="";
+  },
+  saveBillAddress:function(){
+    document.querySelector('check-autogenid').call();
+  },
+  save:function(id){
+    var billjsonobj={};
+    var billemail=document.querySelector('#billemail').value;
+    var billcountry=document.querySelector('#billaddressid').ccode;
+    var billstate=document.querySelector('#billaddressid').scode;
+    var billcity=document.querySelector('#billaddressid').cityname;
+    var billstreet=document.querySelector('#billaddressid').streetname;
+    var billpincodeno=document.querySelector('#billaddressid').pincode;
+    var billmobile=document.querySelector('#billmobile').value;
+    billjsonobj.billid="bill"+id;
+    billjsonobj.billsupplierid=billsupplierid;
+    billjsonobj.billemail=billemail;
+    billjsonobj.billcountry=billcountry;
+    billjsonobj.billstate=billstate;
+    billjsonobj.billcity=billcity;
+    billjsonobj.billstreet=billstreet;
+    billjsonobj.billpincodeno=billpincodeno;
+    billjsonobj.billmobile=billmobile;
+    document.querySelector('call-add-supplier-ironajax').bindBilldata(billjsonobj);
+  },
 });

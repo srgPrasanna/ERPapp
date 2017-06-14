@@ -75,6 +75,30 @@
 </div>
 <call-add-supplier-ironajax></call-add-supplier-ironajax>
 <autogen-id></autogen-id>
+  <div class="row">
+    <center>
+      <paper-button class="btn btn-app" on-click="addBillAddress" id="billShipButtonid" disabled><i class="fa fa-home"></i>Add Billing/Shipping Address</paper-button>
+      <!-- <paper-button class="btn btn-app" on-click="searchBillShipAddress" id="searchbillShipButtonid"><i class="fa fa-search"></i>Search Billing/Shipping Address</paper-button> -->
+    </center>
+  </div>
+  <iron-pages selected="{{page}}" attr-for-selected="data-category">
+    <section data-category="billing" style="">
+      <div class="row">
+        <div class="col-sm-6">
+          <billing-address id="billtag"></billing-address>
+        </div>
+      </div>
+      <div class="row">
+        <center>
+          <paper-button class="btn btn-app" raised on-click="newBillAddress"><i class="fa fa-home"></i>New Address</paper-button>
+          <paper-button class="btn btn-app" raised on-click="saveBillAddress"><i class="fa fa-save"></i>Save</paper-button>
+        </center>
+      </div>
+      <check-autogenid stringname=""
+                       elementname="call-add-supplier">
+      </check-autogenid>
+    </section>
+  </iron-pages>
   </template>
     <script src="call-add-supplier.js"></script>
 </dom-module>

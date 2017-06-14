@@ -96,7 +96,7 @@
     <div class="row">
       <center>
         <paper-button class="btn btn-app" on-click="addBillShipAddress" id="billShipButtonid" disabled><i class="fa fa-home"></i>Add Billing/Shipping Address</paper-button>
-        <paper-button class="btn btn-app" on-click="searchBillShipAddress" id="searchbillShipButtonid"><i class="fa fa-search"></i>Search Billing/Shipping Address</paper-button>
+        <!-- <paper-button class="btn btn-app" on-click="searchBillShipAddress" id="searchbillShipButtonid"><i class="fa fa-search"></i>Search Billing/Shipping Address</paper-button> -->
       </center>
     </div>
     <iron-pages selected="{{page}}" attr-for-selected="data-category">
@@ -116,8 +116,11 @@
             <paper-button class="btn btn-app" raised on-click="saveBillShipAddress"><i class="fa fa-save"></i>Save</paper-button>
           </center>
         </div>
+        <check-autogenid stringname=""
+                         elementname="call-add-customer">
+        </check-autogenid>
       </section>
-      <section data-category="searchbillandship">
+      <!-- <section data-category="searchbillandship">
         <div class="row">
           <div class="col-xs-6">
             <paper-input label="Customer Name for billing address" value="{{searchcustomername}}"><iron-icon icon="search" on-click="searchcustomerbill" suffix style="cursor:pointer;"></iron-icon></paper-input>
@@ -174,7 +177,7 @@
             </table>
           </div>
         </div>
-      </section>
+      </section> -->
     </iron-pages>
   </template>
   <script src="call-add-customer.js"></script>
