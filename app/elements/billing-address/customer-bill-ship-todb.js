@@ -1,5 +1,5 @@
 exports.insertcustomerbill=function(details,callback){
-  var response={"customer_id":details.billcustomerid,
+  var response={"billing_id":details.billid,
                 "customer_email":details.billemail,
                 "country_code":details.billcountry,
                 "state_code":details.billstate,
@@ -28,7 +28,7 @@ exports.insertcustomerbill=function(details,callback){
 
 exports.insertcustomership=function(details,callback){
   if(details.copyBillAddress==1){
-  var response={"customer_id":details.shipname,
+  var response={"shipping_id":details.shipid,
                 "customer_email":details.shipemail,
                 "country_code":details.shipcountry,
                 "state_code":details.shipstate,
@@ -56,7 +56,7 @@ exports.insertcustomership=function(details,callback){
   }
   else {
     connection.query('select * from md_sales_customer_detail where customer_name="'+details.shipname+'"',function(err,customerdetails){
-      var response={"customer_id":customerdetails[0].customer_id,
+      var response={"shipping_id":details.shipid,
                     "customer_email":details.shipemail,
                     "country_code":details.shipcountry,
                     "state_code":details.shipstate,
