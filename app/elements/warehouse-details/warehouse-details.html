@@ -1,5 +1,10 @@
 <dom-module id="warehouse-details">
   <style>
+  paper-item {
+      --paper-item: {
+        width: 200px;
+      }
+    }
   paper-dropdown-menu {
       --paper-dropdown-menu: {
         width: 100%;
@@ -14,7 +19,7 @@
         </template>
       </paper-listbox>
     </paper-dropdown-menu>
+    <warehouse-details-ironajax></warehouse-details-ironajax>
   </template>
-  <warehouse-details-ironajax></warehouse-details-ironajax>
 </dom-module>
 <script src="warehouse-details.js"></script>
