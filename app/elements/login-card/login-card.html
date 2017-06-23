@@ -46,43 +46,54 @@
         params="{{saveinfoparam}}"
         handle-as="json"
         content-type="application/json"
-        on-response="simpleinfoResponse"
-        debounce-duration="300">
-        <iron-ajax
-          auto
-          method="post"
-          id="connectionajax"
-          url="{{connectionurl}}"
-          params="{{connectionparam}}"
-          handle-as="json"
-          content-type="application/json"
-          on-response="connectionResponse"
-          debounce-duration="300">
+        on-response="simpleinfoResponse">
+      </iron-ajax>
+      <iron-ajax
+        auto
+        method="post"
+        id="connectionajax"
+        url="{{connectionurl}}"
+        params="{{connectionparam}}"
+        handle-as="json"
+        content-type="application/json"
+        on-response="connectionResponse">
+      </iron-ajax>
+      <iron-ajax
+        auto
+        method="get"
+        id="urlajax"
+        url="../../config/url.json"
+        handle-as="json"
+        content-type="application/json"
+        last-response="{{urldata}}"
+        on-response="setUrl">
+      </iron-ajax>
   </template>
   <script>
-  Polymer({
-      is: 'login-card',
-
-    login:function(){
-      this.login_cardinfourl="http://localhost:4000"+"/login";
-      var obj={};
-      obj.empid=this.empid;
-      obj.password=this.password;
-      this.saveinfoparam=obj;
-      this.$.simplecardajax.generateRequest();
+    Polymer({
+        is: 'login-card',
+      login:function(){
+        this.login_cardinfourl="http://localhost:4000"+"/login";
+        var obj={};
+        obj.empid=this.empid;
+        obj.password=this.password;
+        this.saveinfoparam=obj;
+        this.$.simplecardajax.generateRequest();
       },
-
-    simpleinfoResponse:function(e){
-      if(e.detail.response.returnval=="Invalid!"){
-        alert('Employee ID or Password is incorrect!');
-      }
-      else {
-        var arr=e.detail.response.returnval;
-        document.querySelector('header-left').loggedrole=e.detail.response.role;
-        document.querySelector('app-page').page='home-page';
-        document.querySelector('header-left').menuarr=arr;
-        sessionStorage.setItem("logrole",e.detail.response.role);
+      simpleinfoResponse:function(e){
+        if(e.detail.response.returnval=="Invalid!"){
+          alert('Employee ID or Password is incorrect!');
         }
+        else {
+          var arr=e.detail.response.returnval;
+          document.querySelector('header-left').loggedrole=e.detail.response.role;
+          document.querySelector('app-page').page='home-page';
+          document.querySelector('header-left').menuarr=arr;
+          sessionStorage.setItem("logrole",e.detail.response.role);
+        }
+      },
+      setUrl:function(){
+        sessionStorage.setItem("url",this.urldata.url);
       }
     });
   </script>

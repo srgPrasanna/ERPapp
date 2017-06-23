@@ -4,7 +4,7 @@
       auto
       method="get"
       id="readlabel"
-      url="item-details-label.json"
+      url="{{labeljsonurl}}"
       handle-as="json"
       content-type="application/json"
       on-response="itemdetailslabel"
@@ -55,7 +55,7 @@
     <iron-ajax
       auto
       method="post"
-      url="http://localhost:4000/itemUnit"
+      url="{{itemuniturl}}"
       handle-as="json"
       on-response="itemUnitResponse">
     </iron-ajax>

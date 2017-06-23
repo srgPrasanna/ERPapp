@@ -24,7 +24,8 @@
                                                        array[0].itempurchasetype)
     },
     send:function(jsinputs){
-      this.requesturl="http://localhost:4000"+"/insertitems";
+      var testurl=sessionStorage.getItem("url");
+      this.requesturl=testurl+"/insertitems";
       this.writeparam=jsinputs;
       this.$.writeajax.generateRequest();
     },
@@ -47,5 +48,10 @@
     autocompletearr:function(e)
     {
       document.querySelector('item-details').tempitemname1=e.detail.response.returnval;
+    },
+    ready:function(){
+      this.labeljsonurl="elements/item-details/item-details-label.json";
+      var globalurl=sessionStorage.getItem("url");
+      this.itemuniturl=globalurl+"/itemUnit";
     }
   });
